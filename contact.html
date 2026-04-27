@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Wil Randolph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0f0e0c;--ink-muted:#4a4844;--ink-faint:#9a9690;
+  --paper:#faf8f5;--paper-warm:#f2ede6;--paper-mid:#e8e2d9;
+  --gold:#c9a84c;--gold-light:#e8d49a;--gold-muted:#8b6e2a;
+  --teal-light:#2a9090;
+  --charcoal:#0a0a0e;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--charcoal);
+  color:var(--paper);
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ─── NAV ─── */
+#wr-nav{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 56px;
+  background:rgba(10,10,14,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.wr-nav-brand{text-decoration:none;display:flex;flex-direction:column;gap:3px}
+.wr-nav-name{font-family:var(--font-display);font-size:22px;font-weight:300;color:#fff;line-height:1.1;letter-spacing:0.02em}
+.wr-nav-sub{font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.wr-nav-links{display:flex;align-items:center;gap:28px}
+.wr-nav-links a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.25s;white-space:nowrap}
+.wr-nav-links a:hover{color:#fff}
+.wr-nav-links a.active{color:var(--gold)}
+.wr-nav-div{display:block;width:1px;height:18px;background:var(--gold);opacity:0.5;flex-shrink:0}
+@media(max-width:860px){.wr-nav-links{display:none}#wr-nav{padding:20px 28px}}
+
+/* ─── PROGRESS ─── */
+#wr-progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0%;z-index:9999;transition:width 0.1s linear}
+
+/* ─── PAGE WRAPPER ─── */
+#wr-page{padding-top:96px;min-height:100vh;display:flex;flex-direction:column}
+
+/* ─── HERO BAND ─── */
+#wr-hero{
+  background:#ffffff;
+  padding:100px 0 0;
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+#wr-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);
+}
+#wr-hero::after{
+  content:'CONTACT';
+  position:absolute;right:-30px;bottom:-30px;
+  font-family:var(--font-display);
+  font-size:clamp(100px,14vw,200px);
+  font-weight:300;color:rgba(201,168,76,0.05);
+  line-height:1;letter-spacing:-0.03em;
+  pointer-events:none;white-space:nowrap;
+}
+
+.wr-hero-inner{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+}
+
+.wr-hero-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+  animation:wr-fadein 0.9s var(--ease-out) forwards;
+}
+.wr-hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+
+.wr-hero-title{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(52px,8vw,96px);line-height:0.92;
+  color:var(--ink);letter-spacing:-0.015em;
+  margin-bottom:0;
+  animation:wr-fadein-up 1s 0.1s var(--ease-out) both;
+}
+.wr-hero-title em{font-style:italic;color:var(--gold)}
+
+/* ─── ARGUMENT STRIP ─── */
+.wr-contact-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;background:var(--paper-mid);
+  margin-top:56px;
+}
+@media(max-width:768px){.wr-contact-strip{grid-template-columns:1fr}}
+
+.wr-strip-cell{
+  background:var(--paper-warm);padding:28px 36px;
+  transition:background 0.3s;
+}
+.wr-strip-cell:hover{background:var(--paper)}
+.wr-strip-label{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:10px;
+}
+.wr-strip-cell h3{
+  font-family:var(--font-display);font-size:18px;font-weight:600;
+  color:var(--charcoal);margin-bottom:8px;line-height:1.2;
+}
+.wr-strip-cell p{
+  font-size:13px;line-height:1.75;color:var(--ink-muted);font-weight:300;
+}
+
+/* ─── MAIN CONTACT AREA ─── */
+#wr-contact-main{
+  background:var(--charcoal);
+  flex:1;
+  padding:80px 0 100px;
+  position:relative;overflow:hidden;
+}
+
+#wr-contact-main::before{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  border:1px solid rgba(201,168,76,0.05);
+  pointer-events:none;
+}
+#wr-contact-main::after{
+  content:'';position:absolute;
+  bottom:-300px;left:-100px;
+  width:700px;height:700px;border-radius:50%;
+  border:1px solid rgba(201,168,76,0.04);
+  pointer-events:none;
+}
+
+.wr-contact-grid{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+  display:grid;grid-template-columns:1fr 1.4fr;
+  gap:80px;align-items:start;
+}
+@media(max-width:860px){.wr-contact-grid{grid-template-columns:1fr;gap:56px;padding:0 32px}}
+
+/* ─── LEFT COLUMN ─── */
+.wr-contact-left{}
+
+.wr-contact-overline{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;
+  text-transform:uppercase;color:var(--gold);opacity:0.7;
+  margin-bottom:24px;display:flex;align-items:center;gap:14px;
+}
+.wr-contact-overline::before{content:'';display:block;width:24px;height:1px;background:var(--gold);opacity:0.6}
+
+.wr-contact-heading{
+  font-family:var(--font-display);font-size:clamp(32px,4vw,52px);
+  font-weight:300;color:var(--paper);line-height:1.05;margin-bottom:28px;
+}
+.wr-contact-heading em{font-style:italic;color:var(--gold)}
+
+.wr-contact-body{
+  font-size:14px;line-height:1.9;
+  color:rgba(250,248,245,0.5);font-weight:300;
+  margin-bottom:48px;max-width:380px;
+}
+.wr-contact-body strong{color:rgba(250,248,245,0.82);font-weight:400}
+
+/* Engagement types */
+.wr-engagement-list{
+  display:flex;flex-direction:column;gap:2px;
+  margin-bottom:48px;
+}
+.wr-engagement-item{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;background:#0d0d14;
+  border-left:2px solid rgba(201,168,76,0.15);
+  transition:border-color 0.3s,background 0.3s;
+}
+.wr-engagement-item:hover{
+  border-left-color:var(--gold);background:#111118;
+}
+.wr-engagement-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--gold);opacity:0.5;flex-shrink:0;
+}
+.wr-engagement-text{
+  font-size:13px;color:rgba(250,248,245,0.55);
+  font-weight:300;line-height:1.4;
+}
+
+/* Location */
+.wr-contact-location{
+  padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.wr-location-label{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.22em;
+  text-transform:uppercase;color:rgba(250,248,245,0.25);
+  margin-bottom:10px;
+}
+.wr-location-text{
+  font-family:var(--font-display);font-size:20px;font-weight:300;
+  color:rgba(250,248,245,0.55);line-height:1.4;
+}
+.wr-location-text em{font-style:italic;color:rgba(201,168,76,0.6)}
+
+/* ─── FORM ─── */
+.wr-contact-right{
+  position:relative;
+}
+
+.wr-form-card{
+  background:#0d0d14;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:6px;
+  padding:48px;
+  position:relative;overflow:hidden;
+}
+.wr-form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent);
+}
+
+.wr-form-title{
+  font-family:var(--font-display);font-size:28px;font-weight:300;
+  color:var(--paper);margin-bottom:8px;line-height:1.1;
+}
+.wr-form-title em{font-style:italic;color:var(--gold)}
+
+.wr-form-sub{
+  font-size:12px;color:rgba(250,248,245,0.35);font-weight:300;
+  margin-bottom:36px;line-height:1.6;
+  font-family:var(--font-mono);letter-spacing:0.06em;
+}
+
+/* Form fields */
+.wr-field{margin-bottom:20px}
+.wr-field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:540px){.wr-field-row{grid-template-columns:1fr}}
+
+.wr-label{
+  display:block;font-family:var(--font-mono);font-size:8px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(250,248,245,0.35);margin-bottom:10px;
+}
+
+.wr-input,
+.wr-select,
+.wr-textarea{
+  width:100%;background:#0a0a0e;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:3px;
+  padding:14px 18px;
+  font-family:var(--font-body);font-size:14px;font-weight:300;
+  color:var(--paper);
+  outline:none;
+  transition:border-color 0.25s,background 0.25s;
+  -webkit-appearance:none;
+}
+.wr-input:focus,
+.wr-select:focus,
+.wr-textarea:focus{
+  border-color:rgba(201,168,76,0.45);
+  background:#0d0d14;
+}
+.wr-input::placeholder,
+.wr-textarea::placeholder{
+  color:rgba(250,248,245,0.2);
+  font-weight:300;
+}
+
+.wr-select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(201,168,76,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  padding-right:40px;
+}
+.wr-select option{background:#0d0d14;color:var(--paper)}
+
+.wr-textarea{
+  resize:vertical;min-height:140px;line-height:1.7;
+}
+
+/* Submit */
+.wr-submit{
+  width:100%;padding:18px 32px;
+  background:var(--gold);color:var(--charcoal);
+  font-family:var(--font-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  border:none;border-radius:3px;cursor:pointer;
+  transition:background 0.25s,transform 0.2s,box-shadow 0.25s;
+  position:relative;overflow:hidden;
+  margin-top:8px;
+}
+.wr-submit:hover{
+  background:var(--gold-light);
+  transform:translateY(-1px);
+  box-shadow:0 8px 32px rgba(201,168,76,0.2);
+}
+.wr-submit:active{transform:translateY(0)}
+.wr-submit-text{display:block;transition:opacity 0.2s}
+.wr-submit.loading .wr-submit-text{opacity:0}
+.wr-submit-spinner{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:18px;height:18px;
+  border:2px solid rgba(10,10,14,0.3);
+  border-top-color:var(--charcoal);
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  opacity:0;transition:opacity 0.2s;
+}
+.wr-submit.loading .wr-submit-spinner{opacity:1}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* Privacy note */
+.wr-privacy{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;
+  color:rgba(250,248,245,0.2);text-align:center;
+  margin-top:16px;line-height:1.7;
+}
+
+/* ─── SUCCESS STATE ─── */
+#wr-success{
+  display:none;
+  text-align:center;
+  padding:64px 32px;
+}
+#wr-success.visible{display:block}
+
+.wr-success-icon{
+  width:64px;height:64px;
+  border:1px solid rgba(201,168,76,0.4);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 32px;
+  animation:wr-fadein 0.6s var(--ease-out) forwards;
+}
+.wr-success-icon svg{width:24px;height:24px}
+
+.wr-success-title{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:var(--paper);line-height:1.1;margin-bottom:16px;
+}
+.wr-success-title em{font-style:italic;color:var(--gold)}
+
+.wr-success-body{
+  font-size:14px;color:rgba(250,248,245,0.45);
+  font-weight:300;line-height:1.8;max-width:360px;margin:0 auto;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes wr-fadein{
+  from{opacity:0}to{opacity:1}
+}
+@keyframes wr-fadein-up{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.wr-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.9s var(--ease-out),transform 0.9s var(--ease-out)}
+.wr-reveal.visible{opacity:1;transform:translateY(0)}
+.wr-delay-1{transition-delay:0.1s}
+.wr-delay-2{transition-delay:0.22s}
+.wr-delay-3{transition-delay:0.36s}
+.wr-delay-4{transition-delay:0.52s}
+
+/* ─── ERROR STATE ─── */
+.wr-input.error,
+.wr-select.error,
+.wr-textarea.error{
+  border-color:rgba(199,75,42,0.6);
+}
+.wr-error-msg{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.12em;
+  color:rgba(199,75,42,0.8);margin-top:6px;display:none;
+}
+.wr-error-msg.visible{display:block}
+</style>
+</head>
+<body>
+
+<nav id="wr-nav">
+  <a href="strategy.html" class="wr-nav-brand">
+    <span class="wr-nav-name">Wil Randolph</span>
+    <span class="wr-nav-sub">Brand &amp; Marketing Strategist</span>
+  </a>
+  <div class="wr-nav-links">
+    <a href="strategy.html">Strategy</a>
+    <span class="wr-nav-div"></span>
+    <a href="work.html">Work</a>
+    <span class="wr-nav-div"></span>
+    <a href="cases.html">Case Studies</a>
+
+    <span class="wr-nav-div"></span>
+    <a href="about.html">About</a>
+    <span class="wr-nav-div"></span>
+    <a href="journal.html">Journal</a>
+    <span class="wr-nav-div"></span>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+</nav>
+
+<div id="wr-progress"></div>
+
+<div id="wr-page">
+
+  <!-- HERO -->
+  <section id="wr-hero">
+    <div class="wr-hero-inner">
+      <div class="wr-hero-eyebrow">Open to Roles &amp; Select Engagements</div>
+      <h1 class="wr-hero-title">Every engagement<br>starts with <em>a conversation.</em></h1>
+    </div>
+
+    <div class="wr-contact-strip">
+      <div class="wr-strip-cell">
+        <p class="wr-strip-label">How It Works</p>
+        <h3>The ADP runs first.</h3>
+        <p>Every engagement begins with a full diagnostic before any strategic or creative direction is set. That diagnostic goes all the way upstream -- from manufacturing reality and operational constraints to market intelligence and competitive positioning -- before a single deliverable is defined.</p>
+      </div>
+      <div class="wr-strip-cell">
+        <p class="wr-strip-label">Who This Is For</p>
+        <h3>Operators who need a strategist.</h3>
+        <p>AEC firms building for bid wins. Healthcare organizations that need positioning clarity. Consumer brands managing equity at scale. Any business that needs marketing to perform, not just produce.</p>
+      </div>
+      <div class="wr-strip-cell">
+        <p class="wr-strip-label">Open To</p>
+        <h3>Senior roles and select engagements.</h3>
+        <p>Available for full-time marketing leadership positions and select consulting engagements. If you are evaluating a hire or exploring a strategic partnership, the conversation starts the same way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <section id="wr-contact-main">
+    <div class="wr-contact-grid">
+
+      <!-- LEFT -->
+      <div class="wr-contact-left wr-reveal">
+        <div class="wr-contact-overline">Open for Engagements</div>
+        <h2 class="wr-contact-heading">What kind of<br>work are you<br><em>trying to do?</em></h2>
+        <p class="wr-contact-body">
+          Strategy engagements. Brand audits. Proposal strategy. 
+          Creative direction. Integrated marketing. <strong>The medium 
+          is determined by the diagnostic.</strong> Tell me what you 
+          are trying to accomplish and we will figure out the right 
+          scope from there.
+        </p>
+
+        <div class="wr-engagement-list">
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Full-time marketing leadership roles</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Contract and fractional marketing engagements</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Brand audits and competitive positioning analysis</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Go-to-market and proposal strategy</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Brand architecture and identity systems</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">SEO, AEO, and digital channel strategy</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Integrated campaign management</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Creative direction and visual systems</span>
+          </div>
+          <div class="wr-engagement-item">
+            <span class="wr-engagement-dot"></span>
+            <span class="wr-engagement-text">Photography direction and execution</span>
+          </div>
+        </div>
+
+        <div class="wr-contact-location">
+          <p class="wr-location-label">Location</p>
+          <p class="wr-location-text">Seattle, Washington<br><em>Nationally available.</em></p>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="wr-contact-right wr-reveal wr-delay-2">
+        <div class="wr-form-card">
+
+          <h3 class="wr-form-title">Start a <em>conversation.</em></h3>
+          <p class="wr-form-sub">No pitch decks. No automated responses. A direct reply within one business day.</p>
+
+          <form id="wr-form" action="https://formspree.io/f/xlgavgng" method="POST" novalidate>
+
+            <div class="wr-field-row">
+              <div class="wr-field">
+                <label class="wr-label" for="first-name">First Name</label>
+                <input class="wr-input" type="text" id="first-name" name="first_name" placeholder="First" required autocomplete="given-name">
+                <p class="wr-error-msg" id="err-first">Required</p>
+              </div>
+              <div class="wr-field">
+                <label class="wr-label" for="last-name">Last Name</label>
+                <input class="wr-input" type="text" id="last-name" name="last_name" placeholder="Last" required autocomplete="family-name">
+                <p class="wr-error-msg" id="err-last">Required</p>
+              </div>
+            </div>
+
+            <div class="wr-field">
+              <label class="wr-label" for="email">Email Address</label>
+              <input class="wr-input" type="email" id="email" name="email" placeholder="you@organization.com" required autocomplete="email">
+              <p class="wr-error-msg" id="err-email">A valid email is required</p>
+            </div>
+
+            <div class="wr-field">
+              <label class="wr-label" for="organization">Organization</label>
+              <input class="wr-input" type="text" id="organization" name="organization" placeholder="Company or firm name" autocomplete="organization">
+            </div>
+
+            <div class="wr-field">
+              <label class="wr-label" for="industry">Industry</label>
+              <select class="wr-select" id="industry" name="industry">
+                <option value="" disabled selected>Select your industry</option>
+                <option>Architecture, Engineering &amp; Construction</option>
+                <option>Healthcare &amp; Medical</option>
+                <option>Consumer Goods &amp; CPG</option>
+                <option>Luxury Real Estate</option>
+                <option>Professional Services</option>
+                <option>Retail &amp; E-Commerce</option>
+                <option>Fashion &amp; Beauty</option>
+                <option>Industrial &amp; B2B</option>
+                <option>Technology</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="wr-field">
+              <label class="wr-label" for="engagement">Type of Engagement</label>
+              <select class="wr-select" id="engagement" name="engagement_type">
+                <option value="" disabled selected>What are you trying to accomplish?</option>
+                <option>Full-Time Marketing Leadership Role</option>
+                <option>Contract or Fractional Marketing Role</option>
+                <option>Brand Audit or Competitive Analysis</option>
+                <option>Brand Strategy or Repositioning</option>
+                <option>Go-To-Market or Proposal Strategy</option>
+                <option>Brand Identity or Visual System</option>
+                <option>Integrated Marketing Campaign</option>
+                <option>SEO, AEO, or Digital Strategy</option>
+                <option>Creative Direction</option>
+                <option>Photography Direction</option>
+                <option>Not Sure Yet — Let's Talk</option>
+              </select>
+            </div>
+
+            <div class="wr-field">
+              <label class="wr-label" for="message">Tell me about the challenge</label>
+              <textarea class="wr-textarea" id="message" name="message" placeholder="What is the business problem you are trying to solve? The more specific, the better." required></textarea>
+              <p class="wr-error-msg" id="err-message">Please describe the challenge</p>
+            </div>
+
+            <!-- Honeypot — hidden from humans, catches bots -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+            <button type="submit" class="wr-submit" id="wr-submit">
+              <span class="wr-submit-text">Send Message &rarr;</span>
+              <span class="wr-submit-spinner"></span>
+            </button>
+
+            <p class="wr-privacy">Your information is never shared, sold, or used for any purpose other than responding to your inquiry.</p>
+
+          </form>
+
+          <!-- SUCCESS -->
+          <div id="wr-success">
+            <div class="wr-success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3 class="wr-success-title">Message <em>received.</em></h3>
+            <p class="wr-success-body">Thank you for reaching out. You will hear back directly within one business day. No automated sequences. A real response.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+
+  /* ─── SCROLL PROGRESS ─── */
+  var bar = document.getElementById('wr-progress');
+  window.addEventListener('scroll', function(){
+    var d = document.documentElement;
+    var s = d.scrollTop || document.body.scrollTop;
+    var t = d.scrollHeight - d.clientHeight;
+    bar.style.width = (t > 0 ? (s/t)*100 : 0) + '%';
+  }, {passive:true});
+
+  /* ─── REVEAL OBSERVER ─── */
+  var revObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.wr-reveal').forEach(function(el){ revObs.observe(el); });
+
+  /* ─── FORM SUBMISSION ─── */
+  var form    = document.getElementById('wr-form');
+  var submit  = document.getElementById('wr-submit');
+  var success = document.getElementById('wr-success');
+
+  function validateEmail(val){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  }
+
+  function setError(inputId, errId, show){
+    var input = document.getElementById(inputId);
+    var err   = document.getElementById(errId);
+    if(show){
+      input.classList.add('error');
+      err.classList.add('visible');
+    } else {
+      input.classList.remove('error');
+      err.classList.remove('visible');
+    }
+    return !show;
+  }
+
+  function validate(){
+    var first   = document.getElementById('first-name').value.trim();
+    var last    = document.getElementById('last-name').value.trim();
+    var email   = document.getElementById('email').value.trim();
+    var message = document.getElementById('message').value.trim();
+
+    var v1 = setError('first-name',  'err-first',   !first);
+    var v2 = setError('last-name',   'err-last',    !last);
+    var v3 = setError('email',       'err-email',   !validateEmail(email));
+    var v4 = setError('message',     'err-message', !message);
+
+    return v1 && v2 && v3 && v4;
+  }
+
+  /* Clear error on input */
+  ['first-name','last-name','email','message'].forEach(function(id){
+    var errMap = {'first-name':'err-first','last-name':'err-last','email':'err-email','message':'err-message'};
+    document.getElementById(id).addEventListener('input', function(){
+      document.getElementById(id).classList.remove('error');
+      document.getElementById(errMap[id]).classList.remove('visible');
+    });
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validate()) return;
+
+    submit.classList.add('loading');
+    submit.disabled = true;
+
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(response){
+      if(response.ok){
+        form.style.display = 'none';
+        success.classList.add('visible');
+        success.style.display = 'block';
+      } else {
+        response.json().then(function(data){
+          submit.classList.remove('loading');
+          submit.disabled = false;
+          alert('There was a problem sending your message. Please try again.');
+        });
+      }
+    })
+    .catch(function(){
+      submit.classList.remove('loading');
+      submit.disabled = false;
+      alert('There was a problem sending your message. Please check your connection and try again.');
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

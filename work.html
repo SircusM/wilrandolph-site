@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Wil Randolph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0e0c;--ink-muted:#4a4844;--ink-faint:#9a9690;
+  --paper:#faf8f5;--paper-warm:#f2ede6;--paper-mid:#e8e2d9;
+  --gold:#c9a84c;--gold-light:#e8d49a;--gold-muted:#8b6e2a;
+  --charcoal:#0a0a0e;--teal-light:#2a9090;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--charcoal);color:var(--ink);overflow-x:hidden}
+
+/* ─── NAV ─── */
+#wr-nav{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 56px;
+  background:rgba(10,10,14,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.wr-nav-brand{text-decoration:none;display:flex;flex-direction:column;gap:3px}
+.wr-nav-name{font-family:var(--font-display);font-size:22px;font-weight:300;color:#fff;line-height:1.1;letter-spacing:0.02em}
+.wr-nav-sub{font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.wr-nav-links{display:flex;align-items:center;gap:28px}
+.wr-nav-links a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.25s;white-space:nowrap}
+.wr-nav-links a:hover{color:#fff}
+.wr-nav-links a.active{color:var(--gold)}
+.wr-nav-div{display:block;width:1px;height:18px;background:var(--gold);opacity:0.5;flex-shrink:0}
+@media(max-width:860px){.wr-nav-links{display:none}#wr-nav{padding:20px 28px}}
+
+/* ─── PROGRESS ─── */
+#wr-progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0%;z-index:9999;transition:width 0.1s linear}
+
+/* ─── REVEALS ─── */
+.wr-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.9s var(--ease-out),transform 0.9s var(--ease-out)}
+/* Header reveals show immediately */
+#wr-header .wr-reveal{animation:wr-header-show 0.9s var(--ease-out) forwards;}
+@keyframes wr-header-show{to{opacity:1;transform:translateY(0)}}
+#wr-header .wr-delay-1{animation-delay:0.1s}
+#wr-header .wr-delay-2{animation-delay:0.22s}
+.wr-reveal.visible{opacity:1;transform:translateY(0)}
+.wr-delay-1{transition-delay:0.1s}
+.wr-delay-2{transition-delay:0.22s}
+.wr-delay-3{transition-delay:0.36s}
+.wr-delay-4{transition-delay:0.52s}
+
+/* ─── HEADER ─── */
+#wr-header{
+  background:#ffffff;
+  padding:180px 48px 80px;
+  position:relative;overflow:hidden;
+  min-height:480px;
+}
+#wr-header::before{
+  content:'WORK';
+  position:absolute;right:-20px;bottom:-40px;
+  font-family:var(--font-display);
+  font-size:clamp(120px,18vw,240px);
+  font-weight:300;color:rgba(201,168,76,0.06);
+  line-height:1;letter-spacing:-0.03em;
+  pointer-events:none;white-space:nowrap;
+}
+.wr-header-inner{max-width:1140px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
+.wr-header-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+}
+.wr-header-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.wr-header-title{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(48px,7vw,88px);line-height:0.95;
+  color:var(--ink);letter-spacing:-0.01em;margin-bottom:24px;
+}
+.wr-header-title em{font-style:italic;color:var(--gold)}
+.wr-header-sub{font-size:14px;color:var(--ink-muted);font-weight:300;max-width:560px;line-height:1.8;padding-bottom:64px;}
+
+/* ─── TIER NAVIGATION ─── */
+#wr-tier-nav{
+  background:var(--charcoal);
+  padding:0 48px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky;top:96px;z-index:100;
+}
+.wr-tier-nav-inner{
+  max-width:1140px;margin:0 auto;
+  display:flex;gap:0;
+}
+.wr-tier-tab{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(255,255,255,0.4);
+  padding:20px 28px;border:none;background:transparent;
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:color 0.25s,border-color 0.25s;white-space:nowrap;
+}
+.wr-tier-tab:hover{color:rgba(255,255,255,0.8)}
+.wr-tier-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+@media(max-width:640px){.wr-tier-tab{padding:16px 14px;font-size:8px}}
+
+/* ─── TICKER ─── */
+.wr-ticker-section{background:var(--gold);padding:14px 0;overflow:hidden}
+.wr-ticker-wrap{overflow:hidden;white-space:nowrap}
+.wr-ticker{
+  display:inline-block;
+  animation:wr-ticker 32s linear infinite;
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);
+}
+@keyframes wr-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.wr-ticker-dot{
+  display:inline-block;width:4px;height:4px;
+  background:#0a0a0e;border-radius:50%;
+  margin:0 24px;vertical-align:middle;opacity:0.4;
+}
+
+/* ─── TIER SECTIONS ─── */
+.wr-tier{display:none}
+.wr-tier.active{display:block}
+
+/* ════════════════════════════════════════════════════════
+   TIER 1 — CASE STUDIES
+════════════════════════════════════════════════════════ */
+#wr-filters{
+  background:#0a0a0e;padding:24px 48px 32px;
+}
+.wr-filter-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap}
+.wr-filter-btn{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;padding:8px 20px;
+  border:1px solid rgba(255,255,255,0.22);
+  background:transparent;color:#faf8f5;cursor:pointer;border-radius:2px;
+  transition:all 0.25s;
+}
+.wr-filter-btn:hover{border-color:var(--gold);color:#fff}
+.wr-filter-btn.active{background:var(--gold)!important;border-color:var(--gold)!important;color:#0a0a0e!important;font-weight:500}
+
+/* Scroll track */
+#wr-scroll-section{background:var(--charcoal)}
+.wr-scroll-hint{max-width:1140px;margin:0 auto;padding:36px 48px 12px;display:flex;align-items:center;gap:16px}
+.wr-scroll-hint-line{width:48px;height:1px;background:rgba(201,168,76,0.3);position:relative;overflow:hidden}
+.wr-scroll-hint-line::after{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;background:var(--gold);animation:hint-slide 2s ease-in-out infinite}
+@keyframes hint-slide{0%{left:-100%}100%{left:100%}}
+.wr-scroll-hint-text{font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,245,0.2)}
+
+#wr-track-wrap{overflow:hidden;padding:16px 48px 60px;-webkit-overflow-scrolling:touch}
+#wr-tile-track{display:flex;gap:20px;width:max-content;will-change:transform}
+
+/* Tiles */
+.wr-tile{
+  width:320px;height:460px;flex-shrink:0;
+  position:relative;cursor:pointer;overflow:hidden;
+  border-radius:4px;background:#18171c;
+  border:1px solid rgba(255,255,255,0.06);
+  transition:border-color 0.4s;
+}
+.wr-tile:hover{border-color:rgba(201,168,76,0.3)}
+.wr-tile-img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform 0.7s var(--ease-out),filter 0.5s;
+  filter:brightness(0.7);
+}
+.wr-tile:hover .wr-tile-img{transform:scale(1.05);filter:brightness(0.45)}
+.wr-tile-ph{width:100%;height:100%;position:relative;overflow:hidden;background:#18171c}
+.wr-tile-ph-inner{width:100%;height:100%;background:linear-gradient(135deg,#1a1820 0%,#221f2a 50%,#1a1820 100%)}
+.wr-tile-ph-inner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(201,168,76,0.03) 40px,rgba(201,168,76,0.03) 41px)}
+.wr-tile-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:80px;font-weight:300;color:rgba(201,168,76,0.08);line-height:1;pointer-events:none}
+.wr-tile-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,9,14,0.97) 0%,rgba(10,9,14,0.3) 55%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:28px;
+}
+.wr-tile-tag{font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:0.8}
+.wr-tile-name{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--paper);line-height:1.15;margin-bottom:8px}
+.wr-tile-teaser{font-size:12px;color:rgba(250,248,245,0.45);font-weight:300;line-height:1.6;max-height:0;overflow:hidden;transition:max-height 0.5s var(--ease-out),opacity 0.4s;opacity:0}
+.wr-tile:hover .wr-tile-teaser{max-height:60px;opacity:1}
+.wr-tile-cta{margin-top:14px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s var(--ease-out),opacity 0.4s 0.1s}
+.wr-tile:hover .wr-tile-cta{max-height:30px;opacity:1}
+.wr-tile-cta::after{content:'';display:block;width:20px;height:1px;background:var(--gold);transition:width 0.3s var(--ease-out)}
+.wr-tile:hover .wr-tile-cta::after{width:32px}
+
+/* Case overlay */
+#wr-case-overlay{position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:0;transition:opacity 0.5s var(--ease-out)}
+#wr-case-overlay.open{opacity:1;pointer-events:all}
+.wr-case-backdrop{position:absolute;inset:0;background:rgba(10,9,14,0.75);backdrop-filter:blur(8px)}
+.wr-case-panel{position:absolute;right:0;top:0;bottom:0;width:min(680px,92vw);background:#0e0e12;border-left:1px solid rgba(201,168,76,0.12);overflow-y:auto;transform:translateX(100%);transition:transform 0.6s var(--ease-out);display:flex;flex-direction:column}
+#wr-case-overlay.open .wr-case-panel{transform:translateX(0)}
+.wr-case-close{position:sticky;top:0;background:rgba(14,14,18,0.96);backdrop-filter:blur(12px);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);z-index:10;flex-shrink:0}
+.wr-case-close-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,245,0.3)}
+.wr-case-close-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,0.1);border-radius:2px;background:transparent;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;transition:border-color 0.25s,background 0.25s}
+.wr-case-close-btn:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.08)}
+.wr-case-close-btn::before,.wr-case-close-btn::after{content:'';position:absolute;width:14px;height:1px;background:rgba(250,248,245,0.5)}
+.wr-case-close-btn::before{transform:rotate(45deg)}
+.wr-case-close-btn::after{transform:rotate(-45deg)}
+.wr-case-image{width:100%;height:280px;flex-shrink:0;overflow:hidden;position:relative;background:#1a1820}
+.wr-case-image img{width:100%;height:100%;object-fit:cover;filter:brightness(0.75)}
+.wr-case-img-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:120px;font-weight:300;color:rgba(201,168,76,0.07);line-height:1}
+.wr-case-body{padding:48px 36px;flex:1}
+.wr-case-tag{font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.wr-case-title{font-family:var(--font-display);font-size:36px;font-weight:300;color:var(--paper);line-height:1.1;margin-bottom:36px}
+.wr-case-section{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.wr-case-section:last-child{border-bottom:none}
+.wr-case-section-label{font-family:var(--font-mono);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(250,248,245,0.25);margin-bottom:12px}
+.wr-case-section-text{font-size:14px;line-height:1.85;color:rgba(250,248,245,0.55);font-weight:300}
+.wr-case-section-text strong{color:rgba(250,248,245,0.85);font-weight:400}
+.wr-case-outcome{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:4px;padding:24px;margin-top:8px}
+.wr-case-outcome-num{font-family:var(--font-display);font-size:52px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:6px}
+.wr-case-outcome-label{font-size:13px;color:rgba(250,248,245,0.5);font-weight:300;line-height:1.7}
+
+/* ════════════════════════════════════════════════════════
+   TIER 2 — VISUAL ARCHIVE
+════════════════════════════════════════════════════════ */
+.wr-archive-section{
+  padding:80px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.wr-archive-section:nth-child(odd){background:#0a0a0e}
+.wr-archive-section:nth-child(even){background:#0d0d14}
+
+.wr-archive-header{
+  max-width:1140px;margin:0 auto;padding:0 48px;
+  margin-bottom:48px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+}
+.wr-archive-tag{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.wr-archive-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.wr-archive-title{
+  font-family:var(--font-display);font-size:clamp(28px,4vw,44px);
+  font-weight:300;color:var(--paper);line-height:1.05;
+}
+.wr-archive-title em{font-style:italic;color:var(--gold)}
+.wr-archive-desc{
+  font-size:13px;line-height:1.8;color:rgba(250,248,245,0.38);
+  font-weight:300;max-width:440px;margin-top:10px;
+}
+
+/* Masonry grid */
+.wr-masonry{
+  max-width:1140px;margin:0 auto;padding:0 48px;
+  columns:3;column-gap:12px;
+}
+@media(max-width:860px){.wr-masonry{columns:2}}
+@media(max-width:480px){.wr-masonry{columns:1;padding:0 24px}}
+
+.wr-masonry-item{
+  break-inside:avoid;margin-bottom:12px;
+  position:relative;overflow:hidden;cursor:pointer;display:block;
+}
+.wr-masonry-item img{
+  width:100%;display:block;
+  transition:transform 0.7s var(--ease-out),filter 0.5s;
+  filter:brightness(0.88);
+}
+.wr-masonry-item:hover img{transform:scale(1.04);filter:brightness(0.55)}
+.wr-masonry-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,9,14,0.92) 0%,transparent 55%);
+  opacity:0;transition:opacity 0.4s;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px;
+}
+.wr-masonry-item:hover .wr-masonry-overlay{opacity:1}
+.wr-masonry-label{font-family:var(--font-mono);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.wr-masonry-caption{font-family:var(--font-display);font-size:14px;font-weight:300;color:rgba(250,248,245,0.9);line-height:1.3}
+
+/* ════════════════════════════════════════════════════════
+   TIER 3 — INDUSTRIES
+════════════════════════════════════════════════════════ */
+#wr-industries{
+  padding:100px 48px;
+  background:var(--paper-warm);
+}
+.wr-industries-inner{max-width:1140px;margin:0 auto}
+.wr-industries-header{margin-bottom:64px}
+.wr-industries-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.wr-industries-title{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:300;color:var(--charcoal);line-height:1.05}
+.wr-industries-title em{font-style:italic;color:var(--gold-muted)}
+.wr-industries-sub{font-size:15px;line-height:1.85;color:var(--ink-muted);font-weight:300;max-width:640px;margin-top:20px}
+
+.wr-industries-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--paper-mid);
+}
+@media(max-width:860px){.wr-industries-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wr-industries-grid{grid-template-columns:1fr}}
+
+.wr-industry-cell{
+  background:var(--paper-warm);padding:36px 32px;
+  transition:background 0.3s;position:relative;overflow:hidden;
+}
+.wr-industry-cell:hover{background:var(--paper)}
+.wr-industry-cell::after{
+  content:'';position:absolute;bottom:0;left:32px;right:32px;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.5s var(--ease-out);
+}
+.wr-industry-cell:hover::after{transform:scaleX(1)}
+.wr-industry-num{
+  font-family:var(--font-display);font-size:48px;font-weight:300;
+  color:var(--paper-mid);line-height:1;margin-bottom:16px;
+  transition:color 0.3s;
+}
+.wr-industry-cell:hover .wr-industry-num{color:rgba(201,168,76,0.15)}
+.wr-industry-name{font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:10px}
+.wr-industry-desc{font-size:13px;line-height:1.75;color:var(--ink-muted);font-weight:300}
+
+/* ─── LIGHTBOX ─── */
+#wr-lightbox{
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(10,9,14,0.97);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.4s;
+}
+#wr-lightbox.open{opacity:1;pointer-events:all}
+#wr-lb-img{max-width:88vw;max-height:86vh;object-fit:contain}
+#wr-lb-close{
+  position:absolute;top:24px;right:32px;width:40px;height:40px;
+  border:1px solid rgba(255,255,255,0.12);border-radius:2px;
+  background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 0.25s;
+}
+#wr-lb-close:hover{border-color:rgba(201,168,76,0.5)}
+#wr-lb-close::before,#wr-lb-close::after{content:'';position:absolute;width:14px;height:1px;background:rgba(250,248,245,0.6)}
+#wr-lb-close::before{transform:rotate(45deg)}
+#wr-lb-close::after{transform:rotate(-45deg)}
+#wr-lb-prev,#wr-lb-next{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border:1px solid rgba(255,255,255,0.1);
+  border-radius:2px;background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.25s;color:rgba(250,248,245,0.5);font-size:18px;
+}
+#wr-lb-prev{left:24px}
+#wr-lb-next{right:24px}
+#wr-lb-prev:hover,#wr-lb-next:hover{border-color:rgba(201,168,76,0.4);color:var(--gold)}
+#wr-lb-caption{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  text-align:center;max-width:600px;padding:0 20px;
+}
+#wr-lb-cap-tag{font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+#wr-lb-cap-text{font-family:var(--font-display);font-size:16px;font-weight:300;color:rgba(250,248,245,0.6);line-height:1.4}
+
+/* ─── CTA ─── */
+#wr-cta{
+  padding:80px 48px;background:var(--charcoal);text-align:center;
+}
+
+.wr-tile-cta{margin-top:14px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s var(--ease-out),opacity 0.4s 0.1s}
+.wr-tile:hover .wr-tile-cta{max-height:30px;opacity:1}
+.wr-tile-cta::after{content:'';display:block;width:20px;height:1px;background:var(--gold);transition:width 0.3s var(--ease-out)}
+.wr-tile:hover .wr-tile-cta::after{width:32px}
+
+/* Case overlay */
+#wr-case-overlay{position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:0;transition:opacity 0.5s var(--ease-out)}
+#wr-case-overlay.open{opacity:1;pointer-events:all}
+.wr-case-backdrop{position:absolute;inset:0;background:rgba(10,9,14,0.75);backdrop-filter:blur(8px)}
+.wr-case-panel{position:absolute;right:0;top:0;bottom:0;width:min(680px,92vw);background:#0e0e12;border-left:1px solid rgba(201,168,76,0.12);overflow-y:auto;transform:translateX(100%);transition:transform 0.6s var(--ease-out);display:flex;flex-direction:column}
+#wr-case-overlay.open .wr-case-panel{transform:translateX(0)}
+.wr-case-close{position:sticky;top:0;background:rgba(14,14,18,0.96);backdrop-filter:blur(12px);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);z-index:10;flex-shrink:0}
+.wr-case-close-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,245,0.3)}
+.wr-case-close-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,0.1);border-radius:2px;background:transparent;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;transition:border-color 0.25s,background 0.25s}
+.wr-case-close-btn:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.08)}
+.wr-case-close-btn::before,.wr-case-close-btn::after{content:'';position:absolute;width:14px;height:1px;background:rgba(250,248,245,0.5)}
+.wr-case-close-btn::before{transform:rotate(45deg)}
+.wr-case-close-btn::after{transform:rotate(-45deg)}
+.wr-case-image{width:100%;height:280px;flex-shrink:0;overflow:hidden;position:relative;background:#1a1820}
+.wr-case-image img{width:100%;height:100%;object-fit:cover;filter:brightness(0.75)}
+.wr-case-img-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:120px;font-weight:300;color:rgba(201,168,76,0.07);line-height:1}
+.wr-case-body{padding:48px 36px;flex:1}
+.wr-case-tag{font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.wr-case-title{font-family:var(--font-display);font-size:36px;font-weight:300;color:var(--paper);line-height:1.1;margin-bottom:36px}
+.wr-case-section{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.wr-case-section:last-child{border-bottom:none}
+.wr-case-section-label{font-family:var(--font-mono);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(250,248,245,0.25);margin-bottom:12px}
+.wr-case-section-text{font-size:14px;line-height:1.85;color:rgba(250,248,245,0.55);font-weight:300}
+.wr-case-section-text strong{color:rgba(250,248,245,0.85);font-weight:400}
+.wr-case-outcome{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:4px;padding:24px;margin-top:8px}
+.wr-case-outcome-num{font-family:var(--font-display);font-size:52px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:6px}
+.wr-case-outcome-label{font-size:13px;color:rgba(250,248,245,0.5);font-weight:300;line-height:1.7}
+
+/* ════════════════════════════════════════════════════════
+   TIER 2 — VISUAL ARCHIVE
+════════════════════════════════════════════════════════ */
+.wr-archive-section{
+  padding:80px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.wr-archive-section:nth-child(odd){background:#0a0a0e}
+.wr-archive-section:nth-child(even){background:#0d0d14}
+
+.wr-archive-header{
+  max-width:1140px;margin:0 auto;padding:0 48px;
+  margin-bottom:48px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+}
+.wr-archive-tag{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.wr-archive-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.wr-archive-title{
+  font-family:var(--font-display);font-size:clamp(28px,4vw,44px);
+  font-weight:300;color:var(--paper);line-height:1.05;
+}
+.wr-archive-title em{font-style:italic;color:var(--gold)}
+.wr-archive-desc{
+  font-size:13px;line-height:1.8;color:rgba(250,248,245,0.38);
+  font-weight:300;max-width:440px;margin-top:10px;
+}
+
+/* Masonry grid */
+.wr-masonry{
+  max-width:1140px;margin:0 auto;padding:0 48px;
+  columns:3;column-gap:12px;
+}
+@media(max-width:860px){.wr-masonry{columns:2}}
+@media(max-width:480px){.wr-masonry{columns:1;padding:0 24px}}
+
+.wr-masonry-item{
+  break-inside:avoid;margin-bottom:12px;
+  position:relative;overflow:hidden;cursor:pointer;display:block;
+}
+.wr-masonry-item img{
+  width:100%;display:block;
+  transition:transform 0.7s var(--ease-out),filter 0.5s;
+  filter:brightness(0.88);
+}
+.wr-masonry-item:hover img{transform:scale(1.04);filter:brightness(0.55)}
+.wr-masonry-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,9,14,0.92) 0%,transparent 55%);
+  opacity:0;transition:opacity 0.4s;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px;
+}
+.wr-masonry-item:hover .wr-masonry-overlay{opacity:1}
+.wr-masonry-label{font-family:var(--font-mono);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.wr-masonry-caption{font-family:var(--font-display);font-size:14px;font-weight:300;color:rgba(250,248,245,0.9);line-height:1.3}
+
+/* ════════════════════════════════════════════════════════
+   TIER 3 — INDUSTRIES
+════════════════════════════════════════════════════════ */
+#wr-industries{
+  padding:100px 48px;
+  background:var(--paper-warm);
+}
+.wr-industries-inner{max-width:1140px;margin:0 auto}
+.wr-industries-header{margin-bottom:64px}
+.wr-industries-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.wr-industries-title{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:300;color:var(--charcoal);line-height:1.05}
+.wr-industries-title em{font-style:italic;color:var(--gold-muted)}
+.wr-industries-sub{font-size:15px;line-height:1.85;color:var(--ink-muted);font-weight:300;max-width:640px;margin-top:20px}
+
+.wr-industries-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--paper-mid);
+}
+@media(max-width:860px){.wr-industries-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wr-industries-grid{grid-template-columns:1fr}}
+
+.wr-industry-cell{
+  background:var(--paper-warm);padding:36px 32px;
+  transition:background 0.3s;position:relative;overflow:hidden;
+}
+.wr-industry-cell:hover{background:var(--paper)}
+.wr-industry-cell::after{
+  content:'';position:absolute;bottom:0;left:32px;right:32px;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.5s var(--ease-out);
+}
+.wr-industry-cell:hover::after{transform:scaleX(1)}
+.wr-industry-num{
+  font-family:var(--font-display);font-size:48px;font-weight:300;
+  color:var(--paper-mid);line-height:1;margin-bottom:16px;
+  transition:color 0.3s;
+}
+.wr-industry-cell:hover .wr-industry-num{color:rgba(201,168,76,0.15)}
+.wr-industry-name{font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:10px}
+.wr-industry-desc{font-size:13px;line-height:1.75;color:var(--ink-muted);font-weight:300}
+
+/* ─── LIGHTBOX ─── */
+#wr-lightbox{
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(10,9,14,0.97);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.4s;
+}
+#wr-lightbox.open{opacity:1;pointer-events:all}
+#wr-lb-img{max-width:88vw;max-height:86vh;object-fit:contain}
+#wr-lb-close{
+  position:absolute;top:24px;right:32px;width:40px;height:40px;
+  border:1px solid rgba(255,255,255,0.12);border-radius:2px;
+  background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 0.25s;
+}
+#wr-lb-close:hover{border-color:rgba(201,168,76,0.5)}
+#wr-lb-close::before,#wr-lb-close::after{content:'';position:absolute;width:14px;height:1px;background:rgba(250,248,245,0.6)}
+#wr-lb-close::before{transform:rotate(45deg)}
+#wr-lb-close::after{transform:rotate(-45deg)}
+#wr-lb-prev,#wr-lb-next{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border:1px solid rgba(255,255,255,0.1);
+  border-radius:2px;background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.25s;color:rgba(250,248,245,0.5);font-size:18px;
+}
+#wr-lb-prev{left:24px}
+#wr-lb-next{right:24px}
+#wr-lb-prev:hover,#wr-lb-next:hover{border-color:rgba(201,168,76,0.4);color:var(--gold)}
+#wr-lb-caption{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  text-align:center;max-width:600px;padding:0 20px;
+}
+#wr-lb-cap-tag{font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+#wr-lb-cap-text{font-family:var(--font-display);font-size:16px;font-weight:300;color:rgba(250,248,245,0.6);line-height:1.4}
+
+/* ─── CTA ─── */
+#wr-cta{
+  padding:80px 48px;background:var(--charcoal);text-align:center;
+}
+
+/* ─── OVERFLOW GRID ─── */
+.wr-cta-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.wr-cta-eyebrow::before,.wr-cta-eyebrow::after{content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:0.4}
+.wr-cta-text{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:300;color:var(--paper);line-height:1.05;margin-bottom:32px}
+.wr-cta-text em{font-style:italic;color:var(--gold)}
+.wr-btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;background:var(--gold);color:var(--charcoal);
+  font-size:11px;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;text-decoration:none;border-radius:2px;
+  font-family:var(--font-mono);transition:background 0.25s,transform 0.2s;
+}
+.wr-btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+
+/* ─── KINETIC CANVAS ─── */
+#wr-header-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+
+<nav id="wr-nav">
+  <a href="strategy.html" class="wr-nav-brand">
+    <span class="wr-nav-name">Wil Randolph</span>
+    <span class="wr-nav-sub">Brand &amp; Marketing Strategist</span>
+  </a>
+  <div class="wr-nav-links">
+    <a href="strategy.html">Strategy</a>
+    <span class="wr-nav-div"></span>
+    <a href="work.html" class="active">Work</a>
+    <span class="wr-nav-div"></span>
+    <a href="cases.html">Case Studies</a>
+
+    <span class="wr-nav-div"></span>
+    <a href="about.html">About</a>
+    <span class="wr-nav-div"></span>
+    <a href="journal.html">Journal</a>
+    <span class="wr-nav-div"></span>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div id="wr-progress"></div>
+
+<!-- HEADER -->
+<section id="wr-header">
+  <canvas id="wr-header-canvas"></canvas>
+  <div class="wr-header-inner">
+    <div class="wr-header-eyebrow wr-reveal">Strategy Made Visible</div>
+    <h1 class="wr-header-title wr-reveal wr-delay-1">Marketing<br>governance made <em>visible.</em></h1>
+    <p class="wr-header-sub wr-reveal wr-delay-2">
+      Every project on this page is the output of a marketing function being governed at the business level -- not just a campaign being executed. Competitive intelligence, operational constraints, retail compliance, brand architecture, and measurable outcomes preceded every visible decision. The work is the evidence. The governance is the practice.
+    </p>
+  </div>
+</section>
+
+<!-- TIER NAV -->
+<div id="wr-tier-nav">
+  <div class="wr-tier-nav-inner">
+    <button class="wr-tier-tab active" data-tier="cases">Case Studies</button>
+    <button class="wr-tier-tab" data-tier="archive">Visual Archive</button>
+    <button class="wr-tier-tab" data-tier="industries">Industries</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     TIER 1: CASE STUDIES
+══════════════════════════════════════════════════ -->
+<div class="wr-tier active" id="tier-cases">
+
+  <div class="wr-ticker-section" aria-hidden="true">
+    <div class="wr-ticker-wrap">
+      <div class="wr-ticker">
+        Brand Strategy<span class="wr-ticker-dot"></span>
+        Package Design<span class="wr-ticker-dot"></span>
+        Seasonal Revenue Campaigns<span class="wr-ticker-dot"></span>
+        Brand Governance<span class="wr-ticker-dot"></span>
+        Market Positioning<span class="wr-ticker-dot"></span>
+        Print &amp; Signage<span class="wr-ticker-dot"></span>
+        Creative Direction<span class="wr-ticker-dot"></span>
+        Go-To-Market Strategy<span class="wr-ticker-dot"></span>
+        Competitive Intelligence<span class="wr-ticker-dot"></span>
+        Integrated Marketing<span class="wr-ticker-dot"></span>
+        Brand Strategy<span class="wr-ticker-dot"></span>
+        Package Design<span class="wr-ticker-dot"></span>
+        Seasonal Revenue Campaigns<span class="wr-ticker-dot"></span>
+        Brand Governance<span class="wr-ticker-dot"></span>
+        Market Positioning<span class="wr-ticker-dot"></span>
+        Print &amp; Signage<span class="wr-ticker-dot"></span>
+        Creative Direction<span class="wr-ticker-dot"></span>
+        Go-To-Market Strategy<span class="wr-ticker-dot"></span>
+        Competitive Intelligence<span class="wr-ticker-dot"></span>
+        Integrated Marketing<span class="wr-ticker-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="wr-filters">
+    <div class="wr-filter-inner">
+      <button class="wr-filter-btn active" data-filter="all">All Work</button>
+      <button class="wr-filter-btn" data-filter="packaging">Packaging</button>
+      <button class="wr-filter-btn" data-filter="print">Print &amp; Signage</button>
+      <button class="wr-filter-btn" data-filter="identity">Brand Identity</button>
+      <button class="wr-filter-btn" data-filter="campaign">Campaign</button>
+      <button class="wr-filter-btn" data-filter="cpg">Consumer Goods</button>
+      <button class="wr-filter-btn" data-filter="realestate">Luxury Real Estate</button>
+    </div>
+  </div>
+
+  <section id="wr-scroll-section">
+    <div class="wr-scroll-hint">
+      <div class="wr-scroll-hint-line"></div>
+      <span class="wr-scroll-hint-text">Scroll to explore featured work</span>
+    </div>
+    <div id="wr-track-wrap">
+      <div id="wr-tile-track">
+
+        <div class="wr-tile" data-project="1" data-cat="packaging cpg">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/mtn_berry-SharpenAI-Motion_ae79qk.jpg" alt="MOUNTAIN™ Series" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Packaging · Consumer Goods</span>
+            <h3 class="wr-tile-name">MOUNTAIN™ Series</h3>
+            <p class="wr-tile-teaser">From a single product to a multi-SKU brand platform. Consumer intelligence led the direction. A national retailer signed exclusives at the mockup stage.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="2" data-cat="packaging cpg">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/easter6.8ozSUB_dhqwtk.jpg" alt="Easter Almond ROCA" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Packaging · Seasonal Campaign</span>
+            <h3 class="wr-tile-name">Easter Almond ROCA</h3>
+            <p class="wr-tile-teaser">First successful Easter category penetration in company history. 70% season-over-season growth. National retailer doubled orders twice.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="3" data-cat="packaging cpg">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/250367_7.75_hear_tin_pulhxq.jpg" alt="Valentine's Day Heart Tins" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Packaging · Seasonal Campaign</span>
+            <h3 class="wr-tile-name">Valentine's Day Heart Tins</h3>
+            <p class="wr-tile-teaser">Paired complementary design strategy engineered to drive consumer purchase behavior from single-unit to paired-set. Three seasons of record sales.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="4" data-cat="packaging cpg">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/ROCABars_Img_ptiwuy.jpg" alt="ROCA Bars" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Packaging · Brand Identity</span>
+            <h3 class="wr-tile-name">ROCA Bars</h3>
+            <p class="wr-tile-teaser">A complete brand identity originated from zero -- die-line, photorealistic vector illustration, and a production system that eliminated photography inconsistency.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="5" data-cat="packaging cpg">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/AR_Bites_v3f4wc.jpg" alt="ROCA Bites" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Packaging · New Product Launch</span>
+            <h3 class="wr-tile-name">ROCA Bites</h3>
+            <p class="wr-tile-teaser">New product category launch. One substrate decision solved four business problems simultaneously -- quality, color accuracy, cost reduction, and environmental impact.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="6" data-cat="packaging cpg">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/IMG_1172_u6r6uf.jpg" alt="Seasonal Holiday Packaging" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Packaging · Seasonal</span>
+            <h3 class="wr-tile-name">Seasonal Holiday Packaging</h3>
+            <p class="wr-tile-teaser">Premium holiday packaging treated as a brand event rather than a shelf update. A recurring seasonal revenue program built on premium materiality.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="7" data-cat="campaign political">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233932/IMG_5638_zdqn6l.jpg" alt="Political Campaign Design" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Campaign · Political</span>
+            <h3 class="wr-tile-name">Political Campaign Design</h3>
+            <p class="wr-tile-teaser">Full campaign design for a judicial candidate -- yard signage, print collateral, and visual identity from brief to production-ready assets.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+        <div class="wr-tile" data-project="8" data-cat="print realestate">
+          <div class="wr-tile-ph">
+            <img class="wr-tile-img" src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/pcard_b7q1sk.jpg" alt="Real Estate Broker Mailer" loading="lazy">
+          </div>
+          <div class="wr-tile-overlay">
+            <span class="wr-tile-tag">Direct Mail · Real Estate</span>
+            <h3 class="wr-tile-name">Real Estate Broker Mailer</h3>
+            <p class="wr-tile-teaser">Conceived, designed, and wrote the copy for a direct mail postcard campaign. Integrated program spanning direct mail, social media, and email management.</p>
+            <span class="wr-tile-cta">View Case Study</span>
+          </div>
+        </div>
+  </section>
+
+</div><!-- /tier-cases -->
+
+<!-- ══════════════════════════════════════════════════
+     TIER 2: VISUAL ARCHIVE
+══════════════════════════════════════════════════ -->
+<div class="wr-tier" id="tier-archive">
+
+  <!-- SEASONAL & HOLIDAY CAMPAIGNS -->
+  <div class="wr-archive-section">
+    <div class="wr-archive-header wr-reveal">
+      <div>
+        <p class="wr-archive-tag">01 &mdash; Packaging</p>
+        <h2 class="wr-archive-title">Seasonal &amp; <em>Holiday Campaigns</em></h2>
+        <p class="wr-archive-desc">Limited edition and seasonal packaging that drove documented revenue growth. Each series was a positioning decision before it was a design decision.</p>
+      </div>
+    </div>
+    <div class="wr-masonry wr-reveal wr-delay-1">
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/IMG_1172_u6r6uf.jpg" data-label="Holiday · Premium" data-cap="Luxuriously finished, foiled and embossed popular holiday package design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/IMG_1172_u6r6uf.jpg" alt="Holiday packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Premium</p><p class="wr-masonry-caption">Luxuriously finished, foiled and embossed holiday package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233922/seahawk_nutcracker_design_i8julq.jpg" data-label="Holiday · Sports" data-cap="Holiday/sports themed package design on tin"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233922/seahawk_nutcracker_design_i8julq.jpg" alt="Seahawks holiday tin" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Sports</p><p class="wr-masonry-caption">Holiday/sports themed package design on tin</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233922/nutcrkr_vbksvf.jpg" data-label="Holiday · Tin" data-cap="Holiday themed package design on tin"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233922/nutcrkr_vbksvf.jpg" alt="Nutcracker holiday tin" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Tin</p><p class="wr-masonry-caption">Holiday themed package design on tin</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/2018_Xmas_China_SM-383_oyuz1i.jpg" data-label="Holiday · Scenic" data-cap="Scenic Holiday Package Design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/2018_Xmas_China_SM-383_oyuz1i.jpg" alt="Scenic holiday packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Scenic</p><p class="wr-masonry-caption">Scenic Holiday Package Design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/deer_iz1zm0.jpg" data-label="Holiday · Film" data-cap="Whimsical holiday themed package design on film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/deer_iz1zm0.jpg" alt="Deer holiday packaging film" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Film</p><p class="wr-masonry-caption">Whimsical holiday themed package design on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/jumping_ginger_kcze6a.jpg" data-label="Holiday · Concept" data-cap="Whimsical holiday themed package design concept on film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/jumping_ginger_kcze6a.jpg" alt="Jumping ginger holiday packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Concept</p><p class="wr-masonry-caption">Whimsical holiday themed package design concept on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/AR_snowglobe_design_n0iulp.jpg" data-label="Holiday · Rendering" data-cap="Holiday snowglobe package design rendering"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/AR_snowglobe_design_n0iulp.jpg" alt="Snowglobe package design" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Rendering</p><p class="wr-masonry-caption">Holiday snowglobe package design rendering</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/MCPC_snow_pkodkj.jpg" data-label="Holiday · Sculptured" data-cap="Holiday themed sculptured embossed Peppermint Cremes Scout package design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/MCPC_snow_pkodkj.jpg" alt="Peppermint cremes holiday packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Sculptured Embossed</p><p class="wr-masonry-caption">Holiday themed sculptured embossed Peppermint Cremes Scout package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/AR_Bites_HOL_B_gohq1b.jpg" data-label="Holiday · Bites" data-cap="Whimsical and Playful Holiday themed package design on film (1 of 2)"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/AR_Bites_HOL_B_gohq1b.jpg" alt="Holiday bites packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Film</p><p class="wr-masonry-caption">Whimsical and Playful Holiday themed package design on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/DPR_Bites_HOL_l9xmsr.jpg" data-label="Holiday · Bites" data-cap="Whimsical and Playful Holiday themed package design on film (2 of 2)"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/DPR_Bites_HOL_l9xmsr.jpg" alt="Holiday bites packaging 2" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Holiday · Film</p><p class="wr-masonry-caption">Whimsical and Playful Holiday themed package design on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/easter6.8ozSUB_dhqwtk.jpg" data-label="Spring · Easter" data-cap="Record selling, fun and whimsical Easter/Spring themed package design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/easter6.8ozSUB_dhqwtk.jpg" alt="Easter spring packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Spring · Easter</p><p class="wr-masonry-caption">Record selling, fun and whimsical Easter/Spring themed package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/fall_A_bqzu0j.jpg" data-label="Autumn · Bilingual" data-cap="Autumn themed, sculptured embossed bi-lingual package design for national retailer"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/fall_A_bqzu0j.jpg" alt="Autumn packaging bilingual" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Autumn · Sculptured Embossed</p><p class="wr-masonry-caption">Autumn themed, sculptured embossed bi-lingual package design for national retailer</p></div></div>
+    </div>
+  </div>
+
+  <!-- VALENTINE'S DAY -->
+  <div class="wr-archive-section">
+    <div class="wr-archive-header wr-reveal">
+      <div>
+        <p class="wr-archive-tag">02 &mdash; Seasonal Campaign</p>
+        <h2 class="wr-archive-title">Valentine's Day <em>Campaign Series</em></h2>
+        <p class="wr-archive-desc">Record-selling tin packaging and lifestyle imagery for the Valentine's Day retail category. Packaging, photography, and campaign assets produced as a unified system.</p>
+      </div>
+    </div>
+    <div class="wr-masonry wr-reveal wr-delay-1">
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/250367_7.75_hear_tin_pulhxq.jpg" data-label="Valentine's · Tin" data-cap="Record selling Valentine's Day themed package design on tin"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/250367_7.75_hear_tin_pulhxq.jpg" alt="Valentine's Day tin" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Record Seller</p><p class="wr-masonry-caption">Record selling Valentine's Day themed package design on tin</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/7.75_heart_tin_AR_DR_2_jwszdn.jpg" data-label="Valentine's · Tin" data-cap="Record selling Valentine's Day themed package design on tin"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/7.75_heart_tin_AR_DR_2_jwszdn.jpg" alt="Valentine's Day heart tin" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Record Seller</p><p class="wr-masonry-caption">Record selling Valentine's Day themed package design on tin</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/better_together_i0y3h5.jpg" data-label="Valentine's · Campaign" data-cap="Valentine's Day themed tin package design and ad imagery"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/better_together_i0y3h5.jpg" alt="Better Together Valentine's campaign" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Campaign</p><p class="wr-masonry-caption">Valentine's Day themed tin package design and ad imagery</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/better_togetherB_mqeo66.jpg" data-label="Valentine's · Campaign" data-cap="Valentine's Day themed tin package design and ad imagery"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/better_togetherB_mqeo66.jpg" alt="Better Together Valentine's B" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Campaign</p><p class="wr-masonry-caption">Valentine's Day themed tin package design and ad imagery</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/Kayley_drtu20.jpg" data-label="Valentine's · Lifestyle" data-cap="Valentine's Day themed tin package design and lifestyle imagery"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/Kayley_drtu20.jpg" alt="Kayley Valentine's lifestyle" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Lifestyle</p><p class="wr-masonry-caption">Valentine's Day themed tin package design and lifestyle imagery</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/give_love_gmyedx.jpg" data-label="Valentine's · Ad" data-cap="Valentine's Day themed tin package design and ad imagery"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/give_love_gmyedx.jpg" alt="Give love Valentine's ad" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Ad</p><p class="wr-masonry-caption">Valentine's Day themed tin package design and ad imagery</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/Sarah_heart_fzy9ad.jpg" data-label="Valentine's · Lifestyle" data-cap="Valentine's Day themed tin package design and lifestyle imagery"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/Sarah_heart_fzy9ad.jpg" alt="Sarah heart Valentine's lifestyle" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Valentine's · Lifestyle</p><p class="wr-masonry-caption">Valentine's Day themed tin package design and lifestyle imagery</p></div></div>
+    </div>
+  </div>
+
+  <!-- BRAND CORE & CPG -->
+  <div class="wr-archive-section">
+    <div class="wr-archive-header wr-reveal">
+      <div>
+        <p class="wr-archive-tag">03 &mdash; Brand Governance</p>
+        <h2 class="wr-archive-title">Core Brand <em>Portfolio</em></h2>
+        <p class="wr-archive-desc">The ongoing brand management of a globally distributed CPG line. New product categories, regulatory redesigns, and brand extensions all governed by a single strategic framework.</p>
+      </div>
+    </div>
+    <div class="wr-masonry wr-reveal wr-delay-1">
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/mtn_berry-SharpenAI-Motion_ae79qk.jpg" data-label="Brand Core · MTN" data-cap="MOUNTAIN Thins Package Design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/mtn_berry-SharpenAI-Motion_ae79qk.jpg" alt="Mountain Thins packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Brand Core · MOUNTAIN</p><p class="wr-masonry-caption">MOUNTAIN Thins Package Design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/MTN_TM_blue_xpcina.jpg" data-label="Brand Core · MTN" data-cap="MOUNTAIN brand mark"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/MTN_TM_blue_xpcina.jpg" alt="Mountain brand mark" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Brand Core · Identity</p><p class="wr-masonry-caption">MOUNTAIN brand mark</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/MTN_Thins_jvefuf.jpg" data-label="Brand Core · MTN" data-cap="New MOUNTAIN package design series on film and package photography"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/MTN_Thins_jvefuf.jpg" alt="Mountain Thins series" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Brand Core · Series</p><p class="wr-masonry-caption">New MOUNTAIN package design series on film and package photography</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/peanuts-SharpenAI-Motion_mr7pmw.jpg" data-label="Brand Core · CPG" data-cap="MOUNTAIN branded Instant consumption category — CPG design on film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/peanuts-SharpenAI-Motion_mr7pmw.jpg" alt="Mountain peanuts CPG" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Brand Core · CPG</p><p class="wr-masonry-caption">MOUNTAIN branded Instant consumption category — CPG design on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/cherry_mtn_mqkrhr.jpg" data-label="Brand Core · Bar" data-cap="MOUNTAIN Bar Package Design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/cherry_mtn_mqkrhr.jpg" alt="Mountain Bar cherry" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Brand Core · Bar</p><p class="wr-masonry-caption">MOUNTAIN Bar Package Design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/AR_Bites_v3f4wc.jpg" data-label="New Category · Bites" data-cap="Package Design — new product category"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/AR_Bites_v3f4wc.jpg" alt="AR Bites new category" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">New Category · Bites</p><p class="wr-masonry-caption">Package Design — new product category</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/Bites_IC_btr6d2.jpg" data-label="New Category · Snack" data-cap="ROCA Bites Package Design — new product category and consumable snack-size on film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/Bites_IC_btr6d2.jpg" alt="ROCA Bites IC" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">New Category · Snack</p><p class="wr-masonry-caption">ROCA Bites — new product category and consumable snack-size on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/MCR_AR_DR_Bites_mqluyg.jpg" data-label="New Category · Film" data-cap="New ROCA Bites Package Design — new product CPG category on film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/MCR_AR_DR_Bites_mqluyg.jpg" alt="ROCA Bites film" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">New Category · Film</p><p class="wr-masonry-caption">New ROCA Bites Package Design — CPG category on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/MCPB_promo_img_dswseb.jpg" data-label="Artisanal · Film" data-cap="Milk Chocolate Peanut Butter Squares in artisanal natural-themed package design on matte film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233921/MCPB_promo_img_dswseb.jpg" alt="MCPB artisanal matte film" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Artisanal · Matte Film</p><p class="wr-masonry-caption">Milk Chocolate Peanut Butter Squares in artisanal natural-themed package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/AR_popcorn_pkgdesign_camping_v8bpos.jpg" data-label="New SKU · Popcorn" data-cap="ALMOND ROCA Popcorn with Autumn themed package design on matte film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/AR_popcorn_pkgdesign_camping_v8bpos.jpg" alt="ALMOND ROCA Popcorn autumn" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">New SKU · Popcorn</p><p class="wr-masonry-caption">ALMOND ROCA Popcorn with Autumn themed package design on matte film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233915/yot_china_2022_mockup_g81auj.jpg" data-label="Brand · Concept" data-cap="Year of the Tiger 2022 package design 3D concept"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233915/yot_china_2022_mockup_g81auj.jpg" alt="Year of the Tiger 2022" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Brand · Concept</p><p class="wr-masonry-caption">Year of the Tiger 2022 package design 3D concept</p></div></div>
+    </div>
+  </div>
+
+  <!-- DESTINATION / TRAVEL RETAIL -->
+  <div class="wr-archive-section">
+    <div class="wr-archive-header wr-reveal">
+      <div>
+        <p class="wr-archive-tag">04 &mdash; Retail Strategy</p>
+        <h2 class="wr-archive-title">Destination &amp; <em>Travel Retail</em></h2>
+        <p class="wr-archive-desc">Airport retailer packaging designed around specific markets and locations. Each design required market intelligence, consumer profiling for that destination, and brand governance within a unified system.</p>
+      </div>
+    </div>
+    <div class="wr-masonry wr-reveal wr-delay-1">
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/NY_xiaulj.jpg" data-label="Destination · New York" data-cap="Airport retailer Destination project package design — New York"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/NY_xiaulj.jpg" alt="New York destination packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · New York</p><p class="wr-masonry-caption">Airport retailer Destination project package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/SEA_xewb66.jpg" data-label="Destination · Seattle" data-cap="Airport retailer Destination project package design — Seattle"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/SEA_xewb66.jpg" alt="Seattle destination packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · Seattle</p><p class="wr-masonry-caption">Airport retailer Destination project package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/SEA_B_r18ynm.jpg" data-label="Destination · Seattle" data-cap="Airport retailer Destination project package design — Seattle B"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/SEA_B_r18ynm.jpg" alt="Seattle destination packaging B" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · Seattle</p><p class="wr-masonry-caption">Airport retailer Destination project package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/vegas_tin_pkgdesign_yrh60a.jpg" data-label="Destination · Las Vegas" data-cap="Record selling Vegas themed travel package design on tin"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/vegas_tin_pkgdesign_yrh60a.jpg" alt="Vegas destination tin" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · Las Vegas</p><p class="wr-masonry-caption">Record selling Vegas themed travel package design on tin</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/LA_nbujvp.jpg" data-label="Destination · Los Angeles" data-cap="Airport retailer Destination project package design — Los Angeles"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/LA_nbujvp.jpg" alt="Los Angeles destination packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · Los Angeles</p><p class="wr-masonry-caption">Airport retailer Destination project package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/US_zzhz91.jpg" data-label="Destination · USA" data-cap="Airport retailer Destination project package design — USA"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/US_zzhz91.jpg" alt="USA destination packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · USA</p><p class="wr-masonry-caption">Airport retailer Destination project package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/HI_vjzywr.jpg" data-label="Destination · Hawaii" data-cap="Airport retailer Destination project package design — Hawaii"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/HI_vjzywr.jpg" alt="Hawaii destination packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Destination · Hawaii</p><p class="wr-masonry-caption">Airport retailer Destination project package design</p></div></div>
+    </div>
+  </div>
+
+  <!-- PRINT, SIGNAGE & ADVERTISING -->
+  <div class="wr-archive-section">
+    <div class="wr-archive-header wr-reveal">
+      <div>
+        <p class="wr-archive-tag">05 &mdash; Print &amp; Advertising</p>
+        <h2 class="wr-archive-title">Print, Signage <em>&amp; Advertising</em></h2>
+        <p class="wr-archive-desc">Collateral, trade show systems, signage, advertising, editorial, and event marketing. The full range of print-based marketing execution across multiple industries and organizations.</p>
+      </div>
+    </div>
+    <div class="wr-masonry wr-reveal wr-delay-1">
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/noteworld2_doqyi9.jpg" data-label="Print · Brand" data-cap="Noteworld brand print design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/noteworld2_doqyi9.jpg" alt="Noteworld print design" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Brand</p><p class="wr-masonry-caption">Noteworld brand print design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/nw_flyer_oljaux.jpg" data-label="Print · Flyer" data-cap="Noteworld flyer design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/nw_flyer_oljaux.jpg" alt="Noteworld flyer" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Flyer</p><p class="wr-masonry-caption">Noteworld flyer design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/B_card_design_crdyrx.jpg" data-label="Print · Collateral" data-cap="Business card design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/B_card_design_crdyrx.jpg" alt="Business card design" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Collateral</p><p class="wr-masonry-caption">Business card design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/4th_Postcard_uej6qj.jpg" data-label="Print · Postcard" data-cap="4th of July postcard design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/4th_Postcard_uej6qj.jpg" alt="4th of July postcard" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Direct Mail</p><p class="wr-masonry-caption">4th of July postcard design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/SB_biz_card_szoenn.jpg" data-label="Print · Business Card" data-cap="Business card design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/SB_biz_card_szoenn.jpg" alt="SB business card" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Business Card</p><p class="wr-masonry-caption">Business card design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233930/3flyerdesign_vp8puo.jpg" data-label="Print · Flyer" data-cap="Multi-panel flyer design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233930/3flyerdesign_vp8puo.jpg" alt="3 flyer design" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Flyer</p><p class="wr-masonry-caption">Multi-panel flyer design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777234874/mc-bar-ad_yzripv.png" data-label="Advertising · CPG" data-cap="Mountain bar ad imagery"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777234874/mc-bar-ad_yzripv.png" alt="Mountain bar ad" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Advertising · CPG</p><p class="wr-masonry-caption">Mountain bar ad imagery</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233931/RE_FlyerDesign_njor85.jpg" data-label="Print · Real Estate" data-cap="Real estate flyer design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233931/RE_FlyerDesign_njor85.jpg" alt="Real estate flyer" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Real Estate</p><p class="wr-masonry-caption">Real estate flyer design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/ROCA_Eve_tshow_poster_qil6ok.jpg" data-label="Trade Show · Signage" data-cap="ROCA trade show event poster"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/ROCA_Eve_tshow_poster_qil6ok.jpg" alt="ROCA trade show poster" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Trade Show · Signage</p><p class="wr-masonry-caption">ROCA trade show event poster</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/Popcorn_tshow_signage_dpxkpm.jpg" data-label="Trade Show · POP" data-cap="Popcorn trade show signage"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/Popcorn_tshow_signage_dpxkpm.jpg" alt="Popcorn trade show signage" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Trade Show · POP</p><p class="wr-masonry-caption">Popcorn trade show signage</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233931/cc_signage_hdv3ki.jpg" data-label="Signage · Retail" data-cap="Retail signage design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233931/cc_signage_hdv3ki.jpg" alt="Retail signage" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Signage · Retail</p><p class="wr-masonry-caption">Retail signage design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233930/2025_4th_Park_lgih9x.jpg" data-label="Event · Outdoor" data-cap="4th of July park event marketing"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233930/2025_4th_Park_lgih9x.jpg" alt="4th of July park event" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Event · Outdoor</p><p class="wr-masonry-caption">4th of July park event marketing</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233931/4th_A_frame_q8ck3f.jpg" data-label="Event · Signage" data-cap="4th of July A-frame signage"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233931/4th_A_frame_q8ck3f.jpg" alt="4th of July A-frame" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Event · Signage</p><p class="wr-masonry-caption">4th of July A-frame signage</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/magB_yyhb8p.jpg" data-label="Editorial · Magazine" data-cap="Magazine design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/magB_yyhb8p.jpg" alt="Magazine design B" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Editorial · Magazine</p><p class="wr-masonry-caption">Magazine design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/mag_mly509.jpg" data-label="Editorial · Magazine" data-cap="Magazine design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233929/mag_mly509.jpg" alt="Magazine design" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Editorial · Magazine</p><p class="wr-masonry-caption">Magazine design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/brochure_v6rthd.jpg" data-label="Print · Brochure" data-cap="Brochure design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/brochure_v6rthd.jpg" alt="Brochure design" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Brochure</p><p class="wr-masonry-caption">Brochure design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233930/movie_poster_A_iql9w5.jpg" data-label="Advertising · Poster" data-cap="Movie poster design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233930/movie_poster_A_iql9w5.jpg" alt="Movie poster A" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Advertising · Poster</p><p class="wr-masonry-caption">Movie poster design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/TJ_flyer_rt5art.jpg" data-label="Print · Flyer" data-cap="TJ flyer design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/TJ_flyer_rt5art.jpg" alt="TJ flyer" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Print · Flyer</p><p class="wr-masonry-caption">TJ flyer design</p></div></div>
+    </div>
+  </div>
+
+  <!-- CONCEPT & UNBRANDED -->
+  <div class="wr-archive-section">
+    <div class="wr-archive-header wr-reveal">
+      <div>
+        <p class="wr-archive-tag">06 &mdash; Concept Work</p>
+        <h2 class="wr-archive-title">Concept &amp; <em>Unbranded</em></h2>
+        <p class="wr-archive-desc">Speculative and concept work demonstrating strategic and creative range independent of any specific client brief.</p>
+      </div>
+    </div>
+    <div class="wr-masonry wr-reveal wr-delay-1">
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/CHOCOLATE_BAR_nqwvdh.jpg" data-label="Concept · Packaging" data-cap="Unbranded chocolate bar package design concept"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/CHOCOLATE_BAR_nqwvdh.jpg" alt="Chocolate bar concept" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Concept · Packaging</p><p class="wr-masonry-caption">Unbranded chocolate bar package design concept</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/Screen_Shot_2023-11-16_at_1.35.11_PM_rsafon.png" data-label="Concept · Spring" data-cap="Spring themed package design concept"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233923/Screen_Shot_2023-11-16_at_1.35.11_PM_rsafon.png" alt="Spring concept packaging" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Concept · Spring</p><p class="wr-masonry-caption">Spring themed package design concept</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/A_sffpw5.jpg" data-label="Concept · Autumn" data-cap="Milk Chocolate Peanut Butter Squares Autumn themed package design on film"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/A_sffpw5.jpg" alt="MCPB Autumn A" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Concept · Autumn</p><p class="wr-masonry-caption">Milk Chocolate Peanut Butter Squares Autumn themed package design on film</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/B_h4nasi.jpg" data-label="Concept · Autumn" data-cap="Autumn themed package design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/B_h4nasi.jpg" alt="Autumn packaging B" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Concept · Autumn</p><p class="wr-masonry-caption">Autumn themed package design</p></div></div>
+
+      <div class="wr-masonry-item" data-src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/MCPB_Squares_SUP_Autumn_jn6sig.jpg" data-label="Concept · Autumn" data-cap="Autumn themed package design"><img src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/MCPB_Squares_SUP_Autumn_jn6sig.jpg" alt="MCPB Squares Autumn" loading="lazy"><div class="wr-masonry-overlay"><p class="wr-masonry-label">Concept · Autumn</p><p class="wr-masonry-caption">Autumn themed package design</p></div></div>
+    </div>
+  </div>
+
+</div><!-- /tier-archive -->
+
+<!-- ══════════════════════════════════════════════════
+     TIER 3: INDUSTRIES
+══════════════════════════════════════════════════ -->
+<div class="wr-tier" id="tier-industries">
+  <section id="wr-industries">
+    <div class="wr-industries-inner">
+      <div class="wr-industries-header wr-reveal">
+        <p class="wr-industries-eyebrow">Industry Experience</p>
+        <h2 class="wr-industries-title">Eight industries.<br><em>One discipline.</em></h2>
+        <p class="wr-industries-sub">
+          The ADP runs the same regardless of the industry. The operational inputs change. 
+          The strategic methodology does not. Nearly two decades of practice across sectors 
+          that span project-based business development, consumer brand management, 
+          luxury services, and healthcare-adjacent markets.
+        </p>
+      </div>
+
+      <div class="wr-industries-grid wr-reveal wr-delay-2">
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">01</div>
+          <h3 class="wr-industry-name">Consumer Goods &amp; CPG</h3>
+          <p class="wr-industry-desc">Brand governance, packaging strategy, seasonal campaign development, and new product category launches at global distribution scale. Documented 70% season-over-season revenue growth through packaging-led brand strategy.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">02</div>
+          <h3 class="wr-industry-name">Architecture, Engineering &amp; Construction</h3>
+          <p class="wr-industry-desc">Proposal strategy, business development marketing, firm positioning, and bid-winning collateral. The skills that win projects in AEC -- competitive positioning, audience intelligence, and differentiated narrative -- are the same skills that built this practice.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">03</div>
+          <h3 class="wr-industry-name">Luxury Real Estate</h3>
+          <p class="wr-industry-desc">Enterprise brand architecture, agent personal brand systems, listing campaigns, and marketing strategy for a major luxury brokerage operating across three regional offices with nearly 200 agents.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">04</div>
+          <h3 class="wr-industry-name">Healthcare &amp; Professional Services</h3>
+          <p class="wr-industry-desc">Brand audits, competitive positioning, and marketing strategy for organizations that must communicate authority, trust, and clarity to sophisticated audiences. The diagnostic discipline that works in CPG works equally in healthcare.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">05</div>
+          <h3 class="wr-industry-name">Retail &amp; Destination</h3>
+          <p class="wr-industry-desc">Airport retailer destination packaging, specialty retail brand launches, and consumer-facing campaign systems. Market-specific positioning at scale across multiple geographic destinations simultaneously.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">06</div>
+          <h3 class="wr-industry-name">Fashion &amp; Beauty</h3>
+          <p class="wr-industry-desc">Brand identity development, editorial direction, campaign photography, and go-to-market strategy for independent labels and established brands. Full creative chain from strategy through final image.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">07</div>
+          <h3 class="wr-industry-name">Advertising &amp; Print</h3>
+          <p class="wr-industry-desc">Multi-channel campaign execution, trade show systems, editorial and publishing design, event marketing, and integrated print advertising across industries and audience segments.</p>
+        </div>
+
+        <div class="wr-industry-cell">
+          <div class="wr-industry-num">08</div>
+          <h3 class="wr-industry-name">Industrial Supply &amp; B2B</h3>
+          <p class="wr-industry-desc">Brand positioning and marketing strategy for organizations that sell to procurement professionals and sophisticated buyers. The ADP's operational intelligence layer is particularly suited to industries where the buyer understands the supply chain better than most marketers do.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div><!-- /tier-industries -->
+
+<!-- CASE STUDY OVERLAY -->
+<div id="wr-case-overlay">
+  <div class="wr-case-backdrop" id="wr-backdrop"></div>
+  <div class="wr-case-panel">
+    <div class="wr-case-close">
+      <span class="wr-case-close-label">Case Study</span>
+      <button class="wr-case-close-btn" id="wr-close-btn" aria-label="Close"></button>
+    </div>
+    <div class="wr-case-image">
+      <img id="cs-img" src="" alt="" style="display:none">
+      <div class="wr-case-img-num" id="cs-num">01</div>
+    </div>
+    <div class="wr-case-body">
+      <p class="wr-case-tag" id="cs-tag"></p>
+      <h2 class="wr-case-title" id="cs-title"></h2>
+      <div class="wr-case-section">
+        <p class="wr-case-section-label">The Strategic Challenge</p>
+        <p class="wr-case-section-text" id="cs-challenge"></p>
+      </div>
+      <div class="wr-case-section">
+        <p class="wr-case-section-label">The Diagnostic</p>
+        <p class="wr-case-section-text" id="cs-diagnostic"></p>
+      </div>
+      <div class="wr-case-section">
+        <p class="wr-case-section-label">The Strategic Decision</p>
+        <p class="wr-case-section-text" id="cs-decision"></p>
+      </div>
+      <div class="wr-case-section">
+        <p class="wr-case-section-label">The Outcome</p>
+        <div class="wr-case-outcome">
+          <div class="wr-case-outcome-num" id="cs-outcome-num"></div>
+          <p class="wr-case-outcome-label" id="cs-outcome-label"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECOND SCROLL ROW -->
+<div id="wr-scroll-section-2" style="background:var(--charcoal);padding-bottom:60px;">
+  <div id="wr-track-wrap-2" style="overflow:hidden;padding:0 48px 0;">
+    <div id="wr-tile-track-2" style="display:flex;gap:20px;width:max-content;will-change:transform;"></div>
+  </div>
+</div>
+
+<!-- Photography bridge -->
+<div style="background:var(--charcoal);padding:32px 56px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);">
+  <a href="photography.html" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(250,248,245,0.3);text-decoration:none;display:inline-flex;align-items:center;gap:12px;transition:color 0.3s;" onmouseover="this.style.color='rgba(201,168,76,0.7)'" onmouseout="this.style.color='rgba(250,248,245,0.3)'">
+    <span style="display:block;width:24px;height:1px;background:currentColor;"></span>
+    Photography &amp; Editorial Work
+    <span style="display:block;width:24px;height:1px;background:currentColor;"></span>
+  </a>
+</div>
+
+<!-- CTA -->
+<section id="wr-cta">
+  <div class="wr-cta-eyebrow">Open to Roles &amp; Select Engagements</div>
+  <p class="wr-cta-text">Ready to build<br><em>something that performs?</em></p>
+  <a href="contact.html" class="wr-btn-primary">Start a Conversation &rarr;</a>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="wr-lightbox">
+  <button id="wr-lb-close" aria-label="Close"></button>
+  <button id="wr-lb-prev" aria-label="Previous">&#8592;</button>
+  <img id="wr-lb-img" src="" alt="">
+  <button id="wr-lb-next" aria-label="Next">&#8594;</button>
+  <div id="wr-lb-caption">
+    <p id="wr-lb-cap-tag"></p>
+    <p id="wr-lb-cap-text"></p>
+  </div>
+</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ─── PROGRESS ─── */
+var bar = document.getElementById('wr-progress');
+window.addEventListener('scroll', function(){
+  var d = document.documentElement;
+  var s = d.scrollTop || document.body.scrollTop;
+  var t = d.scrollHeight - d.clientHeight;
+  bar.style.width = (t > 0 ? (s/t)*100 : 0) + '%';
+}, {passive:true});
+
+/* ─── REVEALS ─── */
+var revObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+}, {threshold:0.1});
+document.querySelectorAll('.wr-reveal').forEach(function(el){ revObs.observe(el); });
+
+/* ─── TIER TABS ─── */
+var tabs = document.querySelectorAll('.wr-tier-tab');
+var tiers = document.querySelectorAll('.wr-tier');
+tabs.forEach(function(tab){
+  tab.addEventListener('click', function(){
+    tabs.forEach(function(t){ t.classList.remove('active'); });
+    tiers.forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    var target = document.getElementById('tier-' + tab.getAttribute('data-tier'));
+    if(target) target.classList.add('active');
+    window.scrollTo({top: document.getElementById('wr-tier-nav').offsetTop - 90, behavior:'smooth'});
+    if(tab.getAttribute('data-tier') === 'cases') setTimeout(function(){ initScroll(); ScrollTrigger.refresh(); }, 100);
+  });
+});
+
+/* ─── CASE STUDIES ─── */
+var projects = {
+  1:{tag:'Packaging · Consumer Goods',title:'Seasonal Reserve Series',num:'01',img:'https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/IMG_1172_u6r6uf.jpg',outcome:'70%',outcomeLabel:'Season-over-season sales growth. A single initiative that became a recurring annual revenue driver.',challenge:'A globally distributed consumer brand with strong wholesale penetration but declining shelf differentiation. Competitors had commoditized the category through price competition. The challenge was not the product — it was positioning and perceived value at the point of decision.',diagnostic:'Running the ADP from the factory floor up revealed what price-focused competitors were missing entirely: no one was using the packaging itself as a premium brand signal. A full audit of manufacturing constraints, substrate options, cost structure, distributor relationships, and retail placement requirements at major national accounts confirmed the white space was real, ownable, and operationally executable within existing margin parameters.',decision:'Design a limited seasonal series that created urgency, collectibility, and premium perception without changing the product. One governing brief: the packaging must feel like a gift before it is purchased. Every visual and material choice -- substrate, finish, structural format -- flowed from that single positioning anchor.'},
+  2:{tag:'Packaging · Global Distribution',title:'Portfolio Governance Redesign',num:'02',img:'https://res.cloudinary.com/dk8dxerks/image/upload/v1777233920/MTN_Thins_jvefuf.jpg',outcome:'100+',outcomeLabel:'SKUs governed across global markets with full regulatory compliance and brand integrity intact.',challenge:'A large, distributed product portfolio spanning multiple international markets with inconsistent visual language, approaching regulatory deadlines, and no governing brand standards document.',diagnostic:'Mapping the full SKU library through the ADP\'s operational layer -- across substrates, print processes, manufacturer specifications, and retail compliance requirements at national accounts -- surfaced the real problem: there was no single source of truth governing how the brand expressed itself at scale. Three categories of deviation emerged: regulatory non-compliance, aesthetic drift, and structural inconsistency across materials and formats, each with a different urgency and market impact.',decision:'Establish a brand governance framework and design guidelines before redesigning a single label. The framework was the deliverable that made everything downstream consistent, fast, and defensible -- and it was built with full operational awareness of what manufacturers could actually produce within existing cost structures.'},
+  3:{tag:'Brand Identity · Luxury Real Estate',title:'Luxury Brokerage Brand System',num:'03',img:'',outcome:'200',outcomeLabel:'Marketing professionals served under a unified brand architecture across three regional offices.',challenge:'A major luxury real estate brokerage operating across three regional offices with fragmented marketing, inconsistent agent branding, and no unified visual identity at the enterprise level.',diagnostic:'Stakeholder interviews across all three offices, mapped through the ADP, revealed the gap with precision: the brand was making a luxury positioning claim that its actual market-facing materials did not support. The diagnosis was systemic, not cosmetic — the brand was saying luxury but showing commodity at every agent-level touchpoint.',decision:'Build a brand system, not a style guide. A system that could be applied consistently by 200 agents with varying design capability while maintaining luxury standards at every touchpoint.'},
+  4:{tag:'Packaging · Brand Consultation',title:'Cannabis Brand Packaging Concept',num:'04',img:'https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/CHOCOLATE_BAR_nqwvdh.jpg',outcome:'—',outcomeLabel:'A major presentation success. The ADP was presented firsthand. The manufacturer learned printing techniques, package types, and left with a strategic framework for brand development in a regulated category.',challenge:'A new product line entering a category dominated by established players with significant shelf presence. Budget constraints made mass advertising impractical.',diagnostic:'Category analysis conducted through the ADP framework showed that most competitors were competing on feature claims, leaving consumers confused rather than persuaded. The cost structure also ruled out traditional awareness advertising. The opportunity was in clarity and confidence delivered entirely at the shelf.',decision:'Position the new line on a single, ownable idea and let the packaging carry the entire positioning argument. No taglines. No feature lists. One clear signal to one clearly defined buyer.'},
+  5:{tag:'Brand Strategy · Repositioning',title:'Category Repositioning',num:'05',img:'',outcome:'—',outcomeLabel:'Brand repositioned from commodity competitor to category authority.',challenge:'A brand with a decade of equity that had drifted from its original positioning through incremental decisions that individually made sense but collectively created strategic incoherence.',diagnostic:'The ADP audit revealed the drift with specificity. The messaging architecture had accumulated contradictions over years of tactical decision-making. The visual identity had been updated piecemeal without a governing brief. The brand was saying three different things to three different audiences simultaneously.',decision:'Return to a singular positioning statement and rebuild every expression from that anchor. Clarity before creativity. The reframe was strategic, not cosmetic.'},
+  6:{tag:'Brand Identity · Studio Client',title:'Beauty Brand from Zero',num:'06',img:'',outcome:'—',outcomeLabel:'Full brand identity system developed from discovery through market launch.',challenge:'An independent beauty founder with a differentiated product and no brand. No name, no visual language, no positioning, no distribution strategy. A blank slate and a launch deadline.',diagnostic:'Running the ADP from inception, with no legacy assets or existing equity to audit, meant the entire operational and competitive picture had to be built from scratch. Audience mapping identified the target as a genuinely underserved segment: professional women who wanted efficacy over aspiration and transparency over luxury theater. Every competitor was selling theater.',decision:'Build a brand that felt like a trusted friend, not a fashion accessory. Warm but precise. Confident but not loud. Designed to perform in a crowded DTC environment without screaming.'},
+  7:{tag:'Campaign · Luxury Real Estate',title:'Luxury Listing Campaign',num:'07',img:'',outcome:'—',outcomeLabel:'Bespoke campaign system delivered for a high-value listing requiring premium brand treatment.',challenge:'A high-value residential listing requiring marketing materials that matched the property\'s price point and buyer profile. Standard brokerage templates were not viable.',diagnostic:'Mapping the buyer profile and acquisition journey through the ADP made the strategic requirement clear: buyers at this price tier make decisions slowly and with extreme scrutiny. Standard listing materials signal commodity to a buyer whose entire frame of reference is the exceptional.',decision:'Treat the listing as a brand, not a property. Develop a dedicated visual identity — custom typography, photography direction, and collateral — that elevated the property above the market.'},
+  8:{tag:'Packaging · Seasonal Campaign',title:'Easter Almond ROCA',num:'08',img:'https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/easter6.8ozSUB_dhqwtk.jpg',outcome:'—',outcomeLabel:'70% season-over-season growth. First successful Easter category penetration in company history. National retailer doubled orders twice. Full story in Case Studies.',challenge:'A product with strong functional performance but no emotional resonance. It was bought on autopilot, not chosen with intention. The goal was to create a reason to choose.',diagnostic:'Consumer research, structured through the ADP, surfaced an underexplored connection between the product and a specific cultural occasion. The manufacturing cost structure confirmed limited run production was viable without compromising margin. The insight was specific, ownable, and operationally executable.',decision:'Limited edition does not mean discount. Design a collector series with the aesthetic authority of a luxury object. Three releases. Three distinct visual themes. One coherent narrative arc.'},
+  9:{tag:'Identity · Campaign',title:'Retail Brand Launch',num:'09',img:'',outcome:'—',outcomeLabel:'Specialty retail concept launched with full brand identity and integrated campaign.',challenge:'A specialty retail concept entering a competitive urban market without an established brand, name, or customer base. First impression was the only impression available.',diagnostic:'The ADP competitive audit identified a genuine positioning gap that the category had left open: most players were either mass-market or aggressively niche, leaving confident accessibility entirely unclaimed. The white space was premium without exclusivity, and no incumbent was owning it.',decision:'Name the brand around the experience, not the product category. Build an identity system that could travel from storefront signage to packaging to digital without losing coherence.'},
+  10:{tag:'Campaign · Real Estate',title:'Agent Personal Brand System',num:'10',img:'',outcome:'—',outcomeLabel:'Personal brand architecture built for a top-producing luxury agent.',challenge:'A top-producing luxury real estate agent with significant transaction volume and no personal brand. Operating under a brokerage umbrella that obscured individual identity.',diagnostic:'Mapping the agent\'s transaction history, client profile, and competitive set through the ADP revealed a differentiator the agent had never articulated: not market knowledge, which every competitor claimed, but negotiation instinct and a documented record of discretion that UHNW clients specifically value.',decision:'Build a personal brand around the agent\'s actual competitive advantage, not the generic luxury real estate vocabulary. Discretion and authority, not aspiration and lifestyle.'},
+  11:{tag:'Packaging · Regulatory',title:'Compliance Redesign at Scale',num:'11',img:'https://res.cloudinary.com/dk8dxerks/image/upload/v1777233919/AR_popcorn_pkgdesign_camping_v8bpos.jpg',outcome:'—',outcomeLabel:'Regulatory mandate executed across a global portfolio with brand integrity intact.',challenge:'A regulatory change requiring redesigns across an entire global product portfolio within a fixed timeline. The risk was not compliance failure — it was using the mandate as an excuse to let brand standards slip.',diagnostic:'Running every SKU through the ADP simultaneously against regulatory requirements, existing brand standards, manufacturer capabilities, and retail shelf compliance specifications revealed where the frameworks aligned and where they created tension. Direct collaboration with manufacturers on substrates, print processes, and structural formats ensured that compliance-driven changes did not introduce production inconsistencies or cost overruns. That operational map determined sequencing, prioritization, and the non-negotiable visual parameters that had to survive the compliance process intact.',decision:'Compliance is the constraint, not the brief. The brief is maintaining brand equity while meeting every regulatory requirement and every retail account specification. Those objectives are not in conflict if the operational thinking happens before the design thinking begins.'},
+};
+
+var overlay = document.getElementById('wr-case-overlay');
+function openCase(id){
+  var p = projects[id]; if(!p) return;
+  document.getElementById('cs-num').textContent = p.num;
+  document.getElementById('cs-tag').textContent = p.tag;
+  document.getElementById('cs-title').textContent = p.title;
+  document.getElementById('cs-challenge').textContent = p.challenge;
+  document.getElementById('cs-diagnostic').textContent = p.diagnostic;
+  document.getElementById('cs-decision').textContent = p.decision;
+  document.getElementById('cs-outcome-num').textContent = p.outcome;
+  document.getElementById('cs-outcome-label').textContent = p.outcomeLabel;
+  var csImg = document.getElementById('cs-img');
+  if(p.img){ csImg.src = p.img; csImg.style.display = 'block'; document.getElementById('cs-num').style.display='none'; }
+  else { csImg.style.display='none'; document.getElementById('cs-num').style.display='block'; }
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCase(){ overlay.classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('wr-close-btn').addEventListener('click', closeCase);
+document.getElementById('wr-backdrop').addEventListener('click', closeCase);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeCase(); });
+document.querySelectorAll('.wr-tile').forEach(function(tile){
+  tile.addEventListener('click', function(){ openCase(parseInt(tile.getAttribute('data-project'))); });
+});
+
+/* ─── FILTER ─── */
+/* ─── FILTER WITH SHUFFLE ─── */
+document.querySelectorAll('.wr-filter-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.wr-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    var filtered = f === 'all' ? WORK_TILES : WORK_TILES.filter(function(t){ return t.cat.includes(f); });
+    /* Filter: show/hide tiles, reorder visible ones */
+    var allTiles = track.querySelectorAll('.wr-tile');
+    allTiles.forEach(function(t){
+      var cats = t.getAttribute('data-cat') || '';
+      var show = f === 'all' || cats.includes(f);
+      t.style.opacity = show ? '1' : '0.15';
+      t.style.pointerEvents = show ? 'all' : 'none';
+    });
+    ScrollTrigger.refresh();
+  });
+});
+/* ─── FILTER ─── */
+document.querySelectorAll('.wr-filter-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.wr-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.wr-tile').forEach(function(t){
+      var cats = t.getAttribute('data-cat') || '';
+      t.style.opacity = (f==='all'||cats.includes(f)) ? '1' : '0.2';
+      t.style.pointerEvents = (f==='all'||cats.includes(f)) ? 'all' : 'none';
+    });
+  });
+});
+
+/* ─── HORIZONTAL SCROLL ─── */
+var WORK_TILES = [{"id": 1, "cat": "packaging cpg", "tag": "Packaging · Consumer Goods", "name": "MOUNTAIN™ Series", "teaser": "From a single product to a multi-SKU brand platform. Consumer intelligence led the direction. A national retailer signed exclusives at the mockup stage.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/mtn_berry-SharpenAI-Motion_ae79qk.jpg"}, {"id": 2, "cat": "packaging cpg", "tag": "Packaging · Seasonal Campaign", "name": "Easter Almond ROCA", "teaser": "First successful Easter category penetration in company history. 70% season-over-season growth. National retailer doubled orders twice.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233924/easter6.8ozSUB_dhqwtk.jpg"}, {"id": 3, "cat": "packaging cpg", "tag": "Packaging · Seasonal Campaign", "name": "Valentine's Day Heart Tins", "teaser": "Paired complementary design strategy engineered to drive consumer purchase behavior from single-unit to paired-set. Three seasons of record sales.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233925/250367_7.75_hear_tin_pulhxq.jpg"}, {"id": 4, "cat": "packaging cpg", "tag": "Packaging · Brand Identity", "name": "ROCA Bars", "teaser": "A complete brand identity originated from zero -- die-line, photorealistic vector illustration, and a production system that eliminated photography inconsistency.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/ROCABars_Img_ptiwuy.jpg"}, {"id": 5, "cat": "packaging cpg", "tag": "Packaging · New Product Launch", "name": "ROCA Bites", "teaser": "New product category launch. One substrate decision solved four business problems simultaneously -- quality, color accuracy, cost reduction, and environmental impact.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/AR_Bites_v3f4wc.jpg"}, {"id": 6, "cat": "packaging cpg", "tag": "Packaging · Seasonal", "name": "Seasonal Holiday Packaging", "teaser": "Premium holiday packaging treated as a brand event rather than a shelf update. A recurring seasonal revenue program built on premium materiality.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233926/IMG_1172_u6r6uf.jpg"}, {"id": 7, "cat": "campaign political", "tag": "Campaign · Political", "name": "Political Campaign Design", "teaser": "Full campaign design for a judicial candidate -- yard signage, print collateral, and visual identity from brief to production-ready assets.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233932/IMG_5638_zdqn6l.jpg"}, {"id": 8, "cat": "print realestate", "tag": "Direct Mail · Real Estate", "name": "Real Estate Broker Mailer", "teaser": "Conceived, designed, and wrote the copy for a direct mail postcard campaign. Integrated program spanning direct mail, social media, and email management.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/pcard_b7q1sk.jpg"}, {"id": 9, "cat": "print", "tag": "Print · Corporate", "name": "Corporate 100th Anniversary Card", "teaser": "A premium greeting card design produced for a corporate centennial. Gold script, rich photography, and editorial finish appropriate for a milestone occasion.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233927/B_card_design_crdyrx.jpg"}, {"id": 10, "cat": "print identity", "tag": "Print · Identity · Studio Client", "name": "Interior Design Studio Postcard", "teaser": "Brand identity and direct mail postcard for a three-person interior design firm. Front and back designed as a unified system covering residential, commercial, and specialty services.", "img": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777233928/pcard_b7q1sk.jpg"}];
+
+/* ─── SHUFFLE UTILITY ─── */
+function shuffleArray(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+/* ─── RENDER TILES ─── */
+function renderTiles(tiles) {
+  /* Reorder existing DOM nodes -- preserves GSAP bindings */
+  var track = document.getElementById('wr-tile-track');
+  var existingTiles = Array.from(track.querySelectorAll('.wr-tile'));
+  tiles.forEach(function(t) {
+    var el = existingTiles.find(function(e){ return e.getAttribute('data-project') == t.id; });
+    if(el) track.appendChild(el);
+  });
+}
+
+/* Shuffle on load */
+var shuffledTiles = shuffleArray(WORK_TILES);
+/* shuffle runs after GSAP init below */
+var track = document.getElementById('wr-tile-track');
+var wrap = document.getElementById('wr-track-wrap');
+var scrollTween = null;
+
+var scrollTween2 = null;
+function initScroll2(){
+  if(scrollTween2){ scrollTween2.kill(); }
+  var track2 = document.getElementById('wr-tile-track-2');
+  var wrap2 = document.getElementById('wr-track-wrap-2');
+  if(!track2 || !wrap2) return;
+  if(window.innerWidth > 768){
+    wrap2.style.overflowX = 'hidden';
+    scrollTween2 = gsap.to(track2, {
+      x: function(){ return -(track2.scrollWidth - wrap2.offsetWidth + 96); },
+      ease: 'none',
+      scrollTrigger:{
+        trigger: '#wr-scroll-section-2',
+        start: 'top 64px',
+        end: function(){ return '+='+(track2.scrollWidth - wrap2.offsetWidth + 500); },
+        pin: true,
+        scrub: 1.2,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+  } else {
+    wrap2.style.overflowX = 'auto';
+    if(track2) track2.style.transform = 'none';
+  }
+}
+
+function initScroll(){
+  if(scrollTween){ scrollTween.kill(); ScrollTrigger.getAll().forEach(function(t){ t.kill(); }); }
+  if(!track || !wrap) return;
+  if(window.innerWidth > 768){
+    wrap.style.overflowX = 'hidden';
+    scrollTween = gsap.to(track, {
+      x: function(){ return -(track.scrollWidth - wrap.offsetWidth + 96); },
+      ease: 'none',
+      scrollTrigger:{
+        trigger: '#wr-scroll-section', start: 'top 96px',
+        end: function(){ return '+=' + (track.scrollWidth - wrap.offsetWidth + 500); },
+        pin: true, scrub: 1.2, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+  } else {
+    wrap.style.overflowX = 'auto';
+    if(track) track.style.transform = 'none';
+  }
+}
+
+initScroll();
+ScrollTrigger.refresh();
+/* ── TILE ROUTING: max 8 in scroll, rest go to overflow grid ──
+   RULE: Add tiles to WORK_TILES array only. Layout handles itself.
+   First 8 (shuffled) → horizontal scroll
+   Tiles 9+ (shuffled) → overflow grid below
+── */
+var MAX_SCROLL_TILES = 8;
+
+function routeTiles() {
+  /* RULE: First MAX_SCROLL_TILES go to row 1, remainder go to row 2.
+     Split first, then shuffle within each row independently.
+     Both rows use identical tile design and scroll behavior. */
+  var row1Tiles = shuffleArray(WORK_TILES.slice(0, MAX_SCROLL_TILES));
+  var row2Tiles = shuffleArray(WORK_TILES.slice(MAX_SCROLL_TILES));
+
+  // Row 1 -- reorder existing DOM nodes in track
+  renderTiles(row1Tiles);
+
+  // Row 2 -- render identical tile HTML into second track
+  var track2 = document.getElementById('wr-tile-track-2');
+  var row2Section = document.getElementById('wr-scroll-section-2');
+  if (track2) {
+    if (row2Tiles.length > 0) {
+      track2.innerHTML = row2Tiles.map(function(t) {
+        return '<div class="wr-tile" data-project="' + t.id + '" data-cat="' + t.cat + '">' +
+          '<div class="wr-tile-ph">' +
+            '<img class="wr-tile-img" src="' + t.img + '" alt="' + t.name + '" loading="lazy">' +
+          '</div>' +
+          '<div class="wr-tile-overlay">' +
+            '<span class="wr-tile-tag">' + t.tag + '</span>' +
+            '<h3 class="wr-tile-name">' + t.name + '</h3>' +
+            '<p class="wr-tile-teaser">' + t.teaser + '</p>' +
+            '<span class="wr-tile-cta">View Case Study</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      if (row2Section) row2Section.style.display = '';
+      // Attach case study handlers to row 2 tiles
+      track2.querySelectorAll('.wr-tile').forEach(function(tile) {
+        tile.addEventListener('click', function() {
+          openCase(parseInt(tile.getAttribute('data-project')));
+        });
+      });
+      // Init horizontal scroll for row 2
+      initScroll2();
+    } else {
+      if (row2Section) row2Section.style.display = 'none';
+    }
+  }
+}
+
+setTimeout(function() {
+  routeTiles();
+  ScrollTrigger.refresh();
+}, 100);
+window.addEventListener('resize', function(){
+  clearTimeout(window._resizeTimer);
+  window._resizeTimer = setTimeout(function(){ initScroll(); ScrollTrigger.refresh(); }, 200);
+});
+
+/* ─── LIGHTBOX ─── */
+var lb = document.getElementById('wr-lightbox');
+var lbImg = document.getElementById('wr-lb-img');
+var lbTag = document.getElementById('wr-lb-cap-tag');
+var lbText = document.getElementById('wr-lb-cap-text');
+var allLbItems = [];
+var lbIdx = 0;
+
+document.querySelectorAll('.wr-masonry-item[data-src]').forEach(function(el, i){
+  allLbItems.push({ src: el.getAttribute('data-src'), label: el.getAttribute('data-label')||'', cap: el.getAttribute('data-cap')||'' });
+  el.addEventListener('click', function(){ lbIdx = i; openLB(allLbItems[i]); });
+});
+
+function openLB(item){
+  lbImg.src = item.src; lbTag.textContent = item.label; lbText.textContent = item.cap;
+  lb.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function closeLB(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.getElementById('wr-lb-close').addEventListener('click', closeLB);
+lb.addEventListener('click', function(e){ if(e.target===lb) closeLB(); });
+document.getElementById('wr-lb-prev').addEventListener('click', function(){ lbIdx = (lbIdx-1+allLbItems.length)%allLbItems.length; openLB(allLbItems[lbIdx]); });
+document.getElementById('wr-lb-next').addEventListener('click', function(){ lbIdx = (lbIdx+1)%allLbItems.length; openLB(allLbItems[lbIdx]); });
+document.addEventListener('keydown', function(e){
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeLB();
+  if(e.key==='ArrowLeft'){ lbIdx=(lbIdx-1+allLbItems.length)%allLbItems.length; openLB(allLbItems[lbIdx]); }
+  if(e.key==='ArrowRight'){ lbIdx=(lbIdx+1)%allLbItems.length; openLB(allLbItems[lbIdx]); }
+});
+
+/* ─── HEADER KINETIC CANVAS ─── */
+(function(){
+  var canvas = document.getElementById('wr-header-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, shapes, raf;
+  var mouseX = 0, mouseY = 0;
+  var targetMX = 0, targetMY = 0;
+  var clickX = 0, clickY = 0;
+  var isClicking = false;
+  var attractStrength = 0;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function randInt(a, b) { return Math.floor(rand(a, b + 1)); }
+  function pick(arr) { return arr[randInt(0, arr.length - 1)]; }
+
+  var PALETTES = [
+    { fill: 'rgba(201,168,76,',  stroke: 'rgba(201,168,76,' },
+    { fill: 'rgba(15,14,12,',    stroke: 'rgba(15,14,12,' },
+    { fill: 'rgba(29,107,107,',  stroke: 'rgba(29,107,107,' },
+    { fill: 'rgba(180,140,60,',  stroke: 'rgba(180,140,60,' },
+  ];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function makeShapes() {
+    shapes = [];
+    var density = Math.max(12, Math.floor((W * H) / 52000));
+
+    for (var i = 0; i < density; i++) {
+      var type  = randInt(0, 3);
+      var pal   = pick(PALETTES);
+      var speed = rand(0.04, 0.16);
+      var angle = rand(0, Math.PI * 2);
+      var sizeMap = { 0: rand(20, 110), 1: rand(80, 340), 2: rand(22, 90), 3: rand(18, 70) };
+      var alphaFill   = rand(0.05, 0.12);
+      var alphaStroke = rand(0.08, 0.18);
+      var useStroke   = Math.random() > 0.4;
+
+      shapes.push({
+        type        : type,
+        x           : rand(-100, W + 100),
+        y           : rand(-100, H + 100),
+        size        : sizeMap[type],
+        aspect      : rand(0.3, 3.0),
+        rot         : rand(0, Math.PI * 2),
+        vx          : Math.cos(angle) * speed,
+        vy          : Math.sin(angle) * speed,
+        vr          : rand(-0.003, 0.003),
+        alphaFill   : alphaFill,
+        alphaStroke : alphaStroke,
+        pal         : pal,
+        stroke      : useStroke,
+        thick       : rand(0.4, 1.1),
+        pulse       : Math.random() > 0.5,
+        pulseSpeed  : rand(0.004, 0.012),
+        pulsePhase  : rand(0, Math.PI * 2),
+        t           : 0
+      });
+    }
+  }
+
+  function drawShape(s) {
+    s.t += 1;
+    var pulseAlpha = s.pulse
+      ? s.alphaFill * (0.6 + 0.4 * Math.sin(s.t * s.pulseSpeed + s.pulsePhase))
+      : s.alphaFill;
+
+    ctx.save();
+    ctx.translate(s.x + (s.px || 0), s.y + (s.py || 0));
+    ctx.rotate(s.rot);
+
+    if (s.type === 0) {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s.size, s.size * s.aspect, 0, 0, Math.PI * 2);
+      if (s.stroke) {
+        ctx.globalAlpha = s.alphaStroke;
+        ctx.strokeStyle = s.pal.stroke + '1)';
+        ctx.lineWidth   = s.thick;
+        ctx.stroke();
+      } else {
+        ctx.globalAlpha = pulseAlpha;
+        ctx.fillStyle   = s.pal.fill + '1)';
+        ctx.fill();
+      }
+    } else if (s.type === 1) {
+      ctx.globalAlpha = s.alphaStroke * (s.pulse ? 0.6 + 0.4 * Math.sin(s.t * s.pulseSpeed) : 1);
+      ctx.beginPath();
+      ctx.moveTo(-s.size / 2, 0);
+      ctx.lineTo( s.size / 2, 0);
+      ctx.strokeStyle = s.pal.stroke + '1)';
+      ctx.lineWidth   = s.thick;
+      ctx.stroke();
+    } else if (s.type === 2) {
+      var hw = s.size / 2, hh = (s.size * s.aspect) / 2;
+      if (s.stroke) {
+        ctx.globalAlpha = s.alphaStroke;
+        ctx.strokeStyle = s.pal.stroke + '1)';
+        ctx.lineWidth   = s.thick;
+        ctx.strokeRect(-hw, -hh, hw * 2, hh * 2);
+      } else {
+        ctx.globalAlpha = pulseAlpha;
+        ctx.fillStyle   = s.pal.fill + '1)';
+        ctx.fillRect(-hw, -hh, hw * 2, hh * 2);
+      }
+    } else {
+      var r = s.size;
+      ctx.beginPath();
+      ctx.moveTo(0, -r);
+      ctx.lineTo( r * 0.866,  r * 0.5);
+      ctx.lineTo(-r * 0.866,  r * 0.5);
+      ctx.closePath();
+      if (s.stroke) {
+        ctx.globalAlpha = s.alphaStroke;
+        ctx.strokeStyle = s.pal.stroke + '1)';
+        ctx.lineWidth   = s.thick;
+        ctx.stroke();
+      } else {
+        ctx.globalAlpha = pulseAlpha;
+        ctx.fillStyle   = s.pal.fill + '1)';
+        ctx.fill();
+      }
+    }
+
+    ctx.restore();
+  }
+
+  function tick() {
+    mouseX += (targetMX - mouseX) * 0.08;
+    mouseY += (targetMY - mouseY) * 0.08;
+
+    if (isClicking) {
+      attractStrength += (1 - attractStrength) * 0.12;
+    } else {
+      attractStrength += (0 - attractStrength) * 0.04;
+    }
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+
+    shapes.forEach(function(s) {
+      s.x   += s.vx;
+      s.y   += s.vy;
+      s.rot += s.vr;
+      var pad = s.size + 60;
+      if (s.x < -pad) s.x = W + pad;
+      if (s.x > W + pad) s.x = -pad;
+      if (s.y < -pad) s.y = H + pad;
+      if (s.y > H + pad) s.y = -pad;
+
+      var depth = 1 - Math.min(s.size / 300, 0.9);
+
+      if (attractStrength > 0.01) {
+        var dx = clickX - s.x;
+        var dy = clickY - s.y;
+        var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        var force = attractStrength * 3.5 * depth;
+        s.px = (dx / dist) * Math.min(dist, 280) * force;
+        s.py = (dy / dist) * Math.min(dist, 280) * force;
+      } else {
+        s.px = mouseX * depth * 48;
+        s.py = mouseY * depth * 48;
+      }
+
+      drawShape(s);
+    });
+
+    raf = requestAnimationFrame(tick);
+  }
+
+  var header = document.getElementById('wr-header');
+  header.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    targetMX = (e.clientX - rect.left - W / 2) / (W / 2);
+    targetMY = (e.clientY - rect.top  - H / 2) / (H / 2);
+    if (isClicking) {
+      clickX = e.clientX - rect.left;
+      clickY = e.clientY - rect.top;
+    }
+  });
+
+  header.addEventListener('mousedown', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    isClicking = true;
+    clickX = e.clientX - rect.left;
+    clickY = e.clientY - rect.top;
+  });
+
+  window.addEventListener('mouseup', function() { isClicking = false; });
+  window.addEventListener('resize', function() { resize(); makeShapes(); });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+      else { cancelAnimationFrame(raf); raf = null; }
+    });
+  }, { threshold: 0 });
+  obs.observe(header);
+
+  resize();
+  makeShapes();
+  raf = requestAnimationFrame(tick);
+})();
+
+</script>
+</body>
+</html>

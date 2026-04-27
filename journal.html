@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal — Wil Randolph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0e0c;--ink-muted:#4a4844;--ink-faint:#9a9690;
+  --paper:#faf8f5;--paper-warm:#f2ede6;--paper-mid:#e8e2d9;
+  --gold:#c9a84c;--gold-light:#e8d49a;--gold-muted:#8b6e2a;
+  --charcoal:#0a0a0e;--teal-light:#2a9090;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--paper);color:var(--ink);overflow-x:hidden}
+
+/* ─── NAV ─── */
+#wr-nav{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 56px;
+  background:rgba(10,10,14,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.wr-nav-brand{text-decoration:none;display:flex;flex-direction:column;gap:3px}
+.wr-nav-name{font-family:var(--font-display);font-size:22px;font-weight:300;color:#fff;line-height:1.1;letter-spacing:0.02em}
+.wr-nav-sub{font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.wr-nav-links{display:flex;align-items:center;gap:28px}
+.wr-nav-links a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.25s;white-space:nowrap}
+.wr-nav-links a:hover{color:#fff}
+.wr-nav-links a.active{color:var(--gold)}
+.wr-nav-div{display:block;width:1px;height:18px;background:var(--gold);opacity:0.5;flex-shrink:0}
+@media(max-width:860px){.wr-nav-links{display:none}#wr-nav{padding:20px 28px}}
+
+/* ─── PROGRESS ─── */
+#wr-progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0%;z-index:9999;transition:width 0.1s linear}
+
+/* ─── REVEALS ─── */
+.wr-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.9s var(--ease-out),transform 0.9s var(--ease-out)}
+.wr-reveal.visible{opacity:1;transform:translateY(0)}
+.wr-delay-1{transition-delay:0.1s}
+.wr-delay-2{transition-delay:0.22s}
+.wr-delay-3{transition-delay:0.36s}
+
+/* ─── KINETIC CANVAS CSS ─── */
+#wr-header-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#wr-header{position:relative;overflow:hidden}
+.wr-header-inner{position:relative;z-index:1}
+
+/* ─── HEADER ─── */
+#wr-header{
+  background:#ffffff;
+  padding:180px 56px 80px;
+}
+#wr-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);
+  z-index:2;
+}
+#wr-header::after{
+  content:'JOURNAL';
+  position:absolute;right:-20px;bottom:-30px;
+  font-family:var(--font-display);
+  font-size:clamp(100px,15vw,220px);
+  font-weight:300;color:rgba(201,168,76,0.05);
+  line-height:1;letter-spacing:-0.03em;
+  pointer-events:none;white-space:nowrap;
+}
+.wr-header-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+}
+.wr-header-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.wr-header-title{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(48px,7vw,88px);line-height:0.95;
+  color:var(--ink);letter-spacing:-0.01em;margin-bottom:24px;
+}
+.wr-header-title em{font-style:italic;color:var(--gold)}
+.wr-header-sub{
+  font-size:14px;color:var(--ink-muted);font-weight:300;
+  max-width:540px;line-height:1.8;
+}
+
+/* ─── FILTER BAR ─── */
+#wr-filter-bar{
+  background:var(--paper);
+  padding:20px 56px;
+  border-bottom:1px solid var(--paper-mid);
+  position:sticky;top:96px;z-index:100;
+}
+.wr-filter-inner{
+  max-width:1140px;margin:0 auto;
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+}
+.wr-filter-label{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.22em;
+  text-transform:uppercase;color:rgba(255,255,255,0.25);
+  margin-right:8px;white-space:nowrap;
+}
+.wr-filter-btn{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;padding:7px 16px;
+  border:1px solid rgba(255,255,255,0.15);
+  background:transparent;color:rgba(255,255,255,0.5);
+  cursor:pointer;border-radius:2px;transition:all 0.25s;white-space:nowrap;
+}
+.wr-filter-btn:hover{border-color:var(--gold);color:rgba(255,255,255,0.85)}
+.wr-filter-btn.active{
+  background:var(--gold);border-color:var(--gold);
+  color:var(--charcoal);font-weight:500;
+}
+@media(max-width:640px){#wr-filter-bar{padding:16px 24px}}
+
+/* ─── FEATURED POST ─── */
+#wr-featured{
+  padding:72px 56px 0;
+  background:var(--paper-warm);
+  max-width:100%;
+}
+.wr-featured-inner{max-width:1140px;margin:0 auto}
+.wr-featured-eyebrow{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.wr-featured-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--gold-muted)}
+
+.wr-featured-card{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;background:#0d0d14;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:4px;overflow:hidden;
+  cursor:pointer;transition:border-color 0.4s;
+}
+.wr-featured-card:hover{border-color:rgba(201,168,76,0.3)}
+@media(max-width:768px){.wr-featured-card{grid-template-columns:1fr}}
+
+.wr-featured-img{
+  position:relative;overflow:hidden;
+  min-height:420px;
+}
+@media(max-width:768px){.wr-featured-img{min-height:260px}}
+
+.wr-featured-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.8s var(--ease-out),filter 0.5s;
+  filter:brightness(0.82);
+}
+.wr-featured-card:hover .wr-featured-img img{
+  transform:scale(1.04);filter:brightness(0.65);
+}
+
+.wr-featured-body{
+  padding:52px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+@media(max-width:768px){.wr-featured-body{padding:36px 32px}}
+
+.wr-featured-cats{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;
+}
+.wr-cat-tag{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.18em;
+  text-transform:uppercase;padding:4px 12px;
+  border:1px solid rgba(201,168,76,0.25);
+  color:rgba(201,168,76,0.7);border-radius:2px;
+}
+
+.wr-featured-title{
+  font-family:var(--font-display);font-size:clamp(28px,3.5vw,42px);
+  font-weight:300;color:var(--paper);line-height:1.1;
+  margin-bottom:20px;
+}
+.wr-featured-title em{font-style:italic;color:var(--gold)}
+
+.wr-featured-excerpt{
+  font-size:14px;line-height:1.85;
+  color:rgba(250,248,245,0.5);font-weight:300;
+  margin-bottom:32px;
+}
+
+.wr-featured-meta{
+  display:flex;align-items:center;gap:16px;
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(250,248,245,0.3);
+}
+.wr-featured-meta-dot{
+  width:3px;height:3px;border-radius:50%;
+  background:rgba(201,168,76,0.4);
+}
+
+.wr-read-more{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);margin-top:28px;
+  transition:gap 0.3s var(--ease-out);
+}
+.wr-featured-card:hover .wr-read-more{gap:16px}
+.wr-read-more::after{
+  content:'';display:block;width:24px;height:1px;
+  background:var(--gold);transition:width 0.3s var(--ease-out);
+}
+.wr-featured-card:hover .wr-read-more::after{width:36px}
+
+/* ─── POST GRID ─── */
+#wr-posts{
+  padding:56px 56px 100px;
+  background:var(--paper-warm);
+  border-top:3px solid var(--gold);
+}
+.wr-posts-inner{max-width:1140px;margin:0 auto}
+
+.wr-posts-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:rgba(255,255,255,0.04);
+}
+@media(max-width:960px){.wr-posts-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.wr-posts-grid{grid-template-columns:1fr}}
+
+.wr-post-card{background:var(--paper);border:1px solid var(--paper-mid);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color 0.3s;display:flex;flex-direction:column;}
+.wr-post-card:hover{background:#0d0d14}
+
+.wr-post-img{
+  width:100%;aspect-ratio:16/10;overflow:hidden;
+  position:relative;background:var(--paper-mid);
+}
+.wr-post-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.7s var(--ease-out),filter 0.5s;
+  filter:brightness(0.85);
+}
+.wr-post-card:hover .wr-post-img img{
+  transform:scale(1.04);filter:brightness(0.75);
+}
+
+.wr-post-body{
+  padding:28px 28px 32px;
+  display:flex;flex-direction:column;flex:1;
+  background:var(--charcoal);
+}
+
+.wr-post-cats{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;
+}
+.wr-post-cat{
+  font-family:var(--font-mono);font-size:7px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(201,168,76,0.7);
+}
+.wr-post-cat::after{content:' ·';opacity:0.6}
+.wr-post-cat:last-child::after{content:''}
+
+.wr-post-title{
+  font-family:var(--font-display);font-size:22px;font-weight:600;
+  color:var(--paper);line-height:1.2;margin-bottom:12px;
+  flex:1;
+}
+
+.wr-post-excerpt{
+  font-size:13px;line-height:1.75;
+  color:rgba(250,248,245,0.55);font-weight:300;
+  margin-bottom:20px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+.wr-post-meta{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(250,248,245,0.3);
+  display:flex;align-items:center;gap:10px;
+  padding-top:16px;border-top:1px solid rgba(255,255,255,0.07);
+}
+
+/* ─── NO RESULTS ─── */
+.wr-no-results{
+  text-align:center;padding:80px 32px;grid-column:1/-1;
+}
+.wr-no-results p{
+  font-family:var(--font-display);font-size:24px;font-weight:300;
+  color:rgba(250,248,245,0.25);
+}
+
+/* ─── POST OVERLAY ─── */
+#wr-post-overlay{
+  position:fixed;inset:0;z-index:2000;
+  pointer-events:none;opacity:0;
+  transition:opacity 0.5s var(--ease-out);
+}
+#wr-post-overlay.open{opacity:1;pointer-events:all}
+.wr-post-backdrop{
+  position:absolute;inset:0;
+  background:rgba(10,9,14,0.82);backdrop-filter:blur(10px);
+}
+.wr-post-panel{
+  position:absolute;right:0;top:0;bottom:0;
+  width:min(760px,96vw);
+  background:#0a0a0e;
+  border-left:1px solid rgba(201,168,76,0.1);
+  overflow-y:auto;
+  transform:translateX(100%);
+  transition:transform 0.6s var(--ease-out);
+  display:flex;flex-direction:column;
+}
+#wr-post-overlay.open .wr-post-panel{transform:translateX(0)}
+
+.wr-post-close{
+  position:sticky;top:0;
+  background:rgba(10,10,14,0.97);
+  backdrop-filter:blur(12px);
+  padding:20px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  z-index:10;flex-shrink:0;
+}
+.wr-post-close-label{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(250,248,245,0.3);
+}
+.wr-post-close-btn{
+  width:36px;height:36px;
+  border:1px solid rgba(255,255,255,0.1);border-radius:2px;
+  background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.25s;position:relative;
+}
+.wr-post-close-btn:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.08)}
+.wr-post-close-btn::before,.wr-post-close-btn::after{
+  content:'';position:absolute;width:14px;height:1px;
+  background:rgba(250,248,245,0.5);
+}
+.wr-post-close-btn::before{transform:rotate(45deg)}
+.wr-post-close-btn::after{transform:rotate(-45deg)}
+
+.wr-post-hero-img{
+  width:100%;height:300px;flex-shrink:0;
+  overflow:hidden;position:relative;background:#111;
+}
+.wr-post-hero-img img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.75);
+}
+
+.wr-post-content{padding:48px 48px 64px}
+@media(max-width:540px){.wr-post-content{padding:32px 24px 48px}}
+
+.wr-post-content-cats{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;
+}
+
+.wr-post-content-title{
+  font-family:var(--font-display);font-size:clamp(28px,4vw,40px);
+  font-weight:300;color:var(--paper);line-height:1.1;margin-bottom:16px;
+}
+
+.wr-post-content-meta{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(250,248,245,0.3);
+  margin-bottom:40px;padding-bottom:32px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;gap:14px;
+}
+
+.wr-post-body-text{
+  font-size:15px;line-height:1.9;
+  color:rgba(250,248,245,0.65);font-weight:300;
+}
+.wr-post-body-text h3{
+  font-family:var(--font-display);font-size:24px;font-weight:600;
+  color:var(--paper);margin:36px 0 16px;line-height:1.2;
+}
+.wr-post-body-text p{margin-bottom:20px}
+.wr-post-body-text p:last-child{margin-bottom:0}
+.wr-post-body-text em{
+  font-style:italic;color:rgba(250,248,245,0.85);
+}
+.wr-post-body-text strong{
+  color:rgba(250,248,245,0.9);font-weight:400;
+}
+.wr-post-body-text img{
+  width:100%;margin:32px 0;display:block;
+  border-radius:2px;filter:brightness(0.88);
+}
+
+.wr-post-footer{
+  margin-top:48px;padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.wr-post-footer p{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(250,248,245,0.2);
+  margin-bottom:12px;
+}
+.wr-post-footer-link{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--gold);
+  text-decoration:none;transition:gap 0.3s;
+}
+.wr-post-footer-link:hover{gap:16px}
+.wr-post-footer-link::after{
+  content:'';display:block;width:20px;height:1px;background:var(--gold);
+  transition:width 0.3s var(--ease-out);
+}
+.wr-post-footer-link:hover::after{width:32px}
+
+/* ─── CTA ─── */
+#wr-cta{
+  padding:80px 56px;background:#0d0d14;text-align:center;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.wr-cta-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.wr-cta-eyebrow::before,.wr-cta-eyebrow::after{
+  content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:0.4;
+}
+.wr-cta-text{
+  font-family:var(--font-display);font-size:clamp(32px,5vw,56px);
+  font-weight:300;color:var(--paper);line-height:1.05;margin-bottom:32px;
+}
+.wr-cta-text em{font-style:italic;color:var(--gold)}
+.wr-btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;background:var(--gold);color:var(--charcoal);
+  font-size:11px;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;text-decoration:none;border-radius:2px;
+  font-family:var(--font-mono);transition:background 0.25s,transform 0.2s;
+}
+.wr-btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+</style>
+</head>
+<body>
+
+<nav id="wr-nav">
+  <a href="strategy.html" class="wr-nav-brand">
+    <span class="wr-nav-name">Wil Randolph</span>
+    <span class="wr-nav-sub">Brand &amp; Marketing Strategist</span>
+  </a>
+  <div class="wr-nav-links">
+    <a href="strategy.html">Strategy</a>
+    <span class="wr-nav-div"></span>
+    <a href="work.html">Work</a>
+    <span class="wr-nav-div"></span>
+    <a href="cases.html">Case Studies</a>
+
+    <span class="wr-nav-div"></span>
+    <a href="about.html">About</a>
+    <span class="wr-nav-div"></span>
+    <a href="journal.html" class="active">Journal</a>
+    <span class="wr-nav-div"></span>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div id="wr-progress"></div>
+
+<!-- HEADER -->
+<section id="wr-header">
+  <canvas id="wr-header-canvas"></canvas>
+  <div class="wr-header-inner">
+    <div class="wr-header-eyebrow wr-reveal">Strategy &middot; Thinking &middot; Practice</div>
+    <h1 class="wr-header-title wr-reveal wr-delay-1">Ideas that<br>earn their <em>keep.</em></h1>
+    <p class="wr-header-sub wr-reveal wr-delay-2">
+      Writing on brand strategy, marketing practice, creative leadership, AEC marketing, 
+      AI integration, and the business of building things that last. 
+      No content marketing. No thought leadership theater. Just clear thinking on problems worth solving.
+    </p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div id="wr-filter-bar">
+  <div class="wr-filter-inner">
+    <span class="wr-filter-label">Filter</span>
+    <button class="wr-filter-btn active" data-cat="all">All Posts</button>
+    <button class="wr-filter-btn" data-cat="Brand Strategy">Brand Strategy</button>
+    <button class="wr-filter-btn" data-cat="AEC">AEC</button>
+    <button class="wr-filter-btn" data-cat="Leadership">Leadership</button>
+    <button class="wr-filter-btn" data-cat="Creative Direction">Creative Direction</button>
+    <button class="wr-filter-btn" data-cat="AI">AI</button>
+    <button class="wr-filter-btn" data-cat="Photography">Photography</button>
+    <button class="wr-filter-btn" data-cat="Design">Design</button>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<section id="wr-featured">
+  <div class="wr-featured-inner wr-reveal">
+    <p class="wr-featured-eyebrow">Latest Post</p>
+    <div class="wr-featured-card" id="wr-featured-card"></div>
+  </div>
+</section>
+
+<!-- POST GRID -->
+<section id="wr-posts">
+  <div class="wr-posts-inner">
+    <div class="wr-posts-grid" id="wr-posts-grid"></div>
+  </div>
+</section>
+
+<!-- POST OVERLAY -->
+<div id="wr-post-overlay">
+  <div class="wr-post-backdrop" id="wr-backdrop"></div>
+  <div class="wr-post-panel">
+    <div class="wr-post-close">
+      <span class="wr-post-close-label">Journal</span>
+      <button class="wr-post-close-btn" id="wr-close-btn" aria-label="Close"></button>
+    </div>
+    <div class="wr-post-hero-img" id="wr-post-hero">
+      <img id="wr-post-hero-img" src="" alt="">
+    </div>
+    <div class="wr-post-content">
+      <div class="wr-post-content-cats" id="wr-post-cats"></div>
+      <h2 class="wr-post-content-title" id="wr-post-title"></h2>
+      <div class="wr-post-content-meta" id="wr-post-meta"></div>
+      <div class="wr-post-body-text" id="wr-post-body"></div>
+      <div class="wr-post-footer">
+        <p>Continue the conversation</p>
+        <a href="contact.html" class="wr-post-footer-link">Start a Conversation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="wr-cta">
+  <div class="wr-cta-eyebrow">Open to Roles &amp; Select Engagements</div>
+  <p class="wr-cta-text">Ready to put this<br>thinking to <em>work for you?</em></p>
+  <a href="contact.html" class="wr-btn-primary">Start a Conversation &rarr;</a>
+</section>
+
+<script>
+/* ─── POSTS DATA ─────────────────────────────────────────────────────────── */
+/* 
+  HOW TO ADD A NEW POST:
+  1. Open posts.json
+  2. Add a new object at the TOP of the array (newest first)
+  3. Follow this structure:
+
+  {
+    "id": "unique-slug-no-spaces",
+    "title": "Your Post Title",
+    "date": "2026-01-15",
+    "dateDisplay": "January 15, 2026",
+    "categories": ["Brand Strategy", "Leadership"],
+    "image": "https://your-image-url.jpg",
+    "excerpt": "One or two sentence summary of the post.",
+    "body": "<p>Full HTML body of your post. Use &lt;h3&gt; for subheadings, &lt;p&gt; for paragraphs, &lt;em&gt; for italics, &lt;strong&gt; for bold.</p>"
+  }
+
+  4. Save posts.json
+  5. Push to GitHub — Vercel deploys automatically
+*/
+
+var POSTS = [
+  {
+    id:"cinematic-storytelling-brand-strategy",
+    title:"Cinematic Storytelling as Brand Strategy: What Luxury Marketing Can Learn from Sircus Magazine",
+    date:"2025-11-05",dateDisplay:"November 5, 2025",
+    categories:["Brand Strategy","Visual Storytelling","Luxury Marketing"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777234874/Sircus-i13-Cover-2_r4yxg8.png",
+    excerpt:"In the age of aesthetic overload, brands can no longer rely on language and static imagery to communicate value. Sircus Magazine serves as a living case study in cinematic storytelling — where emotion, movement, and narrative coherence become the new currency of brand equity.",
+    body:"<p>In the age of aesthetic overload, brands can no longer rely on language and static imagery to communicate value. <em>Sircus Magazine: Opulence &amp; Desire</em> serves as a living case study in cinematic storytelling — where emotion, movement, and narrative coherence become the new currency of brand equity.</p><p>This essay examines how visual storytelling transforms marketing from persuasion into performance, challenging the very psychology that drives modern desire. When a brand commits to a cinematic approach, it stops selling product and starts creating a world the audience wants to inhabit.</p><p>The lesson for luxury marketing is precise: coherence across every touchpoint is not an aesthetic preference, it is a competitive requirement. The brands that build lasting equity are those that treat every visual, every caption, every piece of collateral as one frame in a larger narrative. Sircus does not produce a magazine. It produces an argument for a particular relationship with beauty, aspiration, and desire.</p><p>For marketing strategists, the takeaway is not to produce editorial content. It is to approach every brand expression with the same intentionality that a film director brings to a frame. What does this moment communicate? How does it connect to what came before and what comes next? Those questions are brand strategy questions, regardless of the medium.</p>"
+  },
+  {
+    id:"ai-future-of-work-ethical-leadership",
+    title:"AI and the Future of Work: Why Ethical Leadership Must Outpace Automation",
+    date:"2025-08-12",dateDisplay:"August 12, 2025",
+    categories:["AI","Leadership","Future of Work"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/werehere_tiguyu.jpg",
+    excerpt:"Automation is accelerating. The organizations that navigate it well will not be the ones with the most advanced tools. They will be the ones with the clearest values and the leaders willing to make decisions that protect people, not just optimize processes.",
+    body:"<p>Automation is accelerating. The organizations that navigate it well will not be the ones with the most advanced tools. They will be the ones with the clearest values and the leaders willing to make decisions that protect people, not just optimize processes.</p><p>AI is not a strategy. It is an instrument. Every instrument amplifies the judgment of the person wielding it. In an organization with poor leadership, AI accelerates poor decisions. In an organization with ethical, clear-eyed leadership, it accelerates good ones. The technology is neutral. The outcomes are not.</p><p>The ethical challenge of AI in the workplace is not primarily a technology question. It is a leadership question. Who decides which roles are automated and which are protected? Who ensures that the efficiency gains are distributed equitably? Who maintains accountability when an AI system produces a harmful output? These are human questions requiring human answers, and they require leaders who have thought carefully about their obligations before the pressure to move fast makes careful thinking inconvenient.</p><p>The organizations that build sustainable competitive advantage from AI will be those that treat it as a capability multiplier for their people, not a people replacement strategy. That distinction matters enormously, and it starts at the leadership level.</p>"
+  },
+  {
+    id:"strategic-marketing-aec-industry",
+    title:"Strategic Marketing in the AEC Industry: Bridging Technical Excellence with Competitive Positioning",
+    date:"2025-08-08",dateDisplay:"August 8, 2025",
+    categories:["AEC","Brand Strategy","Proposal Strategy"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/AEC_jsekqs.jpg",
+    excerpt:"In the AEC industry, winning work is not just about technical expertise. It is about translating that expertise into a compelling, credible story that earns trust before the first bid is even placed.",
+    body:"<p>In the Architecture, Engineering, and Construction (AEC) industry, the path from opportunity to contract award is complex, competitive, and often lengthy. Unlike consumer-driven sectors, AEC pursuits demand sustained credibility, rigorous technical accuracy, and the ability to distill highly technical information into accessible, compelling narratives.</p><h3>The Unique Challenges of AEC Marketing</h3><p>AEC firms operate in an environment where differentiation can be difficult. Many firms possess comparable technical capabilities, years of proven project delivery, and similar credentials. The key competitive advantage often lies not in what services are offered, but in how those services are communicated, positioned, and validated through past performance.</p><h3>Turning Information into Influence</h3><p>In pursuit marketing, design and branding are not ornamental — they are strategic tools. Visual consistency across proposals, pitch decks, case studies, and project sheets reinforces a firm's reliability and professionalism. A well-structured proposal leads evaluators through a logical, persuasive narrative that frames the firm as the most qualified and lowest-risk choice.</p><h3>The Strategic Impact</h3><p>When executed effectively, AEC marketing is a revenue-driving function. It elevates technical work into a competitive advantage, translating engineering specifications and architectural renderings into persuasive content that secures contracts. Firms that invest in strategic, design-savvy, and data-informed marketing will be best positioned to win more work, strengthen client relationships, and sustain long-term growth.</p>"
+  },
+  {
+    id:"can-design-style-be-taught",
+    title:"Can Design and Style Be Taught? A Perspective Through Visual Communication and Marketing",
+    date:"2024-12-10",dateDisplay:"December 10, 2024",
+    categories:["Design","Creative Direction","Education"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233911/design_style_aotokh.jpg",
+    excerpt:"The question of whether design and style can be taught divides practitioners. The answer, properly understood, reframes the entire debate about what design education is actually for.",
+    body:"<p>The question of whether design and style can be taught is one that divides practitioners. Purists argue that aesthetic sensibility is innate. Pragmatists argue that design is a learnable craft. Both are partially right, and both miss the more important point.</p><p>Design principles can absolutely be taught. Grid systems, typographic hierarchy, color theory, visual weight, compositional balance — these are learnable, teachable, and essential. What cannot be taught in the same way is taste. Taste is developed through exposure, through deep and sustained engagement with the history of design, with art, with architecture, with culture.</p><p>The implication for marketing and brand strategy is significant. A designer who has only learned the rules produces technically competent work. A designer who has developed taste produces work that surprises, that resonates, that builds equity. The difference between the two is not raw talent. It is the breadth and depth of what they have studied, absorbed, and internalized over time.</p><p>Style, then, is not a personality quirk. It is the visible output of a disciplined education in what has worked and why, applied with the confidence to make decisive choices rather than hedged ones.</p>"
+  },
+  {
+    id:"from-lens-to-strategy",
+    title:"From Lens to Strategy: How Photography Elevated My Career as a Visual Strategist",
+    date:"2024-11-18",dateDisplay:"November 18, 2024",
+    categories:["Photography","Brand Strategy","Creative Direction"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/Screenshot_2024-11-18_at_7.46.44_AM_h6gz2n.png",
+    excerpt:"What began as an academic exercise in understanding light, form, and materials during Architecture studies evolved into one of the most critical pillars of a marketing practice that bridges strategy, creative direction, and execution.",
+    body:"<p>What began as an academic exercise in understanding light, form, and materials during Architecture studies evolved into one of the most critical pillars of a marketing practice. Early experiences building cameras from scratch and developing film in darkrooms laid the foundation for a skill set that integrates seamlessly into modern branding, marketing, and visual communications.</p><p>Over the years, many organizations have approached with bold goals for their marketing and branding but without the necessary content to achieve them. This gap inspired the incorporation of photography into branding offerings, bridging the divide between concept and execution.</p><p>A luxury real estate agent required a polished brochure but lacked professional images. A retailer launching a product line faced challenges with inadequate imagery. In each case, the integration of photography with a broader marketing strategy ensured the visual content aligned perfectly with brand goals.</p><p>When asked whether the practice is brand strategy, creative direction, marketing development, graphic design, or data analytics, the answer is simple: yes. Each represents a facet of a larger skill set, seamlessly working together to solve business challenges. This comprehensive capability transforms complex challenges into clear, actionable solutions that drive results.</p>"
+  },
+  {
+    id:"marketing-data-agile-graphic-designers",
+    title:"Why Marketing, Data, and Agile Are Essential to Every Graphic Designer's Success",
+    date:"2024-10-18",dateDisplay:"October 18, 2024",
+    categories:["Design","Marketing","Data Strategy"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233908/marketing_vopbn5.png",
+    excerpt:"Graphic design is not just about aesthetics — it is about strategy. By integrating marketing principles, data analytics, and Agile methodology, designers can create visuals that not only captivate but drive real business results.",
+    body:"<p>In today's competitive landscape, graphic design is not just about aesthetics — it is about strategy. By integrating marketing principles, data analytics, and Agile methodology, designers can create visuals that not only captivate but also drive real business results.</p><p>The graphic designer who understands their work purely as a visual discipline is operating at a fraction of their potential value. Every design decision has a business implication. A typeface choice affects brand perception. A color palette affects emotional response. A layout hierarchy affects conversion. Understanding those implications — and being able to articulate them — is what separates a designer from a strategic creative.</p><p>Data closes the loop. When designers understand what is performing and what is not, they stop making decisions based on aesthetic preference alone and start making decisions based on evidence. Agile methodology gives design teams the operational framework to move faster without sacrificing quality. The combination of marketing thinking, data literacy, and operational discipline is not a constraint on creativity. It is what makes creativity commercially relevant.</p>"
+  },
+  {
+    id:"graphic-designers-are-artists",
+    title:"All Graphic Designers Are Artists, but Not All Artists Are Graphic Designers",
+    date:"2024-09-30",dateDisplay:"September 30, 2024",
+    categories:["Design","Creative Direction"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233911/graphics_bp0jkg.jpg",
+    excerpt:"A distinction that matters enormously for anyone hiring creative talent — and for any designer trying to understand the full scope of their practice and its commercial application.",
+    body:"<p>All graphic designers are artists, but not all artists are graphic designers. It is a distinction that matters enormously for anyone hiring creative talent — and for any designer trying to understand the full scope of their practice.</p><p>The artist operates from pure expression. The brief, if there is one, is internal. The graphic designer operates from constraint. The brief is external. The audience is primary. The work succeeds not when it expresses the designer's vision but when it communicates the client's message effectively to a defined audience.</p><p>The best graphic designers are artists in the deepest sense — they bring genuine aesthetic intelligence to every decision. But they wear that artistic capability in the context of a commercial and communicative discipline. Understanding the difference is not a hierarchy. It is a job description. And hiring managers who confuse the two tend to hire the wrong person for the wrong role, then wonder why the work does not perform.</p>"
+  },
+  {
+    id:"non-designers-think-theyre-designers",
+    title:"When Non-Designers Think They're Designers: A Humorous Guide to Respectful Feedback",
+    date:"2024-09-25",dateDisplay:"September 25, 2024",
+    categories:["Design","Leadership","Creative Process"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233908/AGD_1_a60h6m.jpg",
+    excerpt:"We have all been there — working on a design that represents a perfect blend of creativity, strategy, and discipline, when someone outside the field sweeps in with the immortal question: can you make it pop?",
+    body:"<p>We have all been there — working on a design that is a perfect blend of creativity, strategy, and discipline, when someone outside the field sweeps in with 'Can you make it pop?' This is not a criticism of non-designers. It is an observation about what happens when the vocabulary of creative feedback has not yet caught up with the intention behind it.</p><p>The challenge is real. When non-designers provide feedback without a shared language for what they are responding to, the conversation becomes a guessing game. Does 'pop' mean higher contrast? More saturated color? Larger type? Without clarity, the designer iterates in circles and the client grows frustrated by results that never quite match the vision in their head.</p><p>The solution is not to dismiss the feedback. The feedback is always trying to tell you something. The job of the skilled designer is to translate subjective reactions into specific, actionable adjustments. 'Make it pop' is telling you the current version lacks visual energy. Work from there.</p><p>The best creative relationships are built on shared vocabulary and mutual respect for expertise. The client knows their audience and their business objectives. The designer knows how to solve visual communication problems. When those two knowledge sets are brought into genuine collaboration, the work gets better and faster.</p>"
+  },
+  {
+    id:"business-needs-stylist",
+    title:"Why Every Business Needs a Stylist for Stellar Visual Campaigns",
+    date:"2024-09-13",dateDisplay:"September 13, 2024",
+    categories:["Creative Direction","Photography","Brand Strategy"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/lipstick_xlq5id.jpg",
+    excerpt:"When preparing for a business or professional visual campaign, the involvement of a stylist is invaluable. The visuals presented often form the first impression of a brand, and that impression is made before a single word is read.",
+    body:"<p>When preparing for a business or professional visual campaign, the involvement of a stylist is invaluable. The visuals presented often form the first impression of a brand. This is where a stylist becomes essential, ensuring that every element of the campaign is meticulously crafted to reflect the brand's identity and objectives.</p><p>A stylist brings coherence. Without deliberate curation of every visual element — wardrobe, props, environment, color palette, and spatial composition — a shoot produces images that are technically competent but aesthetically scattered. Coherence is what separates a collection of photographs from a campaign.</p><p>The business case is straightforward: styled campaigns perform better. They hold attention longer, communicate value more effectively, and produce assets that maintain utility across multiple uses and platforms. The investment in proper styling at the front end saves significant money in reshoots, post-production corrections, and the slow erosion of brand equity that comes from inconsistent visual standards.</p>"
+  },
+  {
+    id:"balancing-local-adaptation-brand-identity",
+    title:"Balancing Local Adaptation and Core Brand Identity: A Strategic Imperative for Global Brands",
+    date:"2024-09-10",dateDisplay:"September 10, 2024",
+    categories:["Brand Strategy","Global Marketing"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233908/globe_sazfxm.png",
+    excerpt:"In today's globalized marketplace, brands face the dual challenge of adapting their strategies to regional preferences while maintaining a consistent core identity. The discipline is in knowing which elements are fixed and which are flexible.",
+    body:"<p>In today's globalized marketplace, brands face the dual challenge of adapting their strategies to fit regional preferences while maintaining a consistent core identity. Successfully balancing these elements is crucial for building brand trust and ensuring long-term success.</p><p>The governing principle is this: the brand's core positioning, visual identity, and values are non-negotiable. They are the equity that travels across markets and accumulates over time. What adapts is the expression of those constants — the language used, the cultural references deployed, the product variants offered, the channels prioritized.</p><p>A brand that changes its core positioning market by market does not have a global brand. It has a collection of local brands wearing the same logo. The equity does not compound because it is not consistent. The discipline is in knowing which elements are structural — and therefore fixed — and which are expressive — and therefore flexible. That distinction requires strategic clarity that most organizations have not done the work to achieve.</p>"
+  },
+  {
+    id:"supporting-employee-aspirations",
+    title:"Supporting Employee Aspirations: Best Practices and Pitfalls to Avoid",
+    date:"2024-09-09",dateDisplay:"September 9, 2024",
+    categories:["Leadership","Management"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233909/osiris_01_an_image_of_a_manager_doing_an_employee_evaluation_f8940098-12b4-425c-980e-36621572e49e_ojlvmw.png",
+    excerpt:"Navigating the aspirations of employees seeking promotions is a crucial aspect of effective leadership. Handling these situations with authenticity and transparency is what separates leaders who retain talent from those who lose it.",
+    body:"<p>Navigating the aspirations of employees seeking promotions and professional development is a crucial aspect of effective leadership. To foster a more engaged and motivated workforce, senior management must handle these situations with authenticity and transparency.</p><p>The most common failure mode is ambiguity offered as kindness. When a leader avoids a direct conversation about an employee's promotion prospects, they believe they are being considerate. What they are actually doing is leaving the employee to fill the silence with optimism that may have no basis in reality. When the reality eventually arrives, the damage to trust is significantly worse than an honest conversation would have caused.</p><p>The best practice is direct and generous. Clearly articulate what is required for advancement, what timeline is realistic, and what support the organization will provide. If advancement is not possible in the current structure, say so directly and help the person understand their options. Leaders who do this consistently build teams with genuine loyalty.</p>"
+  },
+  {
+    id:"overlooked-role-creative-directors",
+    title:"The Overlooked Role of Creative Directors in Manufacturing and Retail",
+    date:"2024-09-06",dateDisplay:"September 6, 2024",
+    categories:["Creative Direction","Brand Strategy","Leadership"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/osiris_01_natural_image_of_a_middle_aged_african_american_creat_6818e080-b51a-4725-a220-116f8a9b1966_ej9v5s.png",
+    excerpt:"Manufacturing and retail organizations consistently underinvest in creative leadership. The cost of that underinvestment is invisible until it becomes undeniable — and by then, it is expensive to correct.",
+    body:"<p>Manufacturing and retail organizations consistently underinvest in creative leadership. The cost of that underinvestment is invisible until it becomes undeniable — and by then, it is expensive to correct.</p><p>In these sectors, the Creative Director is often either absent entirely or present in name only — a senior designer whose title does not reflect actual authority over creative decisions. The result is that visual and brand decisions get made by committee, by procurement, or by whoever argues most loudly in the room. The brand suffers quietly, across thousands of small decisions, until the accumulated damage becomes visible in declining shelf differentiation and weakening consumer recognition.</p><p>The Creative Director in a manufacturing or retail context is not a luxury. They are the person who ensures that the brand's visual equity is protected as a business asset. The organizations that understand this invest in creative leadership early and give it genuine authority. Those that do not spend significantly more correcting brand problems downstream than they would have spent preventing them.</p>"
+  },
+  {
+    id:"critique-authority-vs-credibility",
+    title:"Critique Authority vs. Critique Credibility: Why It Matters",
+    date:"2024-09-02",dateDisplay:"September 2, 2024",
+    categories:["Leadership","Creative Process","Management"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/osiris_01_A_collaborative_design_session_with_a_group_of_people_91c7ae13-69b6-41e1-ad40-0a4c897cad29_tfktrn.png",
+    excerpt:"Having the authority to critique is not the same as having the credibility to critique. Organizations that confuse the two create environments where work is optimized for approval rather than quality.",
+    body:"<p>Having the authority to critique is not the same as having the credibility to critique. Organizations that confuse the two create creative environments where work is optimized for approval rather than quality.</p><p>Authority is positional. It derives from organizational hierarchy. Credibility is earned. It comes from demonstrated expertise, from a track record of sound creative judgment, from the ability to articulate not just what is not working but why — and what would work better. Credible critique elevates the work. Authoritative critique without credibility suppresses it.</p><p>When a creative team learns that approval is the primary metric rather than quality, they stop taking risks. They produce work that is safe enough to survive the approval process rather than ambitious enough to move the market. The ceiling on creative quality is set not by the talent in the room but by the credibility of the feedback system.</p>"
+  },
+  {
+    id:"professional-product-photographer",
+    title:"Why Every Marketing Executive Should Be Best Friends with a Professional Product Photographer",
+    date:"2024-04-11",dateDisplay:"April 11, 2024",
+    categories:["Photography","Marketing","Brand Strategy"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233909/camera_hnfp0t.jpg",
+    excerpt:"Every pixel counts and every scroll could make or break a brand. The role of a professional product photographer is more crucial than ever — and the cost of getting it wrong compounds quietly.",
+    body:"<p>Every pixel counts and every scroll could make or break a brand. The role of a professional product photographer is more crucial than ever — and the cost of getting it wrong compounds quietly until it becomes undeniable.</p><p>The argument for professional product photography is not primarily aesthetic. It is commercial. Product photography is often the first brand experience a consumer has with a physical product they have not yet held. It communicates quality, care, and premium positioning before the price is even visible.</p><p>The difference between professional photography and well-intentioned amateur photography is not technical. It is strategic. A professional product photographer understands the brand positioning, the target audience, and the platform requirements before the first shot is taken. Every decision is made in service of communicating specific brand attributes to a specific audience. The cost of a professional shoot amortized across its intended uses is a fraction of the brand equity lost through inadequate imagery.</p>"
+  },
+  {
+    id:"price-affects-design-dynamics",
+    title:"How Price Affects Design Dynamics",
+    date:"2024-04-04",dateDisplay:"April 4, 2024",
+    categories:["Design","Brand Strategy","CPG"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233911/dollar_sign_vcsdcu.jpg",
+    excerpt:"Every design stroke and pricing decision carries the weight of shaping consumer consciousness. Understanding how price information transforms the design brief — and the resulting work.",
+    body:"<p>Every design stroke and pricing decision carries the weight of shaping consumer consciousness. Behind the aesthetic charm of any product lies a strategic interplay between suggested retail price and design that most organizations manage poorly.</p><p>Price is one of the most powerful signals a brand sends to a consumer. It sets an expectation before the product is touched, opened, or used. Design must be consistent with that expectation. A premium price attached to packaging that reads commodity creates cognitive dissonance — the consumer feels misled, even if they cannot articulate precisely why.</p><p>The practical implication is straightforward: the design brief must include the price point. Not as a footnote but as a governing strategic input. The designer needs to understand not just what the product is, but what it costs, what that cost communicates, and what the packaging must do to reinforce or elevate that communication. When price and design work from the same strategic brief, the result is coherent. When they do not, the inconsistency is always visible — and always costly.</p>"
+  },
+  {
+    id:"ai-cant-fix-stupid",
+    title:"AI Can't Fix Stupid",
+    date:"2024-03-18",dateDisplay:"March 18, 2024",
+    categories:["AI","Leadership","Strategy"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233909/AI_chimp_xhyjkj.png",
+    excerpt:"The grand entrance of AI into a broken organization is like watching a magician try to pull a rabbit out of a hat that is already on fire. AI amplifies what is already there. That is the problem.",
+    body:"<p>The grand entrance of AI into a broken organization is like watching a magician try to pull a rabbit out of a hat that is already on fire. AI might dazzle with its data-crunching prowess, but if the foundation is cracked and the walls are crumbling, the technology accelerates the problems rather than solving them.</p><p>AI is an amplifier. It makes fast organizations faster, organized organizations more organized, and clear-thinking organizations clearer. It also makes dysfunctional organizations more dysfunctional, faster. The outputs of a poorly structured process, fed through an AI system, produce poor outputs at machine speed.</p><p>Before any organization invests in AI implementation, the more important question is whether the human systems are functioning at a level that AI can meaningfully improve. That audit is uncomfortable. It requires honesty about organizational dysfunction that leadership is often motivated to avoid. But it is the only honest starting point for an AI strategy that produces real value rather than expensive noise.</p>"
+  },
+  {
+    id:"design-by-committee",
+    title:"Design by Committee: A Hazard in Modern Marketing",
+    date:"2024-03-14",dateDisplay:"March 14, 2024",
+    categories:["Design","Leadership","Creative Process"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233909/committee_A_co5ojj.png",
+    excerpt:"Collaborative decision-making can compromise creativity, dilute vision, and obscure accountability. The risks of design by committee are well documented and consistently underestimated.",
+    body:"<p>Collaborative decision-making can compromise creativity, dilute vision, and obscure accountability. The risks of design by committee are well documented and consistently underestimated by the organizations most prone to it.</p><p>Design by committee produces a specific and predictable failure mode: the averaged outcome. When multiple stakeholders with different aesthetic preferences and different risk tolerances all have veto power over creative decisions, the work moves inexorably toward the center. The bold choice gets softened. The distinctive element gets removed. The result is work that offends no one and moves no one.</p><p>The solution is not to exclude stakeholders from the creative process. It is to structure their involvement appropriately. Stakeholders should inform the brief, not adjudicate the execution. They should articulate objectives, audiences, and constraints — not make aesthetic judgments about typefaces and color saturation. That distinction, enforced consistently, is what allows creative work to remain distinctive while remaining responsive to legitimate business requirements.</p>"
+  },
+  {
+    id:"embracing-web-30",
+    title:"Embracing Web 3.0: The Future of Marketing Strategy and Consumer Engagement",
+    date:"2024-03-04",dateDisplay:"March 4, 2024",
+    categories:["Digital Marketing","Strategy","Technology"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233909/web3_hk5mi6.jpg",
+    excerpt:"The advent of Web 3.0 heralds a new era of interconnectedness and decentralization. Marketing managers find themselves at the forefront of a transformative journey where traditional strategies must evolve.",
+    body:"<p>The advent of Web 3.0 heralds a new era of interconnectedness, decentralization, and innovation in the digital landscape. As this paradigm shift unfolds, marketing managers find themselves at the forefront of a transformative journey where traditional marketing strategies must evolve.</p><p>The most significant implication for marketers is the shift in the locus of control. Web 2.0 gave platforms control over audience relationships and data. Web 3.0, in its various emerging forms, returns elements of that control to individuals and communities. For brands, this means the broadcast model of marketing becomes increasingly ineffective.</p><p>The brands that navigate this transition well will be those that have invested in genuine community rather than manufactured engagement. The difference between the two is authenticity. Manufactured engagement is optimized for metrics. Genuine community is built around shared values and mutual benefit. The former is increasingly easy for audiences to detect and reject. The latter is increasingly difficult for competitors to replicate.</p>"
+  },
+  {
+    id:"crafting-effective-creative-briefs",
+    title:"The Art of Crafting Effective Creative Briefs: Unveiling Marketing Managers' Achilles' Heel",
+    date:"2024-02-26",dateDisplay:"February 26, 2024",
+    categories:["Creative Process","Marketing","Leadership"],
+    image:"https://res.cloudinary.com/dk8dxerks/image/upload/v1777233910/brief_h1wyer.jpg",
+    excerpt:"The creative brief is simultaneously the most important and most neglected document in marketing. A well-crafted brief does not constrain creative work. It liberates it by removing ambiguity from the strategic foundation.",
+    body:"<p>The creative brief is simultaneously the most important and most neglected document in marketing. Organizations that treat briefs as administrative formalities consistently produce creative work that misses, then spend the backend of every project in expensive revision cycles trying to recover.</p><p>A well-crafted brief does not constrain creative work. It liberates it by removing ambiguity from the strategic foundation. When a creative team knows precisely who they are talking to, what single thing they need that audience to feel or believe, and what the specific business objective is, they can make bold creative choices with confidence.</p><p>The skill of brief writing is the skill of strategic clarity. It requires deciding what matters most and having the discipline to exclude everything else. Marketing managers who develop this discipline produce better work, faster, with fewer revisions — because the strategic thinking happens before the creative work begins, not during it.</p>"
+  }
+];
+
+/* ─── RENDER ENGINE ──────────────────────────────────────────────────── */
+var currentFilter = 'all';
+var overlay = document.getElementById('wr-post-overlay');
+
+function categoryHTML(cats, style) {
+  if(style === 'tag') {
+    return cats.map(function(c){ return '<span class="wr-cat-tag">'+c+'</span>'; }).join('');
+  }
+  return cats.map(function(c){ return '<span class="wr-post-cat">'+c+'</span>'; }).join('');
+}
+
+function renderFeatured(post) {
+  var el = document.getElementById('wr-featured-card');
+  el.innerHTML =
+    '<div class="wr-featured-img"><img src="'+post.image+'" alt="'+post.title+'" loading="eager"></div>' +
+    '<div class="wr-featured-body">' +
+      '<div class="wr-featured-cats">'+categoryHTML(post.categories,'tag')+'</div>' +
+      '<h2 class="wr-featured-title">'+post.title+'</h2>' +
+      '<p class="wr-featured-excerpt">'+post.excerpt+'</p>' +
+      '<div class="wr-featured-meta"><span>Wil Randolph</span><span class="wr-featured-meta-dot"></span><span>'+post.dateDisplay+'</span></div>' +
+      '<span class="wr-read-more">Read Post</span>' +
+    '</div>';
+  el.addEventListener('click', function(){ openPost(post); });
+}
+
+function renderGrid(posts) {
+  var grid = document.getElementById('wr-posts-grid');
+  if (!posts.length) {
+    grid.innerHTML = '<div class="wr-no-results"><p>No posts in this category yet.</p></div>';
+    return;
+  }
+  grid.innerHTML = posts.map(function(post) {
+    return '<div class="wr-post-card" data-id="'+post.id+'">' +
+      '<div class="wr-post-img"><img src="'+post.image+'" alt="'+post.title+'" loading="lazy"></div>' +
+      '<div class="wr-post-body">' +
+        '<div class="wr-post-cats">'+categoryHTML(post.categories,'inline')+'</div>' +
+        '<h3 class="wr-post-title">'+post.title+'</h3>' +
+        '<p class="wr-post-excerpt">'+post.excerpt+'</p>' +
+        '<div class="wr-post-meta"><span>Wil Randolph</span><span style="opacity:0.3">&middot;</span><span>'+post.dateDisplay+'</span></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  grid.querySelectorAll('.wr-post-card').forEach(function(card) {
+    var id = card.getAttribute('data-id');
+    var post = POSTS.find(function(p){ return p.id === id; });
+    if (post) card.addEventListener('click', function(){ openPost(post); });
+  });
+}
+
+function filterPosts(cat) {
+  if (cat === 'all') return POSTS.slice(1);
+  return POSTS.slice(1).filter(function(p){
+    return p.categories.some(function(c){ return c === cat; });
+  });
+}
+
+function openPost(post) {
+  document.getElementById('wr-post-hero-img').src = post.image;
+  document.getElementById('wr-post-cats').innerHTML = categoryHTML(post.categories, 'tag');
+  document.getElementById('wr-post-title').textContent = post.title;
+  document.getElementById('wr-post-meta').innerHTML =
+    '<span>Wil Randolph</span>' +
+    '<span style="opacity:0.3;margin:0 4px">&middot;</span>' +
+    '<span>'+post.dateDisplay+'</span>';
+  document.getElementById('wr-post-body').innerHTML = post.body;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Scroll panel to top
+  overlay.querySelector('.wr-post-panel').scrollTop = 0;
+}
+
+function closePost() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* Init */
+renderFeatured(POSTS[0]);
+renderGrid(filterPosts('all'));
+
+/* Filters */
+document.querySelectorAll('.wr-filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.wr-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentFilter = btn.getAttribute('data-cat');
+
+    // Update featured if filtered
+    if (currentFilter === 'all') {
+      document.getElementById('wr-featured').style.display = '';
+      renderFeatured(POSTS[0]);
+      renderGrid(filterPosts('all'));
+    } else {
+      var filtered = POSTS.filter(function(p){
+        return p.categories.some(function(c){ return c === currentFilter; });
+      });
+      if (filtered.length) {
+        document.getElementById('wr-featured').style.display = '';
+        renderFeatured(filtered[0]);
+        renderGrid(filtered.slice(1));
+      } else {
+        document.getElementById('wr-featured').style.display = 'none';
+        renderGrid([]);
+      }
+    }
+  });
+});
+
+/* Close overlay */
+document.getElementById('wr-close-btn').addEventListener('click', closePost);
+document.getElementById('wr-backdrop').addEventListener('click', closePost);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePost(); });
+
+/* ─── SCROLL PROGRESS ─── */
+var bar = document.getElementById('wr-progress');
+window.addEventListener('scroll', function(){
+  var d = document.documentElement;
+  var s = d.scrollTop || document.body.scrollTop;
+  var t = d.scrollHeight - d.clientHeight;
+  bar.style.width = (t > 0 ? (s/t)*100 : 0) + '%';
+}, {passive:true});
+
+/* ─── REVEALS ─── */
+var revObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.wr-reveal').forEach(function(el){ revObs.observe(el); });
+
+/* ─── HEADER KINETIC CANVAS ─── */
+(function(){
+  var canvas = document.getElementById('wr-header-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, shapes, raf;
+  var mouseX = 0, mouseY = 0;
+  var targetMX = 0, targetMY = 0;
+  var clickX = 0, clickY = 0;
+  var isClicking = false;
+  var attractStrength = 0;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function randInt(a, b) { return Math.floor(rand(a, b + 1)); }
+  function pick(arr) { return arr[randInt(0, arr.length - 1)]; }
+
+  var PALETTES = [
+    { fill: 'rgba(201,168,76,',  stroke: 'rgba(201,168,76,' },
+    { fill: 'rgba(15,14,12,',    stroke: 'rgba(15,14,12,' },
+    { fill: 'rgba(29,107,107,',  stroke: 'rgba(29,107,107,' },
+    { fill: 'rgba(180,140,60,',  stroke: 'rgba(180,140,60,' },
+  ];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function makeShapes() {
+    shapes = [];
+    var density = Math.max(12, Math.floor((W * H) / 52000));
+    for (var i = 0; i < density; i++) {
+      var type  = randInt(0, 3);
+      var pal   = pick(PALETTES);
+      var speed = rand(0.04, 0.16);
+      var angle = rand(0, Math.PI * 2);
+      var sizeMap = { 0: rand(20, 110), 1: rand(80, 340), 2: rand(22, 90), 3: rand(18, 70) };
+      var alphaFill   = rand(0.05, 0.12);
+      var alphaStroke = rand(0.08, 0.18);
+      var useStroke   = Math.random() > 0.4;
+      shapes.push({
+        type: type, x: rand(-100, W + 100), y: rand(-100, H + 100),
+        size: sizeMap[type], aspect: rand(0.3, 3.0),
+        rot: rand(0, Math.PI * 2),
+        vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+        vr: rand(-0.003, 0.003),
+        alphaFill: alphaFill, alphaStroke: alphaStroke,
+        pal: pal, stroke: useStroke, thick: rand(0.4, 1.1),
+        pulse: Math.random() > 0.5,
+        pulseSpeed: rand(0.004, 0.012),
+        pulsePhase: rand(0, Math.PI * 2),
+        t: 0
+      });
+    }
+  }
+
+  function drawShape(s) {
+    s.t += 1;
+    var pulseAlpha = s.pulse
+      ? s.alphaFill * (0.6 + 0.4 * Math.sin(s.t * s.pulseSpeed + s.pulsePhase))
+      : s.alphaFill;
+    ctx.save();
+    ctx.translate(s.x + (s.px || 0), s.y + (s.py || 0));
+    ctx.rotate(s.rot);
+    if (s.type === 0) {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s.size, s.size * s.aspect, 0, 0, Math.PI * 2);
+      if (s.stroke) { ctx.globalAlpha = s.alphaStroke; ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.stroke(); }
+      else { ctx.globalAlpha = pulseAlpha; ctx.fillStyle = s.pal.fill + '1)'; ctx.fill(); }
+    } else if (s.type === 1) {
+      ctx.globalAlpha = s.alphaStroke * (s.pulse ? 0.6 + 0.4 * Math.sin(s.t * s.pulseSpeed) : 1);
+      ctx.beginPath(); ctx.moveTo(-s.size / 2, 0); ctx.lineTo(s.size / 2, 0);
+      ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.stroke();
+    } else if (s.type === 2) {
+      var hw = s.size / 2, hh = (s.size * s.aspect) / 2;
+      if (s.stroke) { ctx.globalAlpha = s.alphaStroke; ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.strokeRect(-hw, -hh, hw * 2, hh * 2); }
+      else { ctx.globalAlpha = pulseAlpha; ctx.fillStyle = s.pal.fill + '1)'; ctx.fillRect(-hw, -hh, hw * 2, hh * 2); }
+    } else {
+      var r = s.size;
+      ctx.beginPath(); ctx.moveTo(0, -r); ctx.lineTo(r * 0.866, r * 0.5); ctx.lineTo(-r * 0.866, r * 0.5); ctx.closePath();
+      if (s.stroke) { ctx.globalAlpha = s.alphaStroke; ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.stroke(); }
+      else { ctx.globalAlpha = pulseAlpha; ctx.fillStyle = s.pal.fill + '1)'; ctx.fill(); }
+    }
+    ctx.restore();
+  }
+
+  function tick() {
+    mouseX += (targetMX - mouseX) * 0.08;
+    mouseY += (targetMY - mouseY) * 0.08;
+    if (isClicking) { attractStrength += (1 - attractStrength) * 0.12; }
+    else { attractStrength += (0 - attractStrength) * 0.04; }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+    shapes.forEach(function(s) {
+      s.x += s.vx; s.y += s.vy; s.rot += s.vr;
+      var pad = s.size + 60;
+      if (s.x < -pad) s.x = W + pad; if (s.x > W + pad) s.x = -pad;
+      if (s.y < -pad) s.y = H + pad; if (s.y > H + pad) s.y = -pad;
+      var depth = 1 - Math.min(s.size / 300, 0.9);
+      if (attractStrength > 0.01) {
+        var dx = clickX - s.x; var dy = clickY - s.y;
+        var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        var force = attractStrength * 3.5 * depth;
+        s.px = (dx / dist) * Math.min(dist, 280) * force;
+        s.py = (dy / dist) * Math.min(dist, 280) * force;
+      } else {
+        s.px = mouseX * depth * 48;
+        s.py = mouseY * depth * 48;
+      }
+      drawShape(s);
+    });
+    raf = requestAnimationFrame(tick);
+  }
+
+  var header = document.getElementById('wr-header');
+  header.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    targetMX = (e.clientX - rect.left - W / 2) / (W / 2);
+    targetMY = (e.clientY - rect.top  - H / 2) / (H / 2);
+    if (isClicking) { clickX = e.clientX - rect.left; clickY = e.clientY - rect.top; }
+  });
+  header.addEventListener('mousedown', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    isClicking = true;
+    clickX = e.clientX - rect.left; clickY = e.clientY - rect.top;
+  });
+  window.addEventListener('mouseup', function() { isClicking = false; });
+  window.addEventListener('resize', function() { resize(); makeShapes(); });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+      else { cancelAnimationFrame(raf); raf = null; }
+    });
+  }, { threshold: 0 });
+  obs.observe(header);
+
+  resize(); makeShapes(); raf = requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

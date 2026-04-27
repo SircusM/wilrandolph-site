@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Wil Randolph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0e0c;--ink-muted:#4a4844;--ink-faint:#9a9690;
+  --paper:#faf8f5;--paper-warm:#f2ede6;--paper-mid:#e8e2d9;
+  --gold:#c9a84c;--gold-light:#e8d49a;--gold-muted:#8b6e2a;
+  --charcoal:#0a0a0e;--teal-light:#2a9090;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--charcoal);color:var(--paper);overflow-x:hidden}
+
+/* ─── NAV ─── */
+#wr-nav{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 56px;
+  background:rgba(10,10,14,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.wr-nav-brand{text-decoration:none;display:flex;flex-direction:column;gap:3px}
+.wr-nav-name{font-family:var(--font-display);font-size:22px;font-weight:300;color:#fff;line-height:1.1;letter-spacing:0.02em}
+.wr-nav-sub{font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.wr-nav-links{display:flex;align-items:center;gap:28px}
+.wr-nav-links a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.25s;white-space:nowrap}
+.wr-nav-links a:hover{color:#fff}
+.wr-nav-links a.active{color:var(--gold)}
+.wr-nav-div{display:block;width:1px;height:18px;background:var(--gold);opacity:0.5;flex-shrink:0}
+@media(max-width:860px){.wr-nav-links{display:none}#wr-nav{padding:20px 28px}}
+
+/* ─── PROGRESS ─── */
+#wr-progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0%;z-index:9999;transition:width 0.1s linear}
+
+/* ─── REVEALS ─── */
+.wr-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.9s var(--ease-out),transform 0.9s var(--ease-out)}
+.wr-reveal.visible{opacity:1;transform:translateY(0)}
+.wr-delay-1{transition-delay:0.1s}
+.wr-delay-2{transition-delay:0.22s}
+.wr-delay-3{transition-delay:0.36s}
+.wr-delay-4{transition-delay:0.52s}
+.wr-delay-5{transition-delay:0.68s}
+
+/* ─── KINETIC CANVAS ─── */
+#wr-header-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#wr-header{position:relative;overflow:hidden}
+.wr-header-inner{position:relative;z-index:1}
+
+/* ─── HEADER ─── */
+#wr-header{
+  background:#ffffff;
+  padding:0;
+  min-height:600px;
+  display:flex;align-items:stretch;
+}
+#wr-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);
+  z-index:2;
+}
+
+.wr-header-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  width:100%;
+  padding-top:96px;
+}
+@media(max-width:860px){
+  .wr-header-inner{grid-template-columns:1fr}
+}
+
+/* Left: headshot */
+.wr-about-photo-col{
+  position:relative;overflow:hidden;
+  min-height:560px;
+}
+.wr-about-photo-col img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  display:block;
+  filter:brightness(0.92) contrast(1.04);
+  transition:transform 0.8s var(--ease-out);
+}
+.wr-about-photo-col:hover img{transform:scale(1.02)}
+
+/* Photo overlay gradient */
+.wr-about-photo-col::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to right,
+    transparent 60%,
+    rgba(255,255,255,0.15) 100%
+  );
+  pointer-events:none;
+}
+
+/* Right: intro text */
+.wr-about-intro-col{
+  padding:80px 64px 80px 56px;
+  display:flex;flex-direction:column;justify-content:center;
+  background:#ffffff;
+}
+@media(max-width:860px){
+  .wr-about-intro-col{padding:48px 32px}
+  .wr-about-photo-col{min-height:420px}
+}
+
+.wr-about-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+}
+.wr-about-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+
+.wr-about-name{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(52px,7vw,80px);line-height:0.92;
+  color:var(--ink);letter-spacing:-0.015em;
+  margin-bottom:12px;
+}
+.wr-about-name em{font-style:italic;color:var(--gold)}
+
+.wr-about-title{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ink-faint);
+  margin-bottom:36px;
+}
+
+.wr-about-lead{
+  font-family:var(--font-display);font-size:clamp(20px,2.2vw,26px);
+  font-weight:300;font-style:italic;
+  color:var(--ink-muted);line-height:1.5;
+  padding-left:20px;
+  border-left:2px solid rgba(201,168,76,0.4);
+  margin-bottom:36px;
+  max-width:460px;
+}
+
+.wr-about-summary{
+  font-size:14px;line-height:1.9;
+  color:var(--ink-muted);font-weight:300;
+  max-width:480px;
+}
+
+/* ─── CREDENTIALS STRIP ─── */
+#wr-credentials{
+  background:var(--charcoal);
+  border-top:3px solid var(--gold);
+}
+.wr-cred-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:#0d0d14;
+}
+@media(max-width:860px){.wr-cred-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wr-cred-grid{grid-template-columns:1fr}}
+
+.wr-cred-cell{
+  background:var(--charcoal);padding:36px 32px;
+  transition:background 0.3s;
+}
+.wr-cred-cell:hover{background:#0d0d14}
+.wr-cred-number{
+  font-family:var(--font-display);font-size:56px;font-weight:300;
+  color:var(--gold);line-height:1;margin-bottom:8px;
+}
+.wr-cred-label{
+  font-size:13px;color:rgba(250,248,245,0.5);
+  font-weight:300;line-height:1.6;
+}
+.wr-cred-label strong{
+  display:block;color:rgba(250,248,245,0.85);
+  font-weight:400;font-size:14px;margin-bottom:4px;
+}
+
+/* ─── THE STORY ─── */
+#wr-story{
+  padding:100px 0;
+  background:var(--charcoal);
+}
+.wr-story-grid{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:80px;align-items:start;
+}
+@media(max-width:860px){
+  .wr-story-grid{grid-template-columns:1fr;gap:48px;padding:0 32px}
+}
+
+.wr-story-left{}
+.wr-story-eyebrow{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;
+  text-transform:uppercase;color:var(--gold);opacity:0.7;
+  margin-bottom:20px;display:flex;align-items:center;gap:14px;
+}
+.wr-story-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold);opacity:0.6}
+.wr-story-heading{
+  font-family:var(--font-display);font-size:clamp(36px,4vw,52px);
+  font-weight:300;color:var(--paper);line-height:1.05;
+}
+.wr-story-heading em{font-style:italic;color:var(--gold)}
+
+.wr-story-right{
+  display:flex;flex-direction:column;gap:28px;
+}
+.wr-story-p{
+  font-size:15px;line-height:1.95;
+  color:rgba(250,248,245,0.6);font-weight:300;
+}
+.wr-story-p strong{
+  color:rgba(250,248,245,0.88);font-weight:400;
+}
+
+/* Pull quote */
+.wr-story-quote{
+  font-family:var(--font-display);font-size:clamp(20px,2.5vw,28px);
+  font-weight:300;font-style:italic;
+  color:rgba(250,248,245,0.35);line-height:1.5;
+  padding:32px 32px 32px 36px;
+  border-left:2px solid rgba(201,168,76,0.3);
+  margin:8px 0;
+}
+
+/* ─── THE ADP CALLOUT ─── */
+#wr-adp-callout{
+  padding:80px 0;
+  background:var(--paper-warm);
+  border-top:1px solid var(--paper-mid);
+  border-bottom:1px solid var(--paper-mid);
+}
+.wr-adp-callout-inner{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+@media(max-width:768px){
+  .wr-adp-callout-inner{grid-template-columns:1fr;gap:40px;padding:0 32px}
+}
+
+.wr-adp-callout-left{}
+.wr-adp-callout-flag{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(201,168,76,0.12);
+  border:1px solid rgba(139,110,42,0.3);
+  border-radius:2px;padding:7px 16px;
+  margin-bottom:24px;
+}
+.wr-adp-callout-flag-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--gold);
+  animation:adp-pulse-dot 2s ease-in-out infinite;
+}
+@keyframes adp-pulse-dot{
+  0%,100%{opacity:0.5;box-shadow:0 0 0 0 rgba(201,168,76,0)}
+  50%{opacity:1;box-shadow:0 0 0 4px rgba(201,168,76,0.15)}
+}
+.wr-adp-callout-flag-text{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--gold-muted);
+}
+.wr-adp-callout-title{
+  font-family:var(--font-display);font-size:clamp(36px,5vw,60px);
+  font-weight:300;color:var(--charcoal);line-height:0.95;
+  margin-bottom:8px;letter-spacing:-0.01em;
+}
+.wr-adp-callout-title em{font-style:italic;color:var(--gold)}
+.wr-adp-callout-sub{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold-muted);
+  margin-bottom:28px;
+}
+.wr-adp-callout-body{
+  font-size:14px;line-height:1.9;
+  color:var(--ink-muted);font-weight:300;
+}
+.wr-adp-callout-body strong{color:var(--charcoal);font-weight:500}
+
+.wr-adp-callout-right{
+  display:flex;flex-direction:column;gap:2px;
+}
+.wr-adp-layer{
+  padding:28px 32px;background:var(--paper);
+  border-left:2px solid transparent;
+  transition:border-color 0.3s,background 0.3s;
+}
+.wr-adp-layer:hover{background:var(--paper-mid)}
+.wr-adp-layer-gold{border-left-color:rgba(201,168,76,0.4)}
+.wr-adp-layer-gold:hover{border-left-color:var(--gold)}
+.wr-adp-layer-teal{border-left-color:rgba(42,144,144,0.4)}
+.wr-adp-layer-teal:hover{border-left-color:var(--teal-light)}
+.wr-adp-layer-label{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.22em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.wr-adp-layer-gold .wr-adp-layer-label{color:rgba(201,168,76,0.6)}
+.wr-adp-layer-teal .wr-adp-layer-label{color:rgba(42,144,144,0.6)}
+.wr-adp-layer h4{
+  font-family:var(--font-display);font-size:18px;font-weight:600;
+  color:var(--charcoal);margin-bottom:8px;
+}
+.wr-adp-layer p{
+  font-size:13px;line-height:1.75;
+  color:var(--ink-muted);font-weight:300;
+}
+
+/* ─── EXPERTISE TIMELINE ─── */
+#wr-career{
+  padding:100px 0;
+  background:var(--charcoal);
+}
+.wr-career-inner{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+}
+@media(max-width:640px){.wr-career-inner{padding:0 32px}}
+
+.wr-career-header{margin-bottom:64px}
+.wr-career-eyebrow{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;
+  text-transform:uppercase;color:var(--gold);opacity:0.7;
+  margin-bottom:16px;
+}
+.wr-career-title{
+  font-family:var(--font-display);font-size:clamp(32px,4vw,48px);
+  font-weight:300;color:var(--paper);line-height:1.05;
+}
+.wr-career-title em{font-style:italic;color:var(--gold)}
+
+.wr-timeline{
+  display:flex;flex-direction:column;gap:0;
+  border-left:1px solid rgba(255,255,255,0.06);
+  margin-left:20px;
+}
+
+.wr-timeline-item{
+  padding:0 0 48px 48px;
+  position:relative;
+  transition:opacity 0.3s;
+}
+.wr-timeline-item:last-child{padding-bottom:0}
+
+.wr-timeline-dot{
+  position:absolute;left:-8px;top:6px;
+  width:15px;height:15px;border-radius:50%;
+  background:var(--charcoal);
+  border:1px solid rgba(201,168,76,0.4);
+  transition:border-color 0.3s,background 0.3s;
+}
+.wr-timeline-item:hover .wr-timeline-dot{
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.15);
+}
+
+.wr-timeline-period{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(201,168,76,0.55);
+  margin-bottom:8px;
+}
+.wr-timeline-role{
+  font-family:var(--font-display);font-size:22px;font-weight:600;
+  color:var(--paper);line-height:1.2;margin-bottom:6px;
+}
+.wr-timeline-org{
+  font-size:13px;color:rgba(250,248,245,0.4);
+  font-weight:300;margin-bottom:16px;
+  font-style:italic;
+}
+.wr-timeline-desc{
+  font-size:13.5px;line-height:1.8;
+  color:rgba(250,248,245,0.45);font-weight:300;
+  max-width:560px;
+}
+.wr-timeline-tags{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;
+}
+.wr-timeline-tag{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:0.14em;
+  text-transform:uppercase;padding:4px 10px;
+  border:1px solid rgba(255,255,255,0.08);
+  color:rgba(250,248,245,0.35);border-radius:2px;
+}
+
+/* ─── INDUSTRIES ─── */
+#wr-industries{
+  padding:80px 0;
+  background:#0d0d14;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.wr-industries-inner{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+}
+@media(max-width:640px){.wr-industries-inner{padding:0 32px}}
+
+.wr-ind-header{margin-bottom:48px}
+.wr-ind-eyebrow{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;
+  text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:14px;
+}
+.wr-ind-title{
+  font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);
+  font-weight:300;color:var(--paper);line-height:1.05;
+}
+.wr-ind-title em{font-style:italic;color:var(--gold)}
+
+.wr-ind-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:rgba(255,255,255,0.03);
+}
+@media(max-width:860px){.wr-ind-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wr-ind-grid{grid-template-columns:1fr}}
+
+.wr-ind-cell{
+  background:#0d0d14;padding:28px 24px;
+  transition:background 0.3s;
+}
+.wr-ind-cell:hover{background:#111118}
+.wr-ind-num{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:rgba(201,168,76,0.12);line-height:1;margin-bottom:10px;
+  transition:color 0.3s;
+}
+.wr-ind-cell:hover .wr-ind-num{color:rgba(201,168,76,0.25)}
+.wr-ind-name{
+  font-size:13px;font-weight:400;
+  color:rgba(250,248,245,0.65);line-height:1.4;
+}
+
+/* ─── EDUCATION & CREDENTIALS ─── */
+#wr-education{
+  padding:80px 0;
+  background:var(--paper-warm);
+}
+.wr-edu-inner{
+  max-width:1140px;margin:0 auto;padding:0 56px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start;
+}
+@media(max-width:768px){.wr-edu-inner{grid-template-columns:1fr;gap:48px;padding:0 32px}}
+
+.wr-edu-left{}
+.wr-edu-eyebrow{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:16px;
+}
+.wr-edu-title{
+  font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);
+  font-weight:300;color:var(--charcoal);line-height:1.05;margin-bottom:32px;
+}
+.wr-edu-title em{font-style:italic;color:var(--gold-muted)}
+
+.wr-edu-item{
+  padding:24px 0;
+  border-bottom:1px solid var(--paper-mid);
+}
+.wr-edu-item:first-of-type{padding-top:0}
+.wr-edu-item:last-child{border-bottom:none}
+.wr-edu-degree{
+  font-family:var(--font-display);font-size:18px;font-weight:600;
+  color:var(--charcoal);margin-bottom:4px;line-height:1.2;
+}
+.wr-edu-field{
+  font-size:13px;color:var(--ink-muted);font-weight:300;
+  margin-bottom:4px;font-style:italic;
+}
+.wr-edu-inst{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--ink-faint);
+}
+
+.wr-edu-right{
+  display:flex;flex-direction:column;gap:16px;
+}
+.wr-skill-cluster{
+  padding:24px 28px;
+  background:var(--paper);
+  border-left:2px solid rgba(201,168,76,0.3);
+  transition:border-color 0.3s;
+}
+.wr-skill-cluster:hover{border-left-color:var(--gold)}
+.wr-skill-cluster h4{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+}
+.wr-skill-list{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.wr-skill-tag{
+  font-size:12px;color:var(--ink-muted);font-weight:300;
+  padding:4px 10px;background:var(--paper-warm);border-radius:2px;
+}
+
+/* ─── PHILOSOPHY STATEMENT ─── */
+#wr-philosophy{
+  padding:100px 56px;
+  background:var(--charcoal);
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+#wr-philosophy::before{
+  content:'"';
+  position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-display);font-size:400px;font-weight:300;
+  color:rgba(201,168,76,0.025);line-height:1;pointer-events:none;
+}
+
+.wr-philosophy-inner{max-width:800px;margin:0 auto}
+.wr-philosophy-eyebrow{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;
+  text-transform:uppercase;color:var(--gold);opacity:0.7;
+  margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.wr-philosophy-eyebrow::before,.wr-philosophy-eyebrow::after{
+  content:'';display:block;width:32px;height:1px;background:var(--gold);opacity:0.4;
+}
+
+.wr-philosophy-statement{
+  font-family:var(--font-display);font-size:clamp(28px,4vw,48px);
+  font-weight:300;font-style:italic;
+  color:rgba(250,248,245,0.7);line-height:1.35;
+  margin-bottom:32px;
+}
+.wr-philosophy-statement em{
+  font-style:normal;color:var(--gold);
+}
+.wr-philosophy-attr{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.22em;
+  text-transform:uppercase;color:rgba(250,248,245,0.25);
+}
+
+/* ─── CTA ─── */
+#wr-cta{
+  padding:80px 56px;background:#0d0d14;text-align:center;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.wr-cta-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.wr-cta-eyebrow::before,.wr-cta-eyebrow::after{
+  content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:0.4;
+}
+.wr-cta-text{
+  font-family:var(--font-display);font-size:clamp(32px,5vw,56px);
+  font-weight:300;color:var(--paper);line-height:1.05;margin-bottom:32px;
+}
+.wr-cta-text em{font-style:italic;color:var(--gold)}
+.wr-cta-sub{
+  font-size:14px;color:rgba(250,248,245,0.4);font-weight:300;
+  margin-bottom:40px;line-height:1.7;max-width:480px;
+  margin-left:auto;margin-right:auto;
+}
+.wr-cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.wr-btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;background:var(--gold);color:var(--charcoal);
+  font-size:11px;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;text-decoration:none;border-radius:2px;
+  font-family:var(--font-mono);transition:background 0.25s,transform 0.2s;
+}
+.wr-btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+.wr-btn-secondary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;background:transparent;
+  color:rgba(250,248,245,0.7);font-size:11px;font-weight:400;
+  letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid rgba(255,255,255,0.12);border-radius:2px;
+  font-family:var(--font-mono);transition:all 0.25s;
+}
+.wr-btn-secondary:hover{border-color:rgba(255,255,255,0.3);color:var(--paper)}
+</style>
+</head>
+<body>
+
+<nav id="wr-nav">
+  <a href="strategy.html" class="wr-nav-brand">
+    <span class="wr-nav-name">Wil Randolph</span>
+    <span class="wr-nav-sub">Brand &amp; Marketing Strategist</span>
+  </a>
+  <div class="wr-nav-links">
+    <a href="strategy.html">Strategy</a>
+    <span class="wr-nav-div"></span>
+    <a href="work.html">Work</a>
+    <span class="wr-nav-div"></span>
+    <a href="cases.html">Case Studies</a>
+
+    <span class="wr-nav-div"></span>
+    <a href="about.html" class="active">About</a>
+    <span class="wr-nav-div"></span>
+    <a href="journal.html">Journal</a>
+    <span class="wr-nav-div"></span>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div id="wr-progress"></div>
+
+<!-- ══ HEADER — HEADSHOT + INTRO ══ -->
+<section id="wr-header">
+  <canvas id="wr-header-canvas"></canvas>
+  <div class="wr-header-inner">
+
+    <!-- Headshot -->
+    <div class="wr-about-photo-col wr-reveal">
+      <img
+        src="https://res.cloudinary.com/dk8dxerks/image/upload/v1777233908/WR_headshot_snxupg.jpg"
+        alt="Wil Randolph — Brand &amp; Marketing Strategist"
+        loading="eager"
+      >
+    </div>
+
+    <!-- Intro -->
+    <div class="wr-about-intro-col">
+      <div class="wr-about-eyebrow wr-reveal">Brand Architect &amp; Marketing Strategist</div>
+      <h1 class="wr-about-name wr-reveal wr-delay-1">Wil<br><em>Randolph</em></h1>
+      <p class="wr-about-title wr-reveal wr-delay-2">Seattle, WA &nbsp;&middot;&nbsp; Nationally Available</p>
+      <p class="wr-about-lead wr-reveal wr-delay-3">
+        Nearly two decades of practice at the intersection of brand intelligence, 
+        creative direction, and business strategy. The work is visible. 
+        The thinking behind it is the point.
+      </p>
+      <p class="wr-about-summary wr-reveal wr-delay-4">
+        I build market-leading brand identities, win-rate-improving marketing systems, 
+        and strategic frameworks that drive measurable revenue growth. My practice spans 
+        brand audits, competitive positioning, proposal strategy, integrated campaign 
+        management, creative direction, and photography -- across eight industries 
+        and nearly two decades of documented outcomes. The medium is always determined 
+        by the diagnostic. The ADP runs first.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CREDENTIALS STRIP ══ -->
+
+
+<!-- ══ THE STORY ══ -->
+<section id="wr-story" style="padding:80px 0;background:var(--charcoal);">
+  <div style="max-width:1140px;margin:0 auto;padding:0 56px;">
+
+    <!-- Opening hook -->
+    <div class="wr-reveal" style="max-width:720px;margin-bottom:64px;">
+      <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;">The Practice</p>
+      <h2 style="font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:300;color:var(--paper);line-height:1.1;margin-bottom:20px;">
+        Marketing governance.<br><em style="font-style:italic;color:var(--gold);">Not just marketing execution.</em>
+      </h2>
+      <p style="font-size:15px;line-height:1.85;color:rgba(250,248,245,0.6);font-weight:300;">
+        Nearly two decades governing marketing functions across eight industries -- from the factory floor to the retail shelf, from FDA compliance to fair housing law, from consumer goods to luxury real estate. The ADP runs first. Business performance is always the objective.
+      </p>
+    </div>
+
+    <!-- Proof cards -->
+    <div class="wr-reveal wr-delay-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);margin-bottom:2px;">
+
+      <div style="background:var(--charcoal);padding:36px 32px;border-top:2px solid var(--gold);">
+        <p style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;">Operational Intelligence</p>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:12px;line-height:1.2;">From the factory floor up</h3>
+        <p style="font-size:13px;line-height:1.8;color:rgba(250,248,245,0.5);font-weight:300;">Diagnosed a packaging assembly line misalignment by tracing the failure to a die-line that did not account for heat seal machinery tolerances. Identified a superior film substrate that simultaneously elevated brand quality, resolved chronic print color variance, reduced per unit cost, and eliminated a production coating step. Most marketing leaders never go this deep. This is where the ADP starts.</p>
+      </div>
+
+      <div style="background:var(--charcoal);padding:36px 32px;border-top:2px solid var(--gold);">
+        <p style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;">Compliance Leadership</p>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:12px;line-height:1.2;">The crisis nobody else caught</h3>
+        <p style="font-size:13px;line-height:1.8;color:rgba(250,248,245,0.5);font-weight:300;">Caught a nutritional labeling discrepancy before it reached national retail distribution -- a flag that, if missed, could have triggered an FDA mandatory recall across a global portfolio. Daily monitoring of luxury real estate broker communications intercepts AI-altered property images and credential misrepresentations before they become regulatory violations. Compliance is not legal's problem. It is marketing's.</p>
+      </div>
+
+      <div style="background:var(--charcoal);padding:36px 32px;border-top:2px solid var(--gold);">
+        <p style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;">Commercial Strategy</p>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:12px;line-height:1.2;">The question no one else asked</h3>
+        <p style="font-size:13px;line-height:1.8;color:rgba(250,248,245,0.5);font-weight:300;">Was the only person in the room to ask what the MSRP of a new product would be -- then had to explain why it mattered. A twenty-dollar package cannot look or behave like a five-dollar package. Price is a brand signal before a word is read. If a plain cardboard box creates the most profit, that is what gets recommended. The aesthetic is never the point.</p>
+      </div>
+
+    </div>
+
+    <div class="wr-reveal wr-delay-2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
+
+      <div style="background:var(--charcoal);padding:36px 32px;">
+        <p style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;">Systems Architecture</p>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:12px;line-height:1.2;">Technology before AI existed</h3>
+        <p style="font-size:13px;line-height:1.8;color:rgba(250,248,245,0.5);font-weight:300;">Implemented a CRM, POS, and inventory management system for a retail operation during graduate studies -- with an architect and designer client base that demanded precision. An MS in Computer Systems means fluent conversations with engineering and data teams that most marketing leaders cannot have. Formal marketing training plus systems thinking is rare. The combination is the differentiator.</p>
+      </div>
+
+      <div style="background:var(--charcoal);padding:36px 32px;">
+        <p style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;">Project Leadership</p>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:12px;line-height:1.2;">Economy of scale under pressure</h3>
+        <p style="font-size:13px;line-height:1.8;color:rgba(250,248,245,0.5);font-weight:300;">When FDA regulatory changes required redesigning nearly 100 SKUs under a hard government deadline, proposed a category-based strategy rather than the replenishment-based approach everyone else wanted. Identified the bottleneck before it happened. Redesigned the entire portfolio in half the allotted time. Zero missed deadlines. Time recovered was used to launch new products.</p>
+      </div>
+
+      <div style="background:var(--charcoal);padding:36px 32px;">
+        <p style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;">AI Integration</p>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:12px;line-height:1.2;">I drive. AI does not drive me.</h3>
+        <p style="font-size:13px;line-height:1.8;color:rgba(250,248,245,0.5);font-weight:300;">Generative tools are embedded across every phase of practice -- brand audits, competitive analysis, content strategy, image generation, campaign planning. Daily, fluent, and purposeful. But the judgment that directs the tool is not replaceable. Knowing what to ask, how to evaluate the output, and where it fits within a coherent brand strategy is the practitioner's job. That expertise is what the tools amplify.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="wr-adp-callout">
+  <div class="wr-adp-callout-inner">
+
+    <div class="wr-adp-callout-left wr-reveal">
+      <div class="wr-adp-callout-flag">
+        <span class="wr-adp-callout-flag-dot"></span>
+        <span class="wr-adp-callout-flag-text">Proprietary Framework</span>
+      </div>
+      <h2 class="wr-adp-callout-title">The <em>ADP</em></h2>
+      <p class="wr-adp-callout-sub">Asset Development Protocol</p>
+      <p class="wr-adp-callout-body">
+        Developed and refined across nearly two decades of engagements, 
+        the ADP is the diagnostic and operational framework that runs beneath 
+        every project before any creative or strategic direction is set. 
+        <strong>Logistics. Cost structure. Competitive position. 
+        Audience intelligence. Brand standards.</strong> The full picture, 
+        mapped before a single decision is made. It is why the work performs 
+        rather than simply appearing.
+      </p>
+    </div>
+
+    <div class="wr-adp-callout-right wr-reveal wr-delay-2">
+      <div class="wr-adp-layer wr-adp-layer-gold">
+        <p class="wr-adp-layer-label">Operational Layer</p>
+        <h4>How the business actually works</h4>
+        <p>Logistics, purchasing, manufacturing, cost structure, vendor relationships, and compliance. The upstream conditions that determine what is genuinely buildable and at what margin.</p>
+      </div>
+      <div class="wr-adp-layer wr-adp-layer-teal">
+        <p class="wr-adp-layer-label">Strategic Layer</p>
+        <h4>Where to play and how to win</h4>
+        <p>Market intelligence, SWOT, audience segmentation, competitive positioning, and messaging architecture. The intelligence that determines where the brand can own a defensible position.</p>
+      </div>
+      <div class="wr-adp-layer wr-adp-layer-gold">
+        <p class="wr-adp-layer-label">Execution Layer</p>
+        <h4>Converting intelligence into performance</h4>
+        <p>Brand strategy, creative direction, and integrated campaign management. The layer where operational reality and strategic intelligence become market-facing assets that perform.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CAREER TIMELINE ══ -->
+<section id="wr-career" style="padding:72px 0;background:var(--charcoal);border-top:1px solid rgba(255,255,255,0.05);">
+  <div style="max-width:760px;margin:0 auto;padding:0 56px;" class="wr-reveal">
+    <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:20px;">Experience</p>
+    <p style="font-size:16px;line-height:1.95;color:rgba(250,248,245,0.65);font-weight:300;">
+      The practice spans nearly two decades of senior-level marketing and creative leadership -- across a globally distributed consumer goods brand, a ten-year independent brand consultancy, luxury real estate, and industries ranging from fashion and beauty to industrial supply, advertising, and AEC. Every engagement has been governed by the same methodology: operational intelligence first, strategy second, execution third. The breadth is not incidental. It is the source of a cross-industry fluency that allows the same diagnostic rigor to produce measurable outcomes regardless of sector, scale, or deliverable type. The organizations that have benefited most are those that recognized a marketing function being led -- not just managed.
+    </p>
+  </div>
+</section>
+
+<section id="wr-industries">
+  <div class="wr-industries-inner">
+    <div class="wr-ind-header wr-reveal">
+      <p class="wr-ind-eyebrow">Industry Experience</p>
+      <h2 class="wr-ind-title">Eight industries.<br><em>One methodology.</em></h2>
+    </div>
+    <div class="wr-ind-grid wr-reveal wr-delay-1">
+      <div class="wr-ind-cell"><div class="wr-ind-num">01</div><p class="wr-ind-name">Consumer Goods &amp; CPG</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">02</div><p class="wr-ind-name">Architecture, Engineering &amp; Construction</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">03</div><p class="wr-ind-name">Luxury Real Estate</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">04</div><p class="wr-ind-name">Healthcare &amp; Professional Services</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">05</div><p class="wr-ind-name">Fashion &amp; Beauty</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">06</div><p class="wr-ind-name">Retail &amp; Destination</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">07</div><p class="wr-ind-name">Advertising &amp; Print</p></div>
+      <div class="wr-ind-cell"><div class="wr-ind-num">08</div><p class="wr-ind-name">Industrial Supply &amp; B2B</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EDUCATION & SKILLS ══ -->
+<section id="wr-education">
+  <div class="wr-edu-inner">
+
+    <div class="wr-edu-left wr-reveal">
+      <p class="wr-edu-eyebrow">Academic Foundation</p>
+      <h2 class="wr-edu-title">Education &amp;<br><em>Credentials</em></h2>
+
+      <div class="wr-edu-item">
+        <p class="wr-edu-degree">Master of Science — Computer Systems</p>
+        <p class="wr-edu-field">Emphasis: Web Development &amp; eCommerce</p>
+        <p class="wr-edu-inst">Graduate Studies &nbsp;&middot;&nbsp; Legacy-scale data-driven internet systems and web architecture</p>
+      </div>
+
+      <div class="wr-edu-item">
+        <p class="wr-edu-degree">Bachelor of Science — Marketing</p>
+        <p class="wr-edu-field">Formal grounding in marketing fundamentals, consumer behavior, and market strategy</p>
+        <p class="wr-edu-inst">Undergraduate Studies</p>
+      </div>
+
+      <div class="wr-edu-item">
+        <p class="wr-edu-degree">Architecture Studies</p>
+        <p class="wr-edu-field">Systems thinking, spatial intelligence, light, form, and materials</p>
+        <p class="wr-edu-inst">Early Academic Foundation &nbsp;&middot;&nbsp; The origin of the visual intelligence</p>
+      </div>
+
+      <p style="font-size:13px;line-height:1.8;color:var(--ink-muted);font-weight:300;margin-top:28px;padding-top:24px;border-top:1px solid var(--paper-mid);">
+        Most senior marketing practitioners in this field are self-taught -- 
+        they absorbed patterns without the formal training to understand the 
+        principles beneath them. A BS in Marketing combined with an MS in Computer 
+        Systems means the strategic and technical foundations were built before 
+        the tools existed to shortcut them. That matters when the landscape shifts.
+        The MSCS was not purely academic -- during graduate studies, a CRM, POS, 
+        and inventory management system was implemented for a retail operation 
+        whose client base was composed largely of architects and designers. 
+        Applied systems thinking in a real business environment, with the exact 
+        audience that AEC firms serve. It also means an unusually fluent conversation 
+        with engineering, product, and data teams -- a gap most marketing leaders 
+        cannot close.
+      </p>
+    </div>
+
+    <div class="wr-edu-right wr-reveal wr-delay-2">
+
+      <div class="wr-skill-cluster">
+        <h4>Strategic Practice</h4>
+        <div class="wr-skill-list">
+          <span class="wr-skill-tag">Brand Strategy</span>
+          <span class="wr-skill-tag">Competitive Intelligence</span>
+          <span class="wr-skill-tag">Market Positioning</span>
+          <span class="wr-skill-tag">Brand Audits</span>
+          <span class="wr-skill-tag">Proposal Strategy</span>
+          <span class="wr-skill-tag">Go-To-Market Strategy</span>
+          <span class="wr-skill-tag">SEO &amp; AEO</span>
+          <span class="wr-skill-tag">Channel Architecture</span>
+        </div>
+      </div>
+
+      <div class="wr-skill-cluster">
+        <h4>Creative Practice</h4>
+        <div class="wr-skill-list">
+          <span class="wr-skill-tag">Creative Direction</span>
+          <span class="wr-skill-tag">Brand Identity Systems</span>
+          <span class="wr-skill-tag">Packaging Design</span>
+          <span class="wr-skill-tag">Photography Direction</span>
+          <span class="wr-skill-tag">Campaign Development</span>
+          <span class="wr-skill-tag">Visual Identity</span>
+          <span class="wr-skill-tag">Print &amp; Signage</span>
+          <span class="wr-skill-tag">Editorial Direction</span>
+        </div>
+      </div>
+
+      <div class="wr-skill-cluster">
+        <h4>Technology &amp; Tools</h4>
+        <div class="wr-skill-list">
+          <span class="wr-skill-tag">Adobe Creative Cloud</span>
+          <span class="wr-skill-tag">Figma</span>
+          <span class="wr-skill-tag">Claude</span>
+          <span class="wr-skill-tag">ChatGPT</span>
+          <span class="wr-skill-tag">Midjourney</span>
+          <span class="wr-skill-tag">Adobe Firefly</span>
+          <span class="wr-skill-tag">CRM Platforms</span>
+          <span class="wr-skill-tag">Marketing Automation</span>
+          <span class="wr-skill-tag">Web Development</span>
+          <span class="wr-skill-tag">eCommerce</span>
+        </div>
+      </div>
+
+      <div class="wr-skill-cluster">
+        <h4>Integrated Marketing</h4>
+        <div class="wr-skill-list">
+          <span class="wr-skill-tag">Full-Funnel Campaigns</span>
+          <span class="wr-skill-tag">Email Marketing</span>
+          <span class="wr-skill-tag">Social Media Strategy</span>
+          <span class="wr-skill-tag">Direct Mail</span>
+          <span class="wr-skill-tag">Trade Show Marketing</span>
+          <span class="wr-skill-tag">Copywriting</span>
+          <span class="wr-skill-tag">Direct Mail Management</span>
+          <span class="wr-skill-tag">Content Strategy</span>
+          <span class="wr-skill-tag">Vendor Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PHILOSOPHY ══ -->
+<section id="wr-philosophy">
+  <div class="wr-philosophy-inner wr-reveal">
+    <div class="wr-philosophy-eyebrow">On the Practice</div>
+    <p class="wr-philosophy-statement">
+      "Formal training gives you the principles. 
+      Two decades of practice gives you the judgment. 
+      <em>AI gives you the speed.</em> 
+      The practitioner who commands all three 
+      does not compete with the market. 
+      They set the terms of it."
+    </p>
+    <p class="wr-philosophy-attr">Wil Randolph &nbsp;&middot;&nbsp; Brand &amp; Marketing Strategist</p>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="wr-cta">
+  <div class="wr-cta-eyebrow">Open to Roles &amp; Select Engagements</div>
+  <p class="wr-cta-text">Ready to put this<br>practice to <em>work?</em></p>
+  <p class="wr-cta-sub">
+    Available for senior marketing leadership roles and select consulting engagements. 
+    Seattle-based. Nationally available. Every engagement starts with the ADP.
+  </p>
+  <div class="wr-cta-buttons">
+    <a href="contact.html" class="wr-btn-primary">Start a Conversation &rarr;</a>
+    <a href="work.html" class="wr-btn-secondary">View the Work</a>
+  </div>
+</section>
+
+<script>
+/* ─── PROGRESS ─── */
+var bar = document.getElementById('wr-progress');
+window.addEventListener('scroll', function(){
+  var d = document.documentElement;
+  var s = d.scrollTop || document.body.scrollTop;
+  var t = d.scrollHeight - d.clientHeight;
+  bar.style.width = (t > 0 ? (s/t)*100 : 0) + '%';
+}, {passive:true});
+
+/* ─── REVEALS ─── */
+var revObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.wr-reveal').forEach(function(el){ revObs.observe(el); });
+
+/* ─── HEADER KINETIC CANVAS ─── */
+(function(){
+  var canvas = document.getElementById('wr-header-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, shapes, raf;
+  var mouseX = 0, mouseY = 0;
+  var targetMX = 0, targetMY = 0;
+  var clickX = 0, clickY = 0;
+  var isClicking = false;
+  var attractStrength = 0;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function randInt(a, b) { return Math.floor(rand(a, b + 1)); }
+  function pick(arr) { return arr[randInt(0, arr.length - 1)]; }
+
+  var PALETTES = [
+    { fill: 'rgba(201,168,76,',  stroke: 'rgba(201,168,76,' },
+    { fill: 'rgba(15,14,12,',    stroke: 'rgba(15,14,12,' },
+    { fill: 'rgba(29,107,107,',  stroke: 'rgba(29,107,107,' },
+    { fill: 'rgba(180,140,60,',  stroke: 'rgba(180,140,60,' },
+  ];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function makeShapes() {
+    shapes = [];
+    var density = Math.max(12, Math.floor((W * H) / 52000));
+    for (var i = 0; i < density; i++) {
+      var type  = randInt(0, 3);
+      var pal   = pick(PALETTES);
+      var speed = rand(0.04, 0.16);
+      var angle = rand(0, Math.PI * 2);
+      var sizeMap = { 0: rand(20, 110), 1: rand(80, 340), 2: rand(22, 90), 3: rand(18, 70) };
+      var alphaFill   = rand(0.05, 0.12);
+      var alphaStroke = rand(0.08, 0.18);
+      var useStroke   = Math.random() > 0.4;
+      shapes.push({
+        type: type, x: rand(-100, W + 100), y: rand(-100, H + 100),
+        size: sizeMap[type], aspect: rand(0.3, 3.0),
+        rot: rand(0, Math.PI * 2),
+        vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+        vr: rand(-0.003, 0.003),
+        alphaFill: alphaFill, alphaStroke: alphaStroke,
+        pal: pal, stroke: useStroke, thick: rand(0.4, 1.1),
+        pulse: Math.random() > 0.5,
+        pulseSpeed: rand(0.004, 0.012),
+        pulsePhase: rand(0, Math.PI * 2),
+        t: 0
+      });
+    }
+  }
+
+  function drawShape(s) {
+    s.t += 1;
+    var pulseAlpha = s.pulse
+      ? s.alphaFill * (0.6 + 0.4 * Math.sin(s.t * s.pulseSpeed + s.pulsePhase))
+      : s.alphaFill;
+    ctx.save();
+    ctx.translate(s.x + (s.px || 0), s.y + (s.py || 0));
+    ctx.rotate(s.rot);
+    if (s.type === 0) {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s.size, s.size * s.aspect, 0, 0, Math.PI * 2);
+      if (s.stroke) { ctx.globalAlpha = s.alphaStroke; ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.stroke(); }
+      else { ctx.globalAlpha = pulseAlpha; ctx.fillStyle = s.pal.fill + '1)'; ctx.fill(); }
+    } else if (s.type === 1) {
+      ctx.globalAlpha = s.alphaStroke * (s.pulse ? 0.6 + 0.4 * Math.sin(s.t * s.pulseSpeed) : 1);
+      ctx.beginPath(); ctx.moveTo(-s.size / 2, 0); ctx.lineTo(s.size / 2, 0);
+      ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.stroke();
+    } else if (s.type === 2) {
+      var hw = s.size / 2, hh = (s.size * s.aspect) / 2;
+      if (s.stroke) { ctx.globalAlpha = s.alphaStroke; ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.strokeRect(-hw, -hh, hw * 2, hh * 2); }
+      else { ctx.globalAlpha = pulseAlpha; ctx.fillStyle = s.pal.fill + '1)'; ctx.fillRect(-hw, -hh, hw * 2, hh * 2); }
+    } else {
+      var r = s.size;
+      ctx.beginPath(); ctx.moveTo(0, -r); ctx.lineTo(r * 0.866, r * 0.5); ctx.lineTo(-r * 0.866, r * 0.5); ctx.closePath();
+      if (s.stroke) { ctx.globalAlpha = s.alphaStroke; ctx.strokeStyle = s.pal.stroke + '1)'; ctx.lineWidth = s.thick; ctx.stroke(); }
+      else { ctx.globalAlpha = pulseAlpha; ctx.fillStyle = s.pal.fill + '1)'; ctx.fill(); }
+    }
+    ctx.restore();
+  }
+
+  function tick() {
+    mouseX += (targetMX - mouseX) * 0.08;
+    mouseY += (targetMY - mouseY) * 0.08;
+    if (isClicking) { attractStrength += (1 - attractStrength) * 0.12; }
+    else { attractStrength += (0 - attractStrength) * 0.04; }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+    shapes.forEach(function(s) {
+      s.x += s.vx; s.y += s.vy; s.rot += s.vr;
+      var pad = s.size + 60;
+      if (s.x < -pad) s.x = W + pad; if (s.x > W + pad) s.x = -pad;
+      if (s.y < -pad) s.y = H + pad; if (s.y > H + pad) s.y = -pad;
+      var depth = 1 - Math.min(s.size / 300, 0.9);
+      if (attractStrength > 0.01) {
+        var dx = clickX - s.x; var dy = clickY - s.y;
+        var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        var force = attractStrength * 3.5 * depth;
+        s.px = (dx / dist) * Math.min(dist, 280) * force;
+        s.py = (dy / dist) * Math.min(dist, 280) * force;
+      } else {
+        s.px = mouseX * depth * 48;
+        s.py = mouseY * depth * 48;
+      }
+      drawShape(s);
+    });
+    raf = requestAnimationFrame(tick);
+  }
+
+  var header = document.getElementById('wr-header');
+  header.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    targetMX = (e.clientX - rect.left - W / 2) / (W / 2);
+    targetMY = (e.clientY - rect.top  - H / 2) / (H / 2);
+    if (isClicking) { clickX = e.clientX - rect.left; clickY = e.clientY - rect.top; }
+  });
+  header.addEventListener('mousedown', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    isClicking = true;
+    clickX = e.clientX - rect.left; clickY = e.clientY - rect.top;
+  });
+  window.addEventListener('mouseup', function() { isClicking = false; });
+  window.addEventListener('resize', function() { resize(); makeShapes(); });
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+      else { cancelAnimationFrame(raf); raf = null; }
+    });
+  }, { threshold: 0 });
+  obs.observe(header);
+
+  resize(); makeShapes(); raf = requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
