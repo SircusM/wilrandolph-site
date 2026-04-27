@@ -1,0 +1,12 @@
+{
+  "name": "wilrandolph-site",
+  "version": "1.0.0",
+  "description": "Wil Randolph's personal portfolio website",
+  "scripts": {
+    "install-analytics": "npm install @vercel/analytics"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.3.1"
+  },
+  "private": true
+}

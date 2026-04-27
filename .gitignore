@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Package manager lock files
+package-lock.json
+
+# Vercel
+.vercel
