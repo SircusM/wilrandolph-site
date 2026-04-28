@@ -1,7 +1,7 @@
 [
   {
     "id": "mountain-series-launch",
-    "title": "The MOUNTAIN™ Series",
+    "title": "The MOUNTAIN\u2122 Series",
     "subtitle": "From a single product to a multi-SKU, multi-format brand platform -- originated from zero by one practitioner",
     "date": "2018",
     "industry": "Consumer Goods",
@@ -118,7 +118,7 @@
       "Packaging"
     ],
     "image": "",
-    "outcome_number": "—",
+    "outcome_number": "\u2014",
     "outcome_label": "A complete brand identity and packaging system originated from nothing -- including the die-line, the graphics system, and a proprietary vector illustration approach that eliminated photography inconsistency across every package format and substrate.",
     "problem": "ROCA Bars was a new product requiring a complete brand identity and packaging system built from scratch. There was no existing packaging format, no die-line, no visual identity, and no production-ready imagery. The brand's photographer at the time was unable to produce high-quality, consistent imagery that would hold up across multiple package formats, sizes, and substrates. Inconsistent photography would undermine the premium positioning of the product at every retail touchpoint.",
     "intelligence": "The architectural background and CAD origins of the practice provided a capability most designers do not have: the ability to think in three-dimensional form and translate that understanding into the precise geometry required for packaging die-line development. The photography problem was diagnosed as a system problem, not a talent problem -- no photograph of a physical object can be resized, reformatted, or reprinted across different substrates without degrading in quality or shifting in color. The solution required rethinking the image production approach entirely.",
@@ -166,13 +166,36 @@
       "ADP"
     ],
     "image": "",
-    "outcome_number": "—",
+    "outcome_number": "\u2014",
     "outcome_label": "Near-immediate improvement in client throughput and winning clients following brand realignment. Systemic inconsistencies eliminated. Marketing posture brought into alignment with luxury positioning.",
     "problem": "A high-performing luxury real estate broker had accumulated marketing materials, communications, and digital presence that had drifted from any coherent brand standard. Individual pieces were competent in isolation but communicated different value propositions, different visual registers, and different levels of premium positioning simultaneously. The cumulative effect was a brand that could not be recognized as a unified identity -- which, in a trust-driven luxury transaction environment, erodes client confidence before the first meeting.",
     "intelligence": "Running the ADP diagnostic across the broker's full marketing ecosystem revealed the precise nature and extent of the drift. The audit mapped every audience-facing asset against the luxury brand standards the brokerage required and identified the specific points of departure -- inconsistent typography, misaligned color usage, credential presentations that varied across platforms, and messaging that oscillated between luxury authority and generic real estate language. The diagnosis was clear before any recommendation was made.",
     "decision": "Realign every audience-facing marketing asset to a single coherent brand standard before the next client interaction. The correction was not a rebrand -- the underlying brand equity was intact. It was a governance intervention that brought the execution back into alignment with the positioning the broker was already claiming.",
     "execution": "Every marketing asset was audited, corrected, and standardized against the governing brand framework. Typography, color, credential presentation, photography standards, and messaging hierarchy were brought into alignment across print, digital, and social touchpoints simultaneously. Compliance monitoring was established to intercept future drift -- including daily review of broker communications for credential misrepresentations, AI-altered imagery, and fair housing compliance issues that carry regulatory consequences.",
     "outcome": "Near-immediate results in client throughput and winning clients following realignment. When a luxury brand speaks with one consistent voice across every touchpoint, the trust signal it sends to high-net-worth clients is compounded rather than contradicted. The intervention required no new creative direction -- only the discipline to execute the existing positioning with consistency. That discipline is the deliverable most marketing engagements never produce."
+  },
+  {
+    "id": "direct-mail-qr-campaign",
+    "title": "Direct Mail as a Digital Trigger",
+    "subtitle": "13% QR engagement on cold unsolicited mail against a 4-5% industry benchmark -- the result of treating channels as a system, not a selection",
+    "date": "2024",
+    "industry": "Real Estate",
+    "type": "Integrated Campaign Strategy",
+    "tags": [
+      "Real Estate",
+      "Integrated Campaign",
+      "ADP",
+      "Direct Mail",
+      "Digital Strategy"
+    ],
+    "image": "https://res.cloudinary.com/dk8dxerks/image/upload/v1777339097/direct_mail_zr53o5.png",
+    "outcome_number": "13%",
+    "outcome_label": "QR engagement rate on cold unsolicited direct mail. Industry benchmark is 4-5%. The result was produced by a single strategic decision: lead with homeowner value, not agent credentials.",
+    "problem": "A luxury residential agent needed to generate homeowner awareness in a competitive market. The tactical default in the category was predictable: agent photo, credentials, recent sales, contact information. Every competitor was running the same play. The brief was to generate awareness. The ADP diagnostic reframed the question immediately -- awareness of what, and for whom?",
+    "intelligence": "The ADP diagnostic identified the strategic asymmetry in the category: every competitor was leading with agent credentials. No one was leading with homeowner value. Credentials require the recipient to care about the agent first. Value requires no such precondition -- it works on anyone who owns a home. The gap between what competitors were sending and what homeowners actually wanted was the opening. A localized market analysis the homeowner did not have to ask for was the vehicle.",
+    "decision": "Engineer the mailer around a single value exchange: give the homeowner something useful before asking for anything in return. The piece would deliver a localized market analysis -- relevant data for the specific neighborhood -- with a QR code bridging the physical piece to a tracked digital destination. The physical mailer was not the campaign. It was the entry point into a measurable system. The QR destination was built to capture behavioral data: which content sections held attention longest, what topics generated repeat visits, and which engagement patterns indicated near-term listing intent. That data would feed directly into the next campaign cycle.",
+    "execution": "The mailer was designed to communicate premium positioning without requiring the recipient to trust the agent first. The value had to be legible in the first three seconds -- before the piece was set down. The localized market analysis framing did that work. The QR code was tracked at the individual delivery level, enabling attribution by address, neighborhood block, and delivery date. Page-level behavioral analytics on the digital destination captured dwell time by content section. The result was a cold mail piece that functioned as the first stage of a multi-touch intelligence-gathering system rather than a standalone awareness play.",
+    "outcome": "13% QR engagement on cold unsolicited direct mail. The industry benchmark is 4-5%. The performance gap was not produced by design quality alone -- it was produced by a strategic decision made before a single layout was opened. Leading with homeowner value rather than agent credentials changed the recipient's relationship to the piece. The physical-to-digital bridge converted cold mail recipients into measurable digital engagements with behavioral profiles. The ADP does not treat channels as tactics. It treats them as a system where each layer informs the next. That is what produced the number."
   },
   {
     "id": "category-repositioning",
@@ -187,7 +210,7 @@
       "ADP"
     ],
     "image": "",
-    "outcome_number": "—",
+    "outcome_number": "\u2014",
     "outcome_label": "Brand repositioned from commodity competitor to category authority. Positioning drift identified and corrected through strategic reframe, not cosmetic redesign.",
     "problem": "A brand with a decade of equity had drifted from its original positioning through incremental decisions that individually made sense but collectively created strategic incoherence. The messaging architecture had accumulated contradictions. The visual identity had been updated piecemeal. The brand was saying three different things to three different audiences and owning none of them.",
     "intelligence": "A full ADP brand audit mapped the drift precisely. Every audience-facing expression was evaluated against the original positioning and against the current competitive landscape. The audit revealed not just where the brand had drifted but why -- a series of reactive decisions made in response to competitive pressure rather than in service of a governing strategic position. The competitive landscape had also shifted since the original positioning was set, opening new white space the brand was not currently occupying.",
@@ -209,7 +232,7 @@
       "Consumer Psychology"
     ],
     "image": "",
-    "outcome_number": "—",
+    "outcome_number": "\u2014",
     "outcome_label": "Retailer had never been offered a Fall themed product of this nature before. The package design was a major success. Consumer research, focus groups, color psychology, and SWOT analysis led the design -- not aesthetics.",
     "problem": "The Fall seasonal category represented an untapped opportunity for the brand. No Fall-themed Almond ROCA product had been offered to retail before. The challenge was not just designing a package -- it was identifying whether a Fall offering could perform in a category where the brand had no established presence, at a price point that justified the premium positioning, and with a design compelling enough to earn retail placement.",
     "intelligence": "Consumer research and focus groups informed the emotional landscape of Fall as a purchasing occasion -- the color expectations, the warmth and comfort associations, and the specific visual signals that trigger seasonal purchase intent. A competitive SWOT analysis mapped every existing Fall confectionery offering at the target retail accounts. Color psychology research informed the precise palette decisions -- the balance between warm autumnal tones and the brand's premium visual register. MSRP positioning was evaluated against manufacturing cost and competitive pricing before a single design direction was committed to. Strategy led. Design followed.",
@@ -234,7 +257,7 @@
       "Consultation"
     ],
     "image": "",
-    "outcome_number": "—",
+    "outcome_number": "\u2014",
     "outcome_label": "Major presentation success. The manufacturer learned different printing and package techniques firsthand, heard the ADP process presented in the context of a regulated consumer category, and left with a clear framework for brand and packaging strategy in a market with no established design standards.",
     "problem": "A cannabis manufacturer was entering a market with vibrant consumer demand, complex regulatory requirements, and almost no established premium design standards. The category was dominated by generic or amateurish packaging that reflected the industry's immaturity rather than the quality of the products inside. The manufacturer needed a framework for thinking about brand, packaging, and retail strategy in a context where most competitors had not yet figured out that packaging was a commercial instrument.",
     "intelligence": "The ADP diagnostic was applied to the manufacturer's operational reality -- regulatory environment, product range, target retail channels, cost structure, and competitive landscape. Abstract urban design concepts and experimental print techniques were evaluated against the brand's positioning ambitions and manufacturing constraints. The consultation revealed significant opportunity for differentiation through premium materials, print technique selection, and structural package innovation in a category where the bar was low.",
