@@ -651,5 +651,11 @@ document.querySelectorAll('.wr-reveal').forEach(function(el){ revObs.observe(el)
   resize();makeShapes();raf=requestAnimationFrame(tick);
 })();
 </script>
+
+<!-- Vercel Web Analytics -->
+<script type="module">
+  import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1/+esm';
+  inject();
+</script>
 </body>
 </html>
