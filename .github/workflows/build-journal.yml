@@ -28,7 +28,7 @@ jobs:
         run: |
           git config user.name "journal-build-bot"
           git config user.email "actions@github.com"
-          git add journal/ journal.html
+          git add journal/ journal.html sitemap.xml
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
