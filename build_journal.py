@@ -400,6 +400,19 @@ def rewrite_journal_html(posts: list) -> None:
 
     path.write_text(new2, encoding="utf-8")
 
+STATIC_PAGES = ["/", "/work.html", "/cases.html", "/journal.html", "/photography.html", "/about.html", "/contact.html"]
+
+
+def write_sitemap(posts: list) -> None:
+    """Regenerate sitemap.xml: static pages plus every journal post."""
+    newest = max(p["date"] for p in posts)
+    rows = [f"  <url><loc>{SITE_URL}{u}</loc><lastmod>{newest}</lastmod></url>" for u in STATIC_PAGES]
+    rows += [f"  <url><loc>{post_url(p)}</loc><lastmod>{p['date']}</lastmod></url>" for p in posts]
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(rows) + "\n</urlset>\n")
+    (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
+
 
 def main() -> None:
     posts = json.loads((ROOT / "posts.json").read_text(encoding="utf-8"))
@@ -431,6 +444,8 @@ def main() -> None:
 
     rewrite_journal_html(posts)
     print("Updated journal.html (POSTS data + OG meta)")
+    write_sitemap(posts)
+    print("Updated sitemap.xml")
     print("Done. Commit and push to GitHub — Vercel deploys automatically.")
 
 
